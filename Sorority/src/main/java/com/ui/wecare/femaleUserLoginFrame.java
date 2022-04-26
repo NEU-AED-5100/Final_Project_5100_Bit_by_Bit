@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.wicare;
+package com.ui.wecare;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -123,12 +123,20 @@ public class femaleUserLoginFrame extends javax.swing.JFrame {
         Statement st=null;
         ResultSet rs=null;
 
-        try {
-            con = DriverManager.getConnection(
-                "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-        } catch (SQLException ex) {
-
-        }
+//        try {
+//            con = DriverManager.getConnection(
+//                "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+//        } catch (SQLException ex) {
+//
+//        }
+try{
+String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+        String user ="SYSTEM";
+        String password = "trisha";
+Class.forName("oracle.jdbc.driver.OracleDriver");
+ con =  DriverManager.getConnection(url,user,password);
+}catch(Exception e){
+}
 
         //create the statement object
         String user=jTextField1.getText();
@@ -167,9 +175,7 @@ public class femaleUserLoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        //sign up button
-                
+                      
           femaleUserSignUp fuser=new femaleUserSignUp() ;
                 
     }//GEN-LAST:event_jButton3ActionPerformed

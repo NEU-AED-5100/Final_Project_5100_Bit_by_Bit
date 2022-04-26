@@ -2,18 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package javaClass;
+package com.pojo.wecare;
 import java.util.*;
-
-        /**
+/**
  *
  * @author gloriasingh
  */
-public class Patient {
+public class MainFemale {
     
-      
-    private int patientId;
-    private int femaleId;
+     private int femaleId;
     private String name;
     private Date DOB;
     private String city;
@@ -21,9 +18,10 @@ public class Patient {
     private int zipcode;
     private String emailId;
     private long mobileNo;
+    private String Password;
+    private int patientId;
 
-    public Patient(int patientId, int femaleId, String name, Date DOB, String city, String State, int zipcode, String emailId, long mobileNo) {
-        this.patientId = patientId;
+    public MainFemale(int femaleId, String name, Date DOB, String city, String State, int zipcode, String emailId, long mobileNo, String Password, int patientId) {
         this.femaleId = femaleId;
         this.name = name;
         this.DOB = DOB;
@@ -32,13 +30,7 @@ public class Patient {
         this.zipcode = zipcode;
         this.emailId = emailId;
         this.mobileNo = mobileNo;
-    }
-
-    public int getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(int patientId) {
+        this.Password = Password;
         this.patientId = patientId;
     }
 
@@ -105,7 +97,22 @@ public class Patient {
     public void setMobileNo(long mobileNo) {
         this.mobileNo = mobileNo;
     }
-    
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
+    }
     
     
 }

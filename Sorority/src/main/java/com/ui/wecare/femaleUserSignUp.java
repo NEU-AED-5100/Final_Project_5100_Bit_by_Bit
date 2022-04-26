@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.wicare;
+package com.ui.wecare;
 
 import java.sql.*;
 import java.sql.SQLException;
@@ -189,7 +189,14 @@ public class femaleUserSignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
         //submit button
         
-  
+  try{
+String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+        String user ="SYSTEM";
+        String password = "trisha";
+Class.forName("oracle.jdbc.driver.OracleDriver");
+ con =  DriverManager.getConnection(url,user,password);
+}catch(Exception e){
+}
     String username =jTextField1.getText();
      String password =jPasswordField1.getText();
       String name =jTextField9.getText();
@@ -216,7 +223,7 @@ public class femaleUserSignUp extends javax.swing.JFrame {
 "    emailId,\n" +
 "    mobileNo )  values(?,?,?,?,?,?,?,?,?)" );
                      
-                       
+            //String s=String.format("insert into Female  values ()");           
              pst=con.prepareStatement(s);
              SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yy");
           java.util.Date dob = sdf1.parse(DOB);
