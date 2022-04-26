@@ -21,7 +21,7 @@ public class Panel1 extends javax.swing.JPanel {
 
     //manage enterprise panel
     
-       Connection con=null;
+       Connection conn=null;
         Statement st=null;
         ResultSet rs=null;
         
@@ -29,7 +29,14 @@ public class Panel1 extends javax.swing.JPanel {
       
     public Panel1() {
         initComponents();
-        
+        try{
+String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+        String user ="SYSTEM";
+        String password = "trisha";
+Class.forName("oracle.jdbc.driver.OracleDriver");
+ conn =  DriverManager.getConnection(url,user,password);
+}catch(Exception e){
+}
         
         jComboBox1.addItem("New Jersy");
         jComboBox1.addItem("Boston");
@@ -53,10 +60,10 @@ public class Panel1 extends javax.swing.JPanel {
 
         
           try {
-            con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-            
-             st=con.createStatement();
+//            con = DriverManager.getConnection(
+//                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+           
+             st=conn.createStatement();
             
              String s= "select * from enterprise"  ;
              rs=st.executeQuery(s);  // execute query
@@ -93,10 +100,10 @@ public class Panel1 extends javax.swing.JPanel {
 
         
           try {
-            con = DriverManager.getConnection(
+            conn = DriverManager.getConnection(
                     "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
             
-             st=con.createStatement();
+             st=conn.createStatement();
             
              String s= "select * from enterprise"  ;
              rs=st.executeQuery(s);  // execute query
@@ -204,7 +211,7 @@ public class Panel1 extends javax.swing.JPanel {
         try {
            
             
-             st=con.createStatement();
+             st=conn.createStatement();
             
              String s=String.format("insert into enterprise values('%s','%s','%s')", name,location,type)    ;
              int n=st.executeUpdate(s);  // execute query
@@ -247,7 +254,7 @@ public class Panel1 extends javax.swing.JPanel {
          try {
             
             
-             st=con.createStatement();
+             st=conn.createStatement();
             
              String s= "select * from enterprise"  ;
              rs=st.executeQuery(s);  // execute query

@@ -108,6 +108,8 @@ public class EditFrame extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "new jersey" }));
+
         jLabel2.setText("Location");
 
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {

@@ -202,9 +202,16 @@ public class FindNgoFrame extends javax.swing.JFrame {
              
              int flag=0;
               try {
-            con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-            
+//            con = DriverManager.getConnection(
+//                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+            try{
+String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+        String user ="SYSTEM";
+        String password1 = "trisha";
+Class.forName("oracle.jdbc.driver.OracleDriver");
+ con =  DriverManager.getConnection(url,user,password1);
+}catch(Exception e){
+}
              st=con.createStatement();
             
              String s=String.format("select * from ngo_detail where location='%s' and zipcode='%s'" , location,zipcode)  ;
