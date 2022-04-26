@@ -48,8 +48,16 @@ public class ngoManagementPanel extends javax.swing.JPanel {
         
          try {
              
-             con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+//             con = DriverManager.getConnection(
+//                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+try{
+String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+        String user ="SYSTEM";
+        String password = "trisha";
+Class.forName("oracle.jdbc.driver.OracleDriver");
+ con =  DriverManager.getConnection(url,user,password);
+}catch(Exception e){
+}
 
             st=con.createStatement();
 

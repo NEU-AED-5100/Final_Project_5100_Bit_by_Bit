@@ -21,7 +21,7 @@ public class Panel2 extends javax.swing.JPanel {
 
     //manage enterprise admin
     
-      Connection con=null;
+      Connection conn=null;
         Statement st=null;
         ResultSet rs=null;
           DefaultTableModel model ;
@@ -35,10 +35,19 @@ public class Panel2 extends javax.swing.JPanel {
         jComboBox1.addItem("California");
         
          try {
+//
+//              con = DriverManager.getConnection(
+//                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
 
-              con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-            st=con.createStatement();
+try{
+String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+        String user ="SYSTEM";
+        String password = "trisha";
+Class.forName("oracle.jdbc.driver.OracleDriver");
+ conn =  DriverManager.getConnection(url,user,password);
+}catch(Exception e){
+}
+            st=conn.createStatement();
 
             String s=String.format("select * from enterprise where location='"+jComboBox1.getSelectedItem()+"'");
            rs=st.executeQuery(s);  // execute query
@@ -81,7 +90,7 @@ public class Panel2 extends javax.swing.JPanel {
         
          try {
 
-            st=con.createStatement();
+            st=conn.createStatement();
 
             String s= "select * from enterprise_detail"  ;
             rs=st.executeQuery(s);  // execute query
@@ -205,7 +214,7 @@ public class Panel2 extends javax.swing.JPanel {
 
         try {
 
-            st=con.createStatement();
+            st=conn.createStatement();
 
             String s=String.format("insert into enterprise_detail values('%s','%s','%s','%s','%s')", enterprise_name,location,username,password,name);
             int n=st.executeUpdate(s);  // execute query
@@ -232,7 +241,7 @@ public class Panel2 extends javax.swing.JPanel {
 
         try {
 
-            st=con.createStatement();
+            st=conn.createStatement();
 
             String s= "select * from enterprise_detail"  ;
             rs=st.executeQuery(s);  // execute query
@@ -274,9 +283,9 @@ public class Panel2 extends javax.swing.JPanel {
         //location combo box click event
           try {
 
-              con = DriverManager.getConnection(
+              conn = DriverManager.getConnection(
                     "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-            st=con.createStatement();
+            st=conn.createStatement();
 
             String s="select * from enterprise where location='"+jComboBox1.getSelectedItem()+"'";
            rs=st.executeQuery(s);  // execute query

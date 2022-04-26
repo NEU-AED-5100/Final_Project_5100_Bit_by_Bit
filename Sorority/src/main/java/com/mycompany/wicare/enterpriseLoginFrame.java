@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 public class enterpriseLoginFrame extends javax.swing.JFrame {
 
    public static String NGO_name="";
-   
+   Connection conn ;
     public enterpriseLoginFrame() {
         initComponents();
         setVisible(true);
@@ -102,16 +102,25 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
 
         //login button
 
-        Connection con=null;
+        //Connection con=null;
         Statement st=null;
         ResultSet rs=null;
 
-        try {
-            con = DriverManager.getConnection(
-                "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-        } catch (SQLException ex) {
+//        try {
+//            con = DriverManager.getConnection(
+//                "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+//        } catch (SQLException ex) {
+//
+//        }
 
-        }
+try{
+String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+        String user ="SYSTEM";
+        String password = "trisha";
+Class.forName("oracle.jdbc.driver.OracleDriver");
+ conn =  DriverManager.getConnection(url,user,password);
+}catch(Exception e){
+}
 
         //create the statement object
         String user=jTextField1.getText();
@@ -123,7 +132,7 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
        String s= String.format("select *from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='NGO' and e.name=ed.username", user,pass)  ;
             NGO_name=user;
         try {
-            st=con.createStatement();
+            st=conn.createStatement();
             rs=st.executeQuery(s);  // execute query
 
                 if(rs.next())
@@ -139,7 +148,7 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
                     
                              s= String.format("select *from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Hospital' and e.name=ed.username", user,pass)  ;
 
-                            st=con.createStatement();
+                            st=conn.createStatement();
                             rs=st.executeQuery(s);  // execute query
 
                             if(rs.next())
@@ -155,7 +164,7 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
                                     
                                          s= String.format("select *from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Police' and e.name=ed.username", user,pass)  ;
 
-                                            st=con.createStatement();
+                                            st=conn.createStatement();
                                             rs=st.executeQuery(s);  // execute query
 
                                             if(rs.next())
@@ -171,7 +180,7 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
                                                 
                                                      s= String.format("select *from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Judiciary' and e.name=ed.username", user,pass)  ;
 
-                                                        st=con.createStatement();
+                                                        st=conn.createStatement();
                                                         rs=st.executeQuery(s);  // execute query
 
                                                         if(rs.next())
@@ -186,7 +195,7 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
                                                             
                                                              s= String.format("select *from work_area  where username='%s' and password='%s'", user,pass)  ;
 
-                                                                st=con.createStatement();
+                                                                st=conn.createStatement();
                                                                 rs=st.executeQuery(s);  // execute query
 
                                                                 if(rs.next())
@@ -227,7 +236,7 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
                 }
                 
               
-            con.close();
+            conn.close();
 
         } catch (SQLException ex) {
 
