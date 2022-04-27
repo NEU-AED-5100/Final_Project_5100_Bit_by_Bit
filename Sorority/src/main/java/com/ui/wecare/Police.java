@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package screensUI;
+package com.ui.wecare;
 
 /**
  *
@@ -16,6 +16,11 @@ public class Police extends javax.swing.JPanel {
     public Police() {
         initComponents();
     }
+
+
+void updateTableForPolice(){
+
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,8 +49,6 @@ public class Police extends javax.swing.JPanel {
         lblheading.setForeground(new java.awt.Color(255, 255, 255));
         lblheading.setText("Police Profile- Judicial Guards");
 
-        lblmedicinepic.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sreyoshi\\Documents\\AED_Assignments\\AED-finalProject\\Image\\boston police.jpg")); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -67,8 +70,6 @@ public class Police extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        lblpoliceimage.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sreyoshi\\Documents\\AED_Assignments\\AED-finalProject\\Image\\police.jpg")); // NOI18N
-
         tblvictims.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -81,8 +82,6 @@ public class Police extends javax.swing.JPanel {
             }
         ));
         jScrollPane1.setViewportView(tblvictims);
-
-        lblinvestigationimg.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sreyoshi\\Documents\\AED_Assignments\\AED-finalProject\\Image\\investigation.jpg")); // NOI18N
 
         btnassigntome.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         btnassigntome.setText("Assign To Me");
@@ -120,7 +119,7 @@ public class Police extends javax.swing.JPanel {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)))
-                                .addComponent(lblpoliceimage, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
+                                .addComponent(lblpoliceimage, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)))))
                 .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
@@ -136,9 +135,7 @@ public class Police extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblinvestigationimg))
+                    .addComponent(lblinvestigationimg)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(btnassigntome)))

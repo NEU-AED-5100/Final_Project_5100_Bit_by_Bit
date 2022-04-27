@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class femaleUserLoginFrame extends javax.swing.JFrame {
 
+public static String Female_USER = "";
     /**
      * Creates new form femaleUserFrame
      */
@@ -140,12 +141,13 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
 
         //create the statement object
         String user=jTextField1.getText();
+        Female_USER = user;
         String pass=jPasswordField1.getText();
 
         jTextField1.setText("");
         jPasswordField1.setText("");
 
-        String s= String.format("select *from female where username='%s' and password='%s'", user,pass)  ;
+        String s= String.format("select * from female where username='%s' and password='%s'", user,pass)  ;
 
         try {
             st=con.createStatement();

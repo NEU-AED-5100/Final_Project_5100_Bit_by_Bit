@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package screensUI;
+package com.ui.wecare;
 
 /**
  *
@@ -56,8 +56,6 @@ public class DiagonasticCenter extends javax.swing.JPanel {
         lblheading.setForeground(new java.awt.Color(255, 255, 255));
         lblheading.setText("Diagonastic Center- We Care for You");
 
-        lblmedicinepic.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sreyoshi\\Documents\\AED_Assignments\\AED-finalProject\\Image\\paths.jpg")); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -75,8 +73,6 @@ public class DiagonasticCenter extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(lblheading, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        lblpicdiao3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sreyoshi\\Documents\\AED_Assignments\\AED-finalProject\\Image\\bloodtestpic.jpg")); // NOI18N
 
         lblheadingpname.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblheadingpname.setForeground(new java.awt.Color(0, 0, 153));
@@ -109,8 +105,6 @@ public class DiagonasticCenter extends javax.swing.JPanel {
         txtreportwriting.setColumns(20);
         txtreportwriting.setRows(5);
         jScrollPane2.setViewportView(txtreportwriting);
-
-        lblimagetest.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sreyoshi\\Documents\\AED_Assignments\\AED-finalProject\\Image\\test2.jpg")); // NOI18N
 
         btnsavediao.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnsavediao.setText("Save");
@@ -159,7 +153,7 @@ public class DiagonasticCenter extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblpicdiao3, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblimagetest, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(lblimagetest, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)))
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(

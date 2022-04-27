@@ -38,10 +38,11 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
 }catch(Exception e){
 }
         
-        jComboBox1.addItem("New Jersy");
         jComboBox1.addItem("Boston");
-        jComboBox1.addItem("California");
-        
+        jComboBox1.addItem("New Jersy");
+        jComboBox1.addItem("New York");
+        jComboBox1.addItem("Seattle");
+        jComboBox1.addItem("Philadelphia");
         
         jComboBox2.addItem("Hospital");
         jComboBox2.addItem("NGO");

@@ -232,7 +232,7 @@ public class EditFrame extends javax.swing.JFrame {
         
         //submit button Govt ID
         int id=Integer.parseInt((String) jComboBox1.getSelectedItem());
-        String ngo_name=enterpriseLoginFrame.NGO_name;//collect the NGO name 
+        String ngo_name=enterpriseLoginFrame.Enterprise_name;//collect the NGO name 
          String location=(String) jComboBox2.getSelectedItem();
         
            String zip=(String) jComboBox4.getSelectedItem();
@@ -299,7 +299,7 @@ public class EditFrame extends javax.swing.JFrame {
           }
                     
           //update the ngo detail table       
-          MainFrame.p3.updateTableForNgo();
+          MainFrame.ngoPanel.updateTableForNgo();
           
        jTextField2.setText("");
         
