@@ -30,9 +30,11 @@ public class Panel2 extends javax.swing.JPanel {
         initComponents();
         
        
-        jComboBox1.addItem("New Jersy");
         jComboBox1.addItem("Boston");
-        jComboBox1.addItem("California");
+        jComboBox1.addItem("New Jersy");
+        jComboBox1.addItem("New York");
+        jComboBox1.addItem("Seattle");
+        jComboBox1.addItem("Philadelphia");
         
          try {
 //

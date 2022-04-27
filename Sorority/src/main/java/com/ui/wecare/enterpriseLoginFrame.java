@@ -14,8 +14,9 @@ import javax.swing.JOptionPane;
  */
 public class enterpriseLoginFrame extends javax.swing.JFrame {
 
-   public static String NGO_name="";
-   Connection conn ;
+    public static String NGO_name = "";
+    Connection conn;
+
     public enterpriseLoginFrame() {
         initComponents();
         setVisible(true);
@@ -101,10 +102,9 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         //login button
-
         //Connection con=null;
-        Statement st=null;
-        ResultSet rs=null;
+        Statement st = null;
+        ResultSet rs = null;
 
 //        try {
 //            con = DriverManager.getConnection(
@@ -112,130 +112,96 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
 //        } catch (SQLException ex) {
 //
 //        }
-
-try{
-String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
-        String user ="SYSTEM";
-        String password = "trisha";
-Class.forName("oracle.jdbc.driver.OracleDriver");
- conn =  DriverManager.getConnection(url,user,password);
-}catch(Exception e){
-}
+        try {
+            String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+            String user = "SYSTEM";
+            String password = "trisha";
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            conn = DriverManager.getConnection(url, user, password);
+        } catch (Exception e) {
+        }
 
         //create the statement object
-        String user=jTextField1.getText();
-        String pass=jPasswordField1.getText();
+        String user = jTextField1.getText();
+        String pass = jPasswordField1.getText();
 
         jTextField1.setText("");
         jPasswordField1.setText("");
 
-       String s= String.format("select *from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='NGO' and e.name=ed.username", user,pass)  ;
-            NGO_name=user;
+        String s = String.format("select * from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='NGO' and e.name=ed.username", user, pass);
+        NGO_name = user;
         try {
-            st=conn.createStatement();
-            rs=st.executeQuery(s);  // execute query
+            st = conn.createStatement();
+            rs = st.executeQuery(s);  // execute query
 
-                if(rs.next())
-                {
-                    // MainFrame. p3.setVisible(true);
-                     MainFrame. workArea.setVisible(true);
-                     MainFrame. p3.updateTableForNgo();
-                     setVisible(false);
-                     
+            if (rs.next()) {
+                // MainFrame. ngoPanel.setVisible(true);
+                MainFrame.workArea.setVisible(true);
+                MainFrame.ngoPanel.updateTableForNgo();
+                setVisible(false);
 
-                }
-                else {
-                    
-                             s= String.format("select *from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Hospital' and e.name=ed.username", user,pass)  ;
+            } else {
 
-                            st=conn.createStatement();
-                            rs=st.executeQuery(s);  // execute query
+                s = String.format("select * from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Hospital' and e.name=ed.username", user, pass);
+                st = conn.createStatement();
+                rs = st.executeQuery(s);  // execute query
 
-                            if(rs.next())
-                            {
-                                 MainFrame. workArea.setVisible(true);
-                               
+                if (rs.next()) {
+                    MainFrame.workArea.setVisible(true);
+
+                    setVisible(false);
+
+                } else {
+
+                    s = String.format("select * from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Police' and e.name=ed.username", user, pass);
+                //s = String.format("select * from work_area a where a.username='%s' and a.password='%s' and a.ORGANIZATION='Police'", user, pass);
+
+                    st = conn.createStatement();
+                    rs = st.executeQuery(s);  // execute query
+
+                    if (rs.next()) {
+                        MainFrame.workArea.setVisible(true);
+                        setVisible(false);
+
+                    } else {
+
+                        s = String.format("select *from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Judiciary' and e.name=ed.username", user, pass);
+
+                        st = conn.createStatement();
+                        rs = st.executeQuery(s);  // execute query
+
+                        if (rs.next()) {
+                            MainFrame.workArea.setVisible(true);
+
+                            MainFrame.lawyerPanel.updateTableForLawyer();
+                            setVisible(false);
+
+                        } else {
+
+                            s = String.format("select * from work_area  where username='%s' and password='%s'", user, pass);
+
+                            st = conn.createStatement();
+                            rs = st.executeQuery(s);  // execute query
+
+                            if (rs.next()) {
+                                MainFrame.ngoPanel.setVisible(true);
+                                MainFrame.ngoPanel.updateTableForNgo();
+
                                 setVisible(false);
 
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Invalid User name / password");
+                                return;
                             }
-                           
-                            else
-                                {
-                                    
-                                         s= String.format("select *from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Police' and e.name=ed.username", user,pass)  ;
 
-                                            st=conn.createStatement();
-                                            rs=st.executeQuery(s);  // execute query
+                        }
 
-                                            if(rs.next())
-                                            {
-                                                 MainFrame. workArea.setVisible(true);
+                    }
 
-                                                setVisible(false);
-
-                                            }
-                                    
-                                            else{
-                                                
-                                                
-                                                     s= String.format("select *from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Judiciary' and e.name=ed.username", user,pass)  ;
-
-                                                        st=conn.createStatement();
-                                                        rs=st.executeQuery(s);  // execute query
-
-                                                        if(rs.next())
-                                                        {
-                                                             MainFrame. workArea.setVisible(true);
-
-                                                            setVisible(false);
-
-                                                        }
-                                                
-                                                        else{
-                                                            
-                                                             s= String.format("select *from work_area  where username='%s' and password='%s'", user,pass)  ;
-
-                                                                st=conn.createStatement();
-                                                                rs=st.executeQuery(s);  // execute query
-
-                                                                if(rs.next())
-                                                                {
-                                                                     MainFrame. p3.setVisible(true);
-                                                                      MainFrame. p3.updateTableForNgo();
-
-
-                                                                    setVisible(false);
-
-                                                                }
-
-                                                                else{
-                                                                    JOptionPane.showMessageDialog(null, "Invalid User name / password");
-                                                                     return;
-                                                                }
-
-                                                            
-                                                            
-                                                        }
-                                                
-                                                
-                                                
-                                                
-                                                 }
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                        
-                                }
-                
-                
-                
                 }
-                
-              
+
+            }
+
             conn.close();
 
         } catch (SQLException ex) {

@@ -30,9 +30,14 @@ public class MainFrame extends javax.swing.JFrame {
     GridBagLayout gl=new GridBagLayout();
     static Panel1 p1;
     static Panel2 p2;
-    static ngoManagementPanel p3;
-     static FeatureForFemalePanel femalePanel;
+    
+    static FeatureForFemalePanel femalePanel;
     static WorkAreaAdminPanel workArea;
+    static EmployeeLoginFrame employeeLoginFrame;
+
+    static ngoManagementPanel ngoPanel;
+static Police policePanel;
+static Lawyer lawyerPanel;
    
         
     
@@ -47,6 +52,7 @@ public class MainFrame extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
         buttonGroup1.add(jRadioButton3);
+        buttonGroup1.add(jRadioButton4);
         
         
        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -77,9 +83,11 @@ public class MainFrame extends javax.swing.JFrame {
         
         p1=new Panel1();
         p2=new Panel2();
-        p3=new ngoManagementPanel();
+        ngoPanel=new ngoManagementPanel();
         femalePanel=new FeatureForFemalePanel();
         workArea=new WorkAreaAdminPanel();
+policePanel =  new Police();
+lawyerPanel = new Lawyer();
        
         
         //----------------------
@@ -95,17 +103,21 @@ public class MainFrame extends javax.swing.JFrame {
         p2.setVisible(false);
         
         
-        targetPanel.add(p3,c);
-        p3.setVisible(false);
+        targetPanel.add(ngoPanel,c);
+        ngoPanel.setVisible(false);
         
         
-         targetPanel.add(femalePanel,c);
+        targetPanel.add(femalePanel,c);
         femalePanel.setVisible(false);
         
         targetPanel.add(workArea,c);
         workArea.setVisible(false);
+
+        targetPanel.add(policePanel,c);
+        workArea.setVisible(false);
         
-                
+        targetPanel.add(lawyerPanel,c);
+        workArea.setVisible(false);
         
     }
     
@@ -127,6 +139,7 @@ public class MainFrame extends javax.swing.JFrame {
         jRadioButton3 = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
         targetPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -146,7 +159,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jRadioButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, -1));
+        jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
 
         jRadioButton2.setText("Female User");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +167,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jRadioButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, -1, -1));
 
         jRadioButton3.setText("Enterprise");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +175,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jRadioButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
+        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
 
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -179,6 +192,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
+
+        jRadioButton4.setText("Work Area");
+        jPanel2.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 290, 434));
 
@@ -230,6 +246,12 @@ public class MainFrame extends javax.swing.JFrame {
             enterpriseLoginFrame et=new enterpriseLoginFrame();
             
         }
+        else if(jRadioButton4.isSelected()){
+            
+            EmployeeLoginFrame et=new EmployeeLoginFrame();
+            
+        }
+
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -240,7 +262,7 @@ public class MainFrame extends javax.swing.JFrame {
 
          p1.setVisible(false);
          p2.setVisible(false);
-         p3.setVisible(false);
+         ngoPanel.setVisible(false);
          femalePanel.setVisible(false);
          workArea.setVisible(false);
         
@@ -305,6 +327,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JPanel targetPanel;
     // End of variables declaration//GEN-END:variables
 }

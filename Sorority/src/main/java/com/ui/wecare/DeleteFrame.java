@@ -237,7 +237,7 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
                  }
                      
                    //------------------------  
-                     MainFrame.p3.updateTableForNgo();
+                     MainFrame.ngoPanel.updateTableForNgo();
                      
                      updateCombobox1();
                  

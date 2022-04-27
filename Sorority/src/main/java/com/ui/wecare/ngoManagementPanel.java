@@ -466,7 +466,7 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
                     
                  
         //update the table             
-          MainFrame.p3.updateTableForNgo();
+          MainFrame.ngoPanel.updateTableForNgo();
           jTextField2.setText("");
         
         

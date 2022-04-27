@@ -299,7 +299,7 @@ public class EditFrame extends javax.swing.JFrame {
           }
                     
           //update the ngo detail table       
-          MainFrame.p3.updateTableForNgo();
+          MainFrame.ngoPanel.updateTableForNgo();
           
        jTextField2.setText("");
         

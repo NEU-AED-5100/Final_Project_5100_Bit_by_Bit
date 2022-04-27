@@ -8,10 +8,11 @@ package com.ui.wecare;
 import java.sql.*;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -19,10 +20,10 @@ import javax.swing.JOptionPane;
  */
 public class femaleUserSignUp extends javax.swing.JFrame {
 
-    Connection con=null;
-        Statement st=null;
-        ResultSet rs=null;
-        PreparedStatement pst;
+    Connection con = null;
+    Statement st = null;
+    ResultSet rs = null;
+    PreparedStatement pst;
 
     public femaleUserSignUp() {
         initComponents();
@@ -44,7 +45,6 @@ public class femaleUserSignUp extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -56,10 +56,9 @@ public class femaleUserSignUp extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jTextField9 = new javax.swing.JTextField();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(250, 150));
@@ -90,8 +89,6 @@ public class femaleUserSignUp extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Patient Id");
-
         jLabel11.setText("Name");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -113,21 +110,19 @@ public class femaleUserSignUp extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel10)
                             .addComponent(jLabel11)
                             .addComponent(jLabel4))
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2)
                             .addComponent(jTextField3)
                             .addComponent(jTextField4)
                             .addComponent(jTextField5)
                             .addComponent(jTextField6)
                             .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField1)
                             .addComponent(jPasswordField1)
-                            .addComponent(jTextField9)))
+                            .addComponent(jTextField9)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(164, 164, 164)
                         .addComponent(jButton1)))
@@ -153,8 +148,8 @@ public class femaleUserSignUp extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -174,11 +169,7 @@ public class femaleUserSignUp extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addComponent(jButton1))
         );
 
@@ -188,88 +179,71 @@ public class femaleUserSignUp extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //submit button
-        
-  try{
-String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
-        String user ="SYSTEM";
-        String password = "trisha";
-Class.forName("oracle.jdbc.driver.OracleDriver");
- con =  DriverManager.getConnection(url,user,password);
-}catch(Exception e){
-}
-    String username =jTextField1.getText();
-     String password =jPasswordField1.getText();
-      String name =jTextField9.getText();
-    String DOB =jTextField2.getText();
-    String city=jTextField3.getText();
-    String State=jTextField4.getText();
-    String zipcode =(jTextField5.getText());
-    String emailId =jTextField6.getText();
-    long mobileNo =Long.parseLong(jTextField7.getText());
-   
-    int patientId=0;
-    
-    Connection con=DAO.getConnection();
-    
-          try {
-           
-                
-             String s=String.format("insert into female(username , 	Password ,\n" +
-"    name ,\n" +
-"    DOB ,\n" +
-"    city ,\n" +
-"    State ,\n" +
-"    zipcode ,\n" +
-"    emailId,\n" +
-"    mobileNo )  values(?,?,?,?,?,?,?,?,?)" );
-                     
-            //String s=String.format("insert into Female  values ()");           
-             pst=con.prepareStatement(s);
-             SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yy");
-          java.util.Date dob = sdf1.parse(DOB);
-          long dateLong = dob.getTime();
-    java.sql.Date dt=new java.sql.Date(dateLong);
-    
-    pst.setString(1, username);
-    pst.setString(2, password);
-    pst.setString(3, name);
-    pst.setDate(4, dt);
-    pst.setString(5, city);
-    pst.setString(6, State);
-    pst.setString(7, zipcode);
-    pst.setString(8, emailId);
-    pst.setLong(9, mobileNo);
-    
-    
-        
-        
-             int n=pst.executeUpdate();  // execute query
-             if(n>0)
-                 JOptionPane.showMessageDialog(null, "Record saved successfully");
-             else
-                 JOptionPane.showMessageDialog(null, "Record could not be added");
-          
-            
-        } catch (SQLException ex) {
-              ex.printStackTrace();
-                    
-        } catch (ParseException ex) {
-            
+
+        try {
+            String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+            String user = "SYSTEM";
+            String password = "trisha";
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            con = DriverManager.getConnection(url, user, password);
+        } catch (Exception e) {
         }
-          
-          dispose();
+        String username = jTextField1.getText();
+        String password = jPasswordField1.getText();
+        String name = jTextField9.getText();
+        Format formatter = new SimpleDateFormat("dd-MMM-yy");
+        String DOB = formatter.format(this.jDateChooser1.getDate());
+        String city = jTextField3.getText();
+        String State = jTextField4.getText();
+        String zipcode = (jTextField5.getText());
+        String emailId = jTextField6.getText();
+        long mobileNo = Long.parseLong(jTextField7.getText());
+
         
+        
+        try {
+
+            String s = String.format("insert into female(username ,Password ,"+ "    name ,"+ "    DOB ," + "    city ,"  + "    State ," + "    zipcode ,"
+                    + "    emailId,"
+                    + "    mobileNo )  values(?,?,?,?,?,?,?,?,?)");
+
+            //String s=String.format("insert into Female  values ()");           
+            pst = con.prepareStatement(s);
+            
+            pst.setString(1, username);
+            pst.setString(2, password);
+            pst.setString(3, name);
+            pst.setString(4, DOB);
+            pst.setString(5, city);
+            pst.setString(6, State);
+            pst.setString(7, zipcode);
+            pst.setString(8, emailId);
+            pst.setLong(9, mobileNo);
+
+            int n = pst.executeUpdate();  // execute query
+            if (n > 0) {
+                JOptionPane.showMessageDialog(null, "Record saved successfully");
+            } else {
+                JOptionPane.showMessageDialog(null, "Record could not be added");
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+
+        }
+
+        dispose();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -281,13 +255,11 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }
