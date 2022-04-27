@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package screensUI;
+package com.ui.wecare;
 
 /**
  *
@@ -59,8 +59,6 @@ public class Pharmacy extends javax.swing.JPanel {
         lblheading.setForeground(new java.awt.Color(255, 255, 255));
         lblheading.setText("DRUG STORE-  Always Available Pharma");
 
-        lblmedicinepic.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sreyoshi\\Documents\\AED_Assignments\\AED-finalProject\\Image\\medicine 1.jpg")); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -97,8 +95,6 @@ public class Pharmacy extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 204));
         jLabel1.setText("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
-
-        lblprescriptionimage.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sreyoshi\\Documents\\AED_Assignments\\AED-finalProject\\Image\\prescription 1.jpg")); // NOI18N
 
         lblprescription.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblprescription.setForeground(new java.awt.Color(0, 0, 204));
@@ -138,8 +134,6 @@ public class Pharmacy extends javax.swing.JPanel {
             }
         ));
         scrlpnlpharmatable.setViewportView(tblmedicineview);
-
-        lblmoneypicture.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sreyoshi\\Documents\\AED_Assignments\\AED-finalProject\\Image\\money.jpg")); // NOI18N
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jButton1.setText("Next to add in Inventory>>");

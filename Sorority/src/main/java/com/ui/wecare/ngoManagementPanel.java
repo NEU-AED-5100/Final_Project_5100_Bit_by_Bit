@@ -149,7 +149,7 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
 
             st=con.createStatement();
 
-            String s= "select * from ngo_detail where ngo_name='"+enterpriseLoginFrame.NGO_name+"'"  ;
+            String s= "select * from ngo_detail where ngo_name='"+enterpriseLoginFrame.Enterprise_name+"'"  ;
             rs=st.executeQuery(s);  // execute query
 
             while(rs.next()){
@@ -395,7 +395,7 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
 
 //we are assuming user name is the NGO name        
          //submit button Govt ID
-        String ngo_name=enterpriseLoginFrame.NGO_name;
+        String ngo_name=enterpriseLoginFrame.Enterprise_name;
          String location=(String) jComboBox1.getSelectedItem();
         
            String zip=(String) jComboBox3.getSelectedItem();

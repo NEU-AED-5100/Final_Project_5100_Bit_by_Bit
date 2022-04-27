@@ -29,12 +29,14 @@ public class NewWorkAreaFrame extends javax.swing.JFrame {
         //-----------------------
         //Doctor,Nurse,Receptionist,Pharma,Examination
         
-         if(enterpriseLoginFrame.NGO_name.equalsIgnoreCase("h1")|| 
-                 enterpriseLoginFrame.NGO_name.equalsIgnoreCase("h2")
+//enterpriseLoginFrame.user;
+        
+         if(enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("h1")|| 
+                 enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("h2")
                  
-                 ||enterpriseLoginFrame.NGO_name.equalsIgnoreCase("h3")
-                  ||enterpriseLoginFrame.NGO_name.equalsIgnoreCase("h4")||
-                  enterpriseLoginFrame.NGO_name.equalsIgnoreCase("h5")
+                 ||enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("h3")
+                  ||enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("h4")||
+                  enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("h5")
                  
                  )
          {
@@ -46,12 +48,12 @@ public class NewWorkAreaFrame extends javax.swing.JFrame {
                      jComboBox1.addItem("Examination");
              
          }
-         else if(enterpriseLoginFrame.NGO_name.equalsIgnoreCase("n1")|| 
-                 enterpriseLoginFrame.NGO_name.equalsIgnoreCase("n2")
+         else if(enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("n1")|| 
+                 enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("n2")
                  
-                 ||enterpriseLoginFrame.NGO_name.equalsIgnoreCase("n3")
-                  ||enterpriseLoginFrame.NGO_name.equalsIgnoreCase("n4")||
-                  enterpriseLoginFrame.NGO_name.equalsIgnoreCase("n5")
+                 ||enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("n3")
+                  ||enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("n4")||
+                  enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("n5")
                  
                  ){
              
@@ -60,11 +62,11 @@ public class NewWorkAreaFrame extends javax.swing.JFrame {
              
          }
          
-          else if(enterpriseLoginFrame.NGO_name.equalsIgnoreCase("p1")|| 
-                 enterpriseLoginFrame.NGO_name.equalsIgnoreCase("p2")
-                  ||enterpriseLoginFrame.NGO_name.equalsIgnoreCase("p3")
-                  ||enterpriseLoginFrame.NGO_name.equalsIgnoreCase("p4")||
-                  enterpriseLoginFrame.NGO_name.equalsIgnoreCase("p5")
+          else if(enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("p1")|| 
+                 enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("p2")
+                  ||enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("p3")
+                  ||enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("p4")||
+                  enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("p5")
                   
                   ){
              
@@ -73,11 +75,11 @@ public class NewWorkAreaFrame extends javax.swing.JFrame {
              
          }
          
-          else if(enterpriseLoginFrame.NGO_name.equalsIgnoreCase("j1")|| 
-                 enterpriseLoginFrame.NGO_name.equalsIgnoreCase("j2")||
-             enterpriseLoginFrame.NGO_name.equalsIgnoreCase("j3")
-                  ||enterpriseLoginFrame.NGO_name.equalsIgnoreCase("j4")||
-                  enterpriseLoginFrame.NGO_name.equalsIgnoreCase("j5")
+          else if(enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("j1")|| 
+                 enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("j2")||
+             enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("j3")
+                  ||enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("j4")||
+                  enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("j5")
                   
                   ){
              

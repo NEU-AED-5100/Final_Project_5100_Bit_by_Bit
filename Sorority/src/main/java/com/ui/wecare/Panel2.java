@@ -20,94 +20,89 @@ import javax.swing.table.DefaultTableModel;
 public class Panel2 extends javax.swing.JPanel {
 
     //manage enterprise admin
-    
-      Connection conn=null;
-        Statement st=null;
-        ResultSet rs=null;
-          DefaultTableModel model ;
-        
+    Connection conn = null;
+    Statement st = null;
+    ResultSet rs = null;
+    DefaultTableModel model;
+
     public Panel2() {
         initComponents();
-        
-       
+
         jComboBox1.addItem("Boston");
         jComboBox1.addItem("New Jersy");
         jComboBox1.addItem("New York");
         jComboBox1.addItem("Seattle");
         jComboBox1.addItem("Philadelphia");
-        
-         try {
+
+        try {
 //
 //              con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+if(conn == (null)){
+            try {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                conn = DriverManager.getConnection(url, user, password);
+            } catch (Exception e) {
+            }}
+            st = conn.createStatement();
 
-try{
-String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
-        String user ="SYSTEM";
-        String password = "trisha";
-Class.forName("oracle.jdbc.driver.OracleDriver");
- conn =  DriverManager.getConnection(url,user,password);
-}catch(Exception e){
-}
-            st=conn.createStatement();
+            String s = String.format("select * from enterprise where location='" + jComboBox1.getSelectedItem() + "'");
+            rs = st.executeQuery(s);  // execute query
+            jComboBox2.removeAllItems();
 
-            String s=String.format("select * from enterprise where location='"+jComboBox1.getSelectedItem()+"'");
-           rs=st.executeQuery(s);  // execute query
-           jComboBox2.removeAllItems();
-           
-           while(rs.next()){
-               
-               jComboBox2.addItem(rs.getString(1));
-           }
-           
+            while (rs.next()) {
+
+                jComboBox2.addItem(rs.getString(1));
+            }
 
         } catch (SQLException ex) {
 
         }
-         
-        
+
         model = new DefaultTableModel();
         jTable1.setModel(model);
         model.addColumn("Enterprise Name");
         model.addColumn("Location");
         model.addColumn("User Name");
-        
-        
+
     }
 
-    
-    public void updateTable(){
-        
-         model = new DefaultTableModel();
+    public void updateTable() {
+
+        model = new DefaultTableModel();
         jTable1.setModel(model);
         model.addColumn("Enterprise Name");
         model.addColumn("Location");
         model.addColumn("User Name");
-        
-          if (jTable1.getRowCount() > 0) {
-            for (int i = jTable1.getRowCount() - 1; i >=0; i--) {
+
+        if (jTable1.getRowCount() > 0) {
+            for (int i = jTable1.getRowCount() - 1; i >= 0; i--) {
                 model.removeRow(i);
             }
         }
-        
-         try {
 
-            st=conn.createStatement();
+        try {
 
-            String s= "select * from enterprise_detail"  ;
-            rs=st.executeQuery(s);  // execute query
+            st = conn.createStatement();
 
-            while(rs.next()){
+            String s = "select * from enterprise_detail";
+            rs = st.executeQuery(s);  // execute query
 
-                model.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3)});
+            while (rs.next()) {
+
+                model.addRow(new Object[]{rs.getString(1), rs.getString(2), rs.getString(3)});
 
             }
 
         } catch (SQLException ex) {
 
         }
-        
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -198,6 +193,11 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
         });
         add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 110, -1));
 
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
         add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 263, 106, -1));
         add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 106, -1));
         add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 106, -1));
@@ -206,51 +206,50 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         //submit button
-        String location=(String) jComboBox1.getSelectedItem();
-        String enterprise_name=(String) jComboBox2.getSelectedItem();
-        String username=jTextField1.getText();
-        String password=jPasswordField1.getText();
+        String location = (String) jComboBox1.getSelectedItem();
+        String enterprise_name = (String) jComboBox2.getSelectedItem();
+        String username = jTextField1.getText();
+        String password = jPasswordField1.getText();
 
-        String name=jTextField2.getText();
-
+        String name = jTextField2.getText();
 
         try {
 
-            st=conn.createStatement();
+            st = conn.createStatement();
 
-            String s=String.format("insert into enterprise_detail values('%s','%s','%s','%s','%s')", enterprise_name,location,username,password,name);
-            int n=st.executeUpdate(s);  // execute query
-            if(n>0)
+            String s = String.format("insert into enterprise_detail values('%s','%s','%s','%s','%s')", enterprise_name, location, username, password, name);
+            int n = st.executeUpdate(s);  // execute query
+            if (n > 0) {
                 JOptionPane.showMessageDialog(null, "Record saved successfully");
-            else
-                 JOptionPane.showMessageDialog(null, "Record could not be added");
+            } else {
+                JOptionPane.showMessageDialog(null, "Record could not be added");
+            }
 
         } catch (SQLException ex) {
 
         }
 
         jTextField1.setText("");
-     jTextField2.setText("");
-      jPasswordField1.setText("");
- 
-        //-------------------
+        jTextField2.setText("");
+        jPasswordField1.setText("");
 
+        //-------------------
         if (jTable1.getRowCount() > 0) {
-            for (int i = jTable1.getRowCount() - 1; i >=0; i--) {
+            for (int i = jTable1.getRowCount() - 1; i >= 0; i--) {
                 model.removeRow(i);
             }
         }
 
         try {
 
-            st=conn.createStatement();
+            st = conn.createStatement();
 
-            String s= "select * from enterprise_detail"  ;
-            rs=st.executeQuery(s);  // execute query
+            String s = "select * from enterprise_detail";
+            rs = st.executeQuery(s);  // execute query
 
-            while(rs.next()){
+            while (rs.next()) {
 
-                model.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3)});
+                model.addRow(new Object[]{rs.getString(1), rs.getString(2), rs.getString(3)});
 
             }
 
@@ -263,48 +262,59 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //Manage Enterprise button
-         MainFrame.p2.setVisible(false);
-         MainFrame.p1.setVisible(true);
-        
-         
+        MainFrame.p2.setVisible(false);
+        MainFrame.p1.setVisible(true);
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         //Manage Enterprise admin button
-         MainFrame.p2.setVisible(true);
-         MainFrame.p1.setVisible(false);
-        
-         updateTable();
-         
+        //Manage Enterprise admin button
+        MainFrame.p2.setVisible(true);
+        MainFrame.p1.setVisible(false);
+
+        updateTable();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        
+
         //location combo box click event
-          try {
+        try {
+if(conn == (null)){
+            try {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                conn = DriverManager.getConnection(url, user, password);
+            } catch (Exception e) {
+            }}
+            st = conn.createStatement();
+String s ="";
+if(!jComboBox1.getSelectedItem().equals(null) || !jComboBox1.getSelectedItem().equals(""))
+            s = "select * from enterprise where location='" + jComboBox1.getSelectedItem() + "'";
+else s = "select * from enterprise";
+            rs = st.executeQuery(s);  // execute query
+            jComboBox2.removeAllItems();
 
-              conn = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-            st=conn.createStatement();
+            while (rs.next()) {
 
-            String s="select * from enterprise where location='"+jComboBox1.getSelectedItem()+"'";
-           rs=st.executeQuery(s);  // execute query
-           jComboBox2.removeAllItems();
-           
-           while(rs.next()){
-               
-               jComboBox2.addItem(rs.getString(1));
-           }
-           
+                jComboBox2.addItem(rs.getString(1));
+            }
 
         } catch (SQLException ex) {
 
         }
-        
-        
+
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

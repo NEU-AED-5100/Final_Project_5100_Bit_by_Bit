@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class enterpriseLoginFrame extends javax.swing.JFrame {
 
-    public static String NGO_name = "";
+    public static String Enterprise_name = "";
     Connection conn;
 
     public enterpriseLoginFrame() {
@@ -123,13 +123,14 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
 
         //create the statement object
         String user = jTextField1.getText();
+        Enterprise_name = user;
         String pass = jPasswordField1.getText();
 
         jTextField1.setText("");
         jPasswordField1.setText("");
 
         String s = String.format("select * from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='NGO' and e.name=ed.username", user, pass);
-        NGO_name = user;
+        
         try {
             st = conn.createStatement();
             rs = st.executeQuery(s);  // execute query
@@ -173,7 +174,6 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
                         if (rs.next()) {
                             MainFrame.workArea.setVisible(true);
 
-                            MainFrame.lawyerPanel.updateTableForLawyer();
                             setVisible(false);
 
                         } else {

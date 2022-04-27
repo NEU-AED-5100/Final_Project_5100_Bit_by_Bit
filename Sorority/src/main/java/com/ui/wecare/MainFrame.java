@@ -27,101 +27,106 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    GridBagLayout gl=new GridBagLayout();
+    GridBagLayout gl = new GridBagLayout();
     static Panel1 p1;
     static Panel2 p2;
-    
+
     static FeatureForFemalePanel femalePanel;
     static WorkAreaAdminPanel workArea;
     static EmployeeLoginFrame employeeLoginFrame;
 
     static ngoManagementPanel ngoPanel;
-static Police policePanel;
-static Lawyer lawyerPanel;
-   
-        
-    
+    static Police policePanel;
+    static Lawyer lawyerPanel;
+    static NurseReading nurseReading;
+    static Reception reception;
+    static Pharmacy pharmacy;
+    static DiagonasticCenter diagonasticCenter;
+
     public void tickTock() {
-          DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-            jLabel6.setText((java.time.LocalTime.now()).format(dtf));
-        }
-    
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        jLabel6.setText((java.time.LocalTime.now()).format(dtf));
+    }
+
     public MainFrame() {
-                
+
         initComponents();
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
         buttonGroup1.add(jRadioButton3);
         buttonGroup1.add(jRadioButton4);
-        
-        
-       DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-                
-     
-       
-       Timer t = new Timer(500, new ActionListener() {
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+        Timer t = new Timer(500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              tickTock();
-              
+                tickTock();
+
             }
-         });
-         t.setRepeats(true);
-         t.setCoalesce(true);
-         t.setInitialDelay(0);
-         t.start();
-       
-             
-     
-        
+        });
+        t.setRepeats(true);
+        t.setCoalesce(true);
+        t.setInitialDelay(0);
+        t.start();
+
         //------------------------------------------
         dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                
-        jLabel3.setText(  (java.time.LocalDate.now()).format(dtf));
-      
+
+        jLabel3.setText((java.time.LocalDate.now()).format(dtf));
+
         //-------------------------------------------
-        
-        p1=new Panel1();
-        p2=new Panel2();
-        ngoPanel=new ngoManagementPanel();
-        femalePanel=new FeatureForFemalePanel();
-        workArea=new WorkAreaAdminPanel();
-policePanel =  new Police();
-lawyerPanel = new Lawyer();
-       
-        
+        p1 = new Panel1();
+        p2 = new Panel2();
+        ngoPanel = new ngoManagementPanel();
+        femalePanel = new FeatureForFemalePanel();
+        workArea = new WorkAreaAdminPanel();
+        policePanel = new Police();
+        lawyerPanel = new Lawyer();
+        nurseReading = new NurseReading();
+        reception = new Reception();
+        pharmacy = new Pharmacy();
+        diagonasticCenter = new DiagonasticCenter();
+
         //----------------------
-        
         targetPanel.setLayout(gl);
-        GridBagConstraints c=new GridBagConstraints();
-        c.gridx=0;
-        c.gridy=0;
-        targetPanel.add(p1,c);
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        targetPanel.add(p1, c);
         p1.setVisible(false);
-        
-        targetPanel.add(p2,c);
+
+        targetPanel.add(p2, c);
         p2.setVisible(false);
-        
-        
-        targetPanel.add(ngoPanel,c);
+
+        targetPanel.add(ngoPanel, c);
         ngoPanel.setVisible(false);
-        
-        
-        targetPanel.add(femalePanel,c);
+
+        targetPanel.add(femalePanel, c);
         femalePanel.setVisible(false);
-        
-        targetPanel.add(workArea,c);
+
+        targetPanel.add(workArea, c);
         workArea.setVisible(false);
 
-        targetPanel.add(policePanel,c);
-        workArea.setVisible(false);
-        
-        targetPanel.add(lawyerPanel,c);
-        workArea.setVisible(false);
-        
+        targetPanel.add(policePanel, c);
+        policePanel.setVisible(false);
+
+        targetPanel.add(lawyerPanel, c);
+        lawyerPanel.setVisible(false);
+
+        targetPanel.add(nurseReading, c);
+        nurseReading.setVisible(false);
+
+        targetPanel.add(reception, c);
+        reception.setVisible(false);
+
+        targetPanel.add(pharmacy, c);
+        pharmacy.setVisible(false);
+
+        targetPanel.add(diagonasticCenter, c);
+        diagonasticCenter.setVisible(false);
+
     }
-    
-  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -228,45 +233,45 @@ lawyerPanel = new Lawyer();
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         //login button
-        
-        if(jRadioButton1.isSelected()){
-            
-            adminLoginFrame ad=new adminLoginFrame();
-           
-        }
-        else if(jRadioButton2.isSelected()){
-            
-            femaleUserLoginFrame fm=new femaleUserLoginFrame();
-            
-        }
-        else if(jRadioButton3.isSelected()){
-            
-            enterpriseLoginFrame et=new enterpriseLoginFrame();
-            
-        }
-        else if(jRadioButton4.isSelected()){
-            
-            EmployeeLoginFrame et=new EmployeeLoginFrame();
-            
+        if (jRadioButton1.isSelected()) {
+
+            adminLoginFrame ad = new adminLoginFrame();
+
+        } else if (jRadioButton2.isSelected()) {
+
+            femaleUserLoginFrame fm = new femaleUserLoginFrame();
+
+        } else if (jRadioButton3.isSelected()) {
+
+            enterpriseLoginFrame et = new enterpriseLoginFrame();
+
+        } else if (jRadioButton4.isSelected()) {
+
+            EmployeeLoginFrame et = new EmployeeLoginFrame();
+
         }
 
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-         //logout button
 
-         p1.setVisible(false);
-         p2.setVisible(false);
-         ngoPanel.setVisible(false);
-         femalePanel.setVisible(false);
-         workArea.setVisible(false);
-        
-        
+        //logout button
+        p1.setVisible(false);
+        p2.setVisible(false);
+        ngoPanel.setVisible(false);
+        femalePanel.setVisible(false);
+        workArea.setVisible(false);
+        policePanel.setVisible(false);
+        lawyerPanel.setVisible(false);
+        reception.setVisible(false);
+        nurseReading.setVisible(false);
+        pharmacy.setVisible(false);
+        diagonasticCenter.setVisible(false);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed

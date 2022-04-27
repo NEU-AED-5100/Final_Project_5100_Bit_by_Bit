@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class EmployeeLoginFrame extends javax.swing.JFrame {
 
-    public static String NGO_name = "";
+    public static String Emp_name = "";
     Connection conn;
 
     public EmployeeLoginFrame() {
@@ -130,93 +130,141 @@ public class EmployeeLoginFrame extends javax.swing.JFrame {
 
         //String s = String.format("select * from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='NGO' and e.name=ed.username", user, pass);
         String s = String.format("select * from work_area a where a.username='%s' and a.password='%s' and a.ORGANIZATION='NGO'", user, pass);
-        
-        NGO_name = user;
+
+        Emp_name = user;
         try {
             st = conn.createStatement();
             rs = st.executeQuery(s);  // execute query
 
             if (rs.next()) {
                 // MainFrame. ngoPanel.setVisible(true);
-                MainFrame.workArea.setVisible(true);
-                MainFrame.ngoPanel.updateTableForNgo();
+                MainFrame.ngoPanel.setVisible(true);
+                //MainFrame.ngoPanel.updateTableForNgo();
                 setVisible(false);
 
             } else {
-
                 //s = String.format("select * from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Hospital' and e.name=ed.username", user, pass);
-                s = String.format("select * from work_area a where a.username='%s' and a.password='%s' and a.ORGANIZATION='Hospital'", user, pass);
-                       
-            st = conn.createStatement();
+                s = String.format("select * from work_area a where a.username='%s' and a.password='%s' and a.ORGANIZATION='Doctor'", user, pass);
+
+                st = conn.createStatement();
                 rs = st.executeQuery(s);  // execute query
 
                 if (rs.next()) {
-                    MainFrame.workArea.setVisible(true);
+                    MainFrame.nurseReading.setVisible(true);
 
                     setVisible(false);
 
                 } else {
 
                     //s = String.format("select * from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Police' and e.name=ed.username", user, pass);
-                s = String.format("select * from work_area a where a.username='%s' and a.password='%s' and a.ORGANIZATION='Police'", user, pass);
+                    s = String.format("select * from work_area a where a.username='%s' and a.password='%s' and a.ORGANIZATION='Nurse'", user, pass);
 
                     st = conn.createStatement();
                     rs = st.executeQuery(s);  // execute query
 
                     if (rs.next()) {
-                        MainFrame.policePanel.setVisible(true);
+                        MainFrame.nurseReading.setVisible(true);
                         setVisible(false);
 
                     } else {
 
-                        //s = String.format("select *from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Judiciary' and e.name=ed.username", user, pass);
-                        s = String.format("select * from work_area a where a.username='%s' and a.password='%s' and a.ORGANIZATION='Judiciary'", user, pass);
-                
+                        //s = String.format("select * from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Police' and e.name=ed.username", user, pass);
+                        s = String.format("select * from work_area a where a.username='%s' and a.password='%s' and a.ORGANIZATION='Receptionist'", user, pass);
+
                         st = conn.createStatement();
                         rs = st.executeQuery(s);  // execute query
 
                         if (rs.next()) {
-                            MainFrame.workArea.setVisible(true);
-
-                            MainFrame.lawyerPanel.updateTableForLawyer();
+                            MainFrame.reception.setVisible(true);
                             setVisible(false);
 
                         } else {
 
-                            s = String.format("select * from work_area  where username='%s' and password='%s'", user, pass);
+                            //s = String.format("select * from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Police' and e.name=ed.username", user, pass);
+                            s = String.format("select * from work_area a where a.username='%s' and a.password='%s' and a.ORGANIZATION='Pharma'", user, pass);
 
                             st = conn.createStatement();
                             rs = st.executeQuery(s);  // execute query
 
                             if (rs.next()) {
-                                MainFrame.ngoPanel.setVisible(true);
-                                MainFrame.ngoPanel.updateTableForNgo();
-
+                                MainFrame.pharmacy.setVisible(true);
                                 setVisible(false);
 
                             } else {
-                                JOptionPane.showMessageDialog(null, "Invalid User name / password");
-                                return;
+
+                                //s = String.format("select * from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Police' and e.name=ed.username", user, pass);
+                                s = String.format("select * from work_area a where a.username='%s' and a.password='%s' and a.ORGANIZATION='Examination'", user, pass);
+
+                                st = conn.createStatement();
+                                rs = st.executeQuery(s);  // execute query
+
+                                if (rs.next()) {
+                                    MainFrame.diagonasticCenter.setVisible(true);
+                                    setVisible(false);
+
+                                } else {
+
+                                        //s = String.format("select * from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Police' and e.name=ed.username", user, pass);
+                                        s = String.format("select * from work_area a where a.username='%s' and a.password='%s' and a.ORGANIZATION='Police'", user, pass);
+
+                                        st = conn.createStatement();
+                                        rs = st.executeQuery(s);  // execute query
+
+                                        if (rs.next()) {
+                                            MainFrame.policePanel.setVisible(true);
+                                            setVisible(false);
+
+                                        } else {
+
+                                            //s = String.format("select *from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='Judiciary' and e.name=ed.username", user, pass);
+                                            s = String.format("select * from work_area a where a.username='%s' and a.password='%s' and a.ORGANIZATION='Judiciary'", user, pass);
+
+                                            st = conn.createStatement();
+                                            rs = st.executeQuery(s);  // execute query
+
+                                            if (rs.next()) {
+                                                MainFrame.lawyerPanel.setVisible(true);
+                                                setVisible(false);
+
+                                            } else {
+
+                                                s = String.format("select * from work_area  where username='%s' and password='%s'", user, pass);
+
+                                                st = conn.createStatement();
+                                                rs = st.executeQuery(s);  // execute query
+
+                                                if (rs.next()) {
+                                                    MainFrame.ngoPanel.setVisible(true);
+                                                    MainFrame.ngoPanel.updateTableForNgo();
+                                                    setVisible(false);
+
+                                                } else {
+                                                    JOptionPane.showMessageDialog(null, "Invalid User name / password");
+                                                    return;
+                                                }
+
+                                            }
+
+                                        }
+
+                                    
+                                }
                             }
-
                         }
-
                     }
 
-                }
+                }}
 
-            }
+                conn.close();
 
-            conn.close();
-
-        } catch (SQLException ex) {
+            }catch (SQLException ex) {
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
-     * @param args the command line arguments
-     */
+         * @param args the command line arguments
+         */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
