@@ -75,7 +75,8 @@ try {
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
             System.out.print(e.getMessage());
-        }}
+        }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -231,15 +232,16 @@ try {
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 Connection conn = DriverManager.getConnection(url, user, password);
             }
-int selectedrow = jTable1.getSelectedRow();
-int selectedcolumn = 0;
-String femaleUsername = (String) jTable1.getValueAt(selectedrow, selectedcolumn);
-Statement stmt = conn.createStatement();
+            int selectedrow = jTable1.getSelectedRow();
+            int selectedcolumn = 0;
+            String femaleUsername = (String) jTable1.getValueAt(selectedrow, selectedcolumn);
+            Statement stmt = conn.createStatement();
             String sql4 = "update REGISTEREDCASES set LAWYERUSERNAME = '"+EmployeeLoginFrame.Emp_name+"' where FEMALEID = '"+femaleUsername+"'";
             int result4 = stmt.executeUpdate(sql4);
             //System.out.print("result: " + result);
             JOptionPane.showMessageDialog(null, "Record Updated successfully");
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             System.out.print(e.getMessage());
         }
     }//GEN-LAST:event_btnapproverequestActionPerformed
