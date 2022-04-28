@@ -167,6 +167,7 @@ public class EmployeeLoginFrame extends javax.swing.JFrame {
 
                     if (rs.next()) {
                         MainFrame.nurseReading.setVisible(true);
+                        MainFrame.nurseReading.displayAllPatient();
                         setVisible(false);
 
                     } else {

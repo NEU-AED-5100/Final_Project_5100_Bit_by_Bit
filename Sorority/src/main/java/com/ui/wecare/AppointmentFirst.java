@@ -33,7 +33,7 @@ public class AppointmentFirst extends javax.swing.JPanel {
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 conn = DriverManager.getConnection(url, user, password);
             }
-            String sql = "select FEMALEID as ID,PATIENTID as Patient_ID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO,REGISTRATIONDATE from patient";
+            String sql = "select * from appointment";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
