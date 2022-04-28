@@ -43,6 +43,10 @@ public class MainFrame extends javax.swing.JFrame {
     static Pharmacy pharmacy;
     static DiagonasticCenter diagonasticCenter;
 
+static RegisterPatient registerPatient;
+static AppointmentFirst appointmentFirst;
+static AppointmentRegister appointmentRegister;
+
     public void tickTock() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         jLabel6.setText((java.time.LocalTime.now()).format(dtf));
@@ -87,6 +91,9 @@ public class MainFrame extends javax.swing.JFrame {
         reception = new Reception();
         pharmacy = new Pharmacy();
         diagonasticCenter = new DiagonasticCenter();
+registerPatient = new  RegisterPatient() ;
+appointmentFirst = new  AppointmentFirst() ;
+appointmentRegister = new  AppointmentRegister() ;
 
         //----------------------
         targetPanel.setLayout(gl);
@@ -125,6 +132,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         targetPanel.add(diagonasticCenter, c);
         diagonasticCenter.setVisible(false);
+
+        targetPanel.add(registerPatient, c);
+                registerPatient.setVisible(false);
+        targetPanel.add(appointmentFirst, c);
+                appointmentFirst.setVisible(false);
+        targetPanel.add(appointmentRegister, c);
+                appointmentRegister.setVisible(false);
 
     }
 

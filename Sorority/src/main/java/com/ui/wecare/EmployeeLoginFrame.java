@@ -14,7 +14,9 @@ import javax.swing.JOptionPane;
  */
 public class EmployeeLoginFrame extends javax.swing.JFrame {
 
+// performance improvement by reducing DB call
     public static String Emp_name = "";
+    public static String Emp_org = "";
     Connection conn;
 
     public EmployeeLoginFrame() {
@@ -123,6 +125,7 @@ public class EmployeeLoginFrame extends javax.swing.JFrame {
 
         //create the statement object
         String user = jTextField1.getText();
+        Emp_name = user;
         String pass = jPasswordField1.getText();
 
         jTextField1.setText("");
@@ -131,7 +134,7 @@ public class EmployeeLoginFrame extends javax.swing.JFrame {
         //String s = String.format("select * from enterprise_detail ed,enterprise e where ed.username='%s' and ed.password='%s' and e.type='NGO' and e.name=ed.username", user, pass);
         String s = String.format("select * from work_area a where a.username='%s' and a.password='%s' and a.ORGANIZATION='NGO'", user, pass);
 
-        Emp_name = user;
+        
         try {
             st = conn.createStatement();
             rs = st.executeQuery(s);  // execute query
