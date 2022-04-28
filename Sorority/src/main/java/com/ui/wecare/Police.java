@@ -4,21 +4,47 @@
  */
 package com.ui.wecare;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+
 /**
  *
- * @author Sreyoshi
+ * @author Bit-by-Bit
  */
 public class Police extends javax.swing.JPanel {
 
     /**
      * Creates new form Police
      */
+    Connection conn = null;
     public Police() {
         initComponents();
+        setVisible(true);
     }
 
 
-void updateTableForPolice(){
+void updateTableForLawyer(){
+    try {
+            if (conn == null) {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                conn = DriverManager.getConnection(url, user, password);
+            }
+
+            String sql = "select a.USERNAME, a.name, b.CASEDETAIL,a.EMAILID, a.MOBILENO from FEMALE a, REGISTEREDCASES b where a.USERNAME = b.FEMALEID";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
 
 }
 
@@ -35,11 +61,11 @@ void updateTableForPolice(){
         lblheading = new javax.swing.JLabel();
         lblmedicinepic = new javax.swing.JLabel();
         lblpoliceimage = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblvictims = new javax.swing.JTable();
         lblinvestigationimg = new javax.swing.JLabel();
         btnassigntome = new javax.swing.JButton();
         txtvictimepoliceheading = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(204, 204, 255));
 
@@ -57,7 +83,7 @@ void updateTableForPolice(){
                 .addComponent(lblmedicinepic)
                 .addGap(42, 42, 42)
                 .addComponent(lblheading, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -70,21 +96,13 @@ void updateTableForPolice(){
                 .addContainerGap())
         );
 
-        tblvictims.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Victims Name", "Case type", "Case Description"
-            }
-        ));
-        jScrollPane1.setViewportView(tblvictims);
-
         btnassigntome.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         btnassigntome.setText("Assign To Me");
+        btnassigntome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnassigntomeActionPerformed(evt);
+            }
+        });
 
         txtvictimepoliceheading.setBackground(new java.awt.Color(0, 0, 204));
         txtvictimepoliceheading.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -95,6 +113,19 @@ void updateTableForPolice(){
                 txtvictimepoliceheadingActionPerformed(evt);
             }
         });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -107,39 +138,38 @@ void updateTableForPolice(){
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(118, 118, 118)
-                                .addComponent(btnassigntome)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblinvestigationimg, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtvictimepoliceheading, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(66, 66, 66))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)))
+                                .addComponent(txtvictimepoliceheading, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(67, 67, 67)
                                 .addComponent(lblpoliceimage, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)))))
                 .addGap(31, 31, 31))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addComponent(btnassigntome)))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblpoliceimage)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtvictimepoliceheading, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblinvestigationimg)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(btnassigntome)))
-                .addGap(0, 15, Short.MAX_VALUE))
+                    .addComponent(txtvictimepoliceheading, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblpoliceimage))
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(btnassigntome)
+                .addGap(24, 24, 24)
+                .addComponent(lblinvestigationimg)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -147,16 +177,41 @@ void updateTableForPolice(){
         // TODO add your handling code here:
     }//GEN-LAST:event_txtvictimepoliceheadingActionPerformed
 
+    private void btnassigntomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnassigntomeActionPerformed
+        
+        try {
+
+            if (conn == null) {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                Connection conn = DriverManager.getConnection(url, user, password);
+            }
+            int selectedrow = jTable1.getSelectedRow();
+            int selectedcolumn = 0;
+            String femaleUsername = (String) jTable1.getValueAt(selectedrow, selectedcolumn);
+            Statement stmt = conn.createStatement();
+            String sql4 = "update REGISTEREDCASES set POLICEUSERNAME = '"+EmployeeLoginFrame.Emp_name+"' where FEMALEID = '"+femaleUsername+"'";
+            int result4 = stmt.executeUpdate(sql4);
+            //System.out.print("result: " + result);
+            JOptionPane.showMessageDialog(null, "Task asigned successfully!");
+        } 
+        catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
+    }//GEN-LAST:event_btnassigntomeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnassigntome;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblheading;
     private javax.swing.JLabel lblinvestigationimg;
     private javax.swing.JLabel lblmedicinepic;
     private javax.swing.JLabel lblpoliceimage;
-    private javax.swing.JTable tblvictims;
     private javax.swing.JTextField txtvictimepoliceheading;
     // End of variables declaration//GEN-END:variables
 }

@@ -215,6 +215,7 @@ public class EmployeeLoginFrame extends javax.swing.JFrame {
 
                                         if (rs.next()) {
                                             MainFrame.policePanel.setVisible(true);
+                                            MainFrame.lawyerPanel.updateTableForLawyer();
                                             setVisible(false);
 
                                         } else {
