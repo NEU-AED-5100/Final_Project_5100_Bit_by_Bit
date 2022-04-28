@@ -4,11 +4,15 @@
  */
 package com.ui.wecare;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
 public class RegisterPatient extends javax.swing.JPanel {
@@ -30,7 +34,7 @@ public class RegisterPatient extends javax.swing.JPanel {
                 Connection conn = DriverManager.getConnection(url, user, password);
             }
 
-            String sql = "select Femaleid as ID, name as Name, DOB as DOB, City as City, username as Username from Female";
+            String sql = "select FEMALEID as ID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO from Female";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
@@ -47,10 +51,10 @@ try {
                 String user = "SYSTEM";
                 String password = "trisha";
                 Class.forName("oracle.jdbc.driver.OracleDriver");
-                Connection conn = DriverManager.getConnection(url, user, password);
+                conn = DriverManager.getConnection(url, user, password);
             }
 
-            String sql = "select Femaleid as ID, name as Name, DOB as DOB, City as City, username as Username from Female";
+            String sql = "select FEMALEID as ID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO from Female";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
@@ -160,64 +164,51 @@ try {
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(95, 95, 95)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(85, 85, 85)
                                 .addComponent(jLabel2)
-                                .addGap(26, 26, 26)
+                                .addGap(18, 18, 18)
                                 .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton3)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addComponent(jLabel9)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(223, 223, 223)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(83, 83, 83)
-                    .addComponent(jLabel10)
-                    .addContainerGap(612, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2))
+                        .addGap(105, 105, 105)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(153, 153, 153)
-                    .addComponent(jLabel10)
-                    .addContainerGap(322, Short.MAX_VALUE)))
+                        .addGap(80, 80, 80)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -276,17 +267,22 @@ try {
 //            PreparedStatement ps = conn.prepareStatement(sql1);
 //            ResultSet rs1 = ps.executeQuery();
             int selectedrow = jTable1.getSelectedRow();
-            int FEMALEID = (int) jTable1.getValueAt(selectedrow, 0);
+
+            BigDecimal FEMALEID = (BigDecimal) jTable1.getValueAt(selectedrow, 0);
             String NAME = (String) jTable1.getValueAt(selectedrow, 1);
-            String DOB = (String) jTable1.getValueAt(selectedrow, 2);
+            Format formatter = new SimpleDateFormat("dd-MMM-yy");
+            String registrationDate = (String) formatter.format(this.jDateChooser1.getDate());
+            String DOB = (String) formatter.format(jTable1.getValueAt(selectedrow,2));
             String CITY = (String) jTable1.getValueAt(selectedrow, 3);
             String STATE = (String) jTable1.getValueAt(selectedrow, 4);
-            int ZIPCODE = (int) jTable1.getValueAt(selectedrow, 5);
+            BigDecimal ZIPCODE = (BigDecimal) jTable1.getValueAt(selectedrow, 5);
             String EMAILID = (String) jTable1.getValueAt(selectedrow, 6);
-            int MOBILENO = (int) jTable1.getValueAt(selectedrow, 7);
+            int MOBILENO = Integer.parseInt((String)jTable1.getValueAt(selectedrow, 7));
+        
+
             // Patient table insert
             Statement stmt = conn.createStatement();
-            String sql2 = String.format("insert into Patient (FEMALEID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO) values('%s','%s','%s','%s','%s','%s','%s','%s')", FEMALEID, NAME, DOB, CITY, STATE, ZIPCODE, EMAILID, MOBILENO);
+            String sql2 = String.format("insert into Patient (FEMALEID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO,REGISTRATIONDATE) values('%s','%s','%s','%s','%s','%s','%s','%s','%s')", FEMALEID, NAME, DOB, CITY, STATE, ZIPCODE, EMAILID, MOBILENO, registrationDate);
             int result2 = stmt.executeUpdate(sql2);
 
             //get id from patient table
@@ -302,6 +298,7 @@ try {
             String sql4 = "update female set PATIENTID = "+PATIENTID+" where FEMALEID = "+FEMALEID;
             int result4 = stmt.executeUpdate(sql4);
             //System.out.print("result: " + result);
+            JOptionPane.showMessageDialog(null, "Record saved successfully");
         } catch (Exception e) {
             System.out.print(e.getMessage());
         }
