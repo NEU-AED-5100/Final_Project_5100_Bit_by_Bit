@@ -285,6 +285,9 @@ appointmentRegister = new  AppointmentRegister() ;
         nurseReading.setVisible(false);
         pharmacy.setVisible(false);
         diagonasticCenter.setVisible(false);
+registerPatient.setVisible(false);
+appointmentFirst.setVisible(false);
+appointmentRegister.setVisible(false);
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
