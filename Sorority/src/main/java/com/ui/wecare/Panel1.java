@@ -29,14 +29,16 @@ public class Panel1 extends javax.swing.JPanel {
       
     public Panel1() {
         initComponents();
-        try{
-String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
-        String user ="SYSTEM";
-        String password = "trisha";
-Class.forName("oracle.jdbc.driver.OracleDriver");
- conn =  DriverManager.getConnection(url,user,password);
-}catch(Exception e){
-}
+        if (conn == null) {
+            try {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                conn = DriverManager.getConnection(url, user, password);
+            } catch (Exception e) {
+            }
+        }
         
         jComboBox1.addItem("Boston");
         jComboBox1.addItem("New Jersy");
@@ -63,7 +65,17 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
           try {
 //            con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-           
+           if (conn == null) {
+                  try {
+                      String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                      String user = "SYSTEM";
+                      String password = "trisha";
+                      Class.forName("oracle.jdbc.driver.OracleDriver");
+                      conn = DriverManager.getConnection(url, user, password);
+                  } catch (Exception e) {
+                  }
+              }
+
              st=conn.createStatement();
             
              String s= "select * from enterprise"  ;

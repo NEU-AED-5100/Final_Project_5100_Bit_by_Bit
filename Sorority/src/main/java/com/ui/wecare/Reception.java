@@ -58,8 +58,6 @@ public class Reception extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("/Users/gloriasingh/AEDFINALWOMEN/Sorority/src/main/image/pexels-andrea-piacquadio-3768095.jpg")); // NOI18N
-
         jButton1.setText("Register Patient");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,6 +66,11 @@ public class Reception extends javax.swing.JPanel {
         });
 
         jButton2.setText("Appointments");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -106,8 +109,15 @@ public class Reception extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new RegisterPatient().setVisible(true);
+    MainFrame.registerPatient.setVisible(true);
+    MainFrame.registerPatient.populateFemaleData();
+        setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    MainFrame.appointmentFirst.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

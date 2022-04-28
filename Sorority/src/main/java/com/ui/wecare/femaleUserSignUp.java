@@ -179,7 +179,7 @@ public class femaleUserSignUp extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //submit button
-
+if(con == null){
         try {
             String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
             String user = "SYSTEM";
@@ -187,7 +187,7 @@ public class femaleUserSignUp extends javax.swing.JFrame {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             con = DriverManager.getConnection(url, user, password);
         } catch (Exception e) {
-        }
+        }}
         String username = jTextField1.getText();
         String password = jPasswordField1.getText();
         String name = jTextField9.getText();

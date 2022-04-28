@@ -173,7 +173,6 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
 
                         if (rs.next()) {
                             MainFrame.workArea.setVisible(true);
-
                             setVisible(false);
 
                         } else {
