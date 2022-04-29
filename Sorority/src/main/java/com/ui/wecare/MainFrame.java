@@ -1,357 +1,362 @@
-// /*
-//  * To change this license header, choose License Headers in Project Properties.
-//  * To change this template file, choose Tools | Templates
-//  * and open the template in the editor.
-//  */
-// package com.ui.wecare;
-
-// import java.awt.GridBagConstraints;
-// import java.awt.GridBagLayout;
-// import java.awt.event.ActionEvent;
-// import java.awt.event.ActionListener;
-// import java.sql.Connection;
-// import java.sql.DriverManager;
-// import java.sql.ResultSet;
-// import java.sql.SQLException;
-// import java.sql.Statement;
-
-// import java.time.format.DateTimeFormatter;
-// import javax.swing.JLabel;
-// import javax.swing.JOptionPane;
-// import javax.swing.Timer;
-// import javax.swing.table.DefaultTableModel;
-
-// /**
-//  *
-//  * @author Sreyoshi Ghosh
-//  */
-// public class MainFrame extends javax.swing.JFrame {
-
-//     GridBagLayout gl = new GridBagLayout();
-//     static Panel1 p1;
-//     static Panel2 p2;
-
-//     static FeatureForFemalePanel femalePanel;
-//     static WorkAreaAdminPanel workArea;
-//     static EmployeeLoginFrame employeeLoginFrame;
-
-//     static ngoManagementPanel ngoPanel;
-//     static Police policePanel;
-//     static Lawyer lawyerPanel;
-//     static NurseReading nurseReading;
-//     static Reception reception;
-//     static Pharmacy pharmacy;
-//     static DiagonasticCenter diagonasticCenter;
-
-// static RegisterPatient registerPatient;
-// static AppointmentFirst appointmentFirst;
-// static AppointmentRegister appointmentRegister;
-// static DoctorsPanel doctorePanel;
-
-//     public void tickTock() {
-//         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-//         jLabel6.setText((java.time.LocalTime.now()).format(dtf));
-//     }
-
-//     public MainFrame() {
-
-//         initComponents();
-//         buttonGroup1.add(jRadioButton1);
-//         buttonGroup1.add(jRadioButton2);
-//         buttonGroup1.add(jRadioButton3);
-//         buttonGroup1.add(jRadioButton4);
-
-//         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-
-//         Timer t = new Timer(500, new ActionListener() {
-//             @Override
-//             public void actionPerformed(ActionEvent e) {
-//                 tickTock();
-
-//             }
-//         });
-//         t.setRepeats(true);
-//         t.setCoalesce(true);
-//         t.setInitialDelay(0);
-//         t.start();
-
-//         //------------------------------------------
-//         dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-//         jLabel3.setText((java.time.LocalDate.now()).format(dtf));
-
-//         //-------------------------------------------
-//         p1 = new Panel1();
-//         p2 = new Panel2();
-//         ngoPanel = new ngoManagementPanel();
-//         femalePanel = new FeatureForFemalePanel();
-//         workArea = new WorkAreaAdminPanel();
-//         policePanel = new Police();
-//         lawyerPanel = new Lawyer();
-//         nurseReading = new NurseReading();
-//         reception = new Reception();
-//         pharmacy = new Pharmacy();
-//         diagonasticCenter = new DiagonasticCenter();
-// registerPatient = new  RegisterPatient() ;
-// appointmentFirst = new  AppointmentFirst() ;
-// appointmentRegister = new  AppointmentRegister() ;
-// doctorePanel = new DoctorsPanel();
-//         //----------------------
-//         targetPanel.setLayout(gl);
-//         GridBagConstraints c = new GridBagConstraints();
-//         c.gridx = 0;
-//         c.gridy = 0;
-//         targetPanel.add(p1, c);
-//         p1.setVisible(false);
-
-//         targetPanel.add(p2, c);
-//         p2.setVisible(false);
-
-//         targetPanel.add(ngoPanel, c);
-//         ngoPanel.setVisible(false);
-
-//         targetPanel.add(femalePanel, c);
-//         femalePanel.setVisible(false);
-
-//         targetPanel.add(workArea, c);
-//         workArea.setVisible(false);
-
-//         targetPanel.add(policePanel, c);
-//         policePanel.setVisible(false);
-
-//         targetPanel.add(lawyerPanel, c);
-//         lawyerPanel.setVisible(false);
-
-//         targetPanel.add(nurseReading, c);
-//         nurseReading.setVisible(false);
-
-//         targetPanel.add(reception, c);
-//         reception.setVisible(false);
-
-//         targetPanel.add(pharmacy, c);
-//         pharmacy.setVisible(false);
-
-//         targetPanel.add(diagonasticCenter, c);
-//         diagonasticCenter.setVisible(false);
-
-//         targetPanel.add(registerPatient, c);
-//                 registerPatient.setVisible(false);
-//         targetPanel.add(appointmentFirst, c);
-//                 appointmentFirst.setVisible(false);
-//         targetPanel.add(appointmentRegister, c);
-//                 appointmentRegister.setVisible(false);
-// targetPanel.add(doctorePanel,c);
-// doctorePanel.setVisible(false);
-//     }
-
-//     /**
-//      * This method is called from within the constructor to initialize the form.
-//      * WARNING: Do NOT modify this code. The content of this method is always
-//      * regenerated by the Form Editor.
-//      */
-//     @SuppressWarnings("unchecked")
-//     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-//     private void initComponents() {
-
-//         buttonGroup1 = new javax.swing.ButtonGroup();
-//         jPanel2 = new javax.swing.JPanel();
-//         jRadioButton1 = new javax.swing.JRadioButton();
-//         jRadioButton2 = new javax.swing.JRadioButton();
-//         jRadioButton3 = new javax.swing.JRadioButton();
-//         jButton1 = new javax.swing.JButton();
-//         jButton2 = new javax.swing.JButton();
-//         jRadioButton4 = new javax.swing.JRadioButton();
-//         targetPanel = new javax.swing.JPanel();
-//         jLabel6 = new javax.swing.JLabel();
-//         jLabel3 = new javax.swing.JLabel();
-//         jLabel4 = new javax.swing.JLabel();
-
-//         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-//         setBackground(new java.awt.Color(204, 204, 204));
-//         setLocation(new java.awt.Point(200, 200));
-//         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-//         jPanel2.setBackground(new java.awt.Color(102, 204, 255));
-//         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-//         jRadioButton1.setText("Admin");
-//         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-//             public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                 jRadioButton1ActionPerformed(evt);
-//             }
-//         });
-//         jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
-
-//         jRadioButton2.setText("Female User");
-//         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
-//             public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                 jRadioButton2ActionPerformed(evt);
-//             }
-//         });
-//         jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, -1, -1));
-
-//         jRadioButton3.setText("Enterprise");
-//         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
-//             public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                 jRadioButton3ActionPerformed(evt);
-//             }
-//         });
-//         jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
-
-//         jButton1.setText("Login");
-//         jButton1.addActionListener(new java.awt.event.ActionListener() {
-//             public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                 jButton1ActionPerformed(evt);
-//             }
-//         });
-//         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
-
-//         jButton2.setText("Logout");
-//         jButton2.addActionListener(new java.awt.event.ActionListener() {
-//             public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                 jButton2ActionPerformed(evt);
-//             }
-//         });
-//         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
-
-//         jRadioButton4.setText("Employee");
-//         jPanel2.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
-
-//         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 290, 470));
-
-//         targetPanel.setBackground(new java.awt.Color(204, 204, 204));
-//         targetPanel.setPreferredSize(new java.awt.Dimension(700, 397));
-
-//         javax.swing.GroupLayout targetPanelLayout = new javax.swing.GroupLayout(targetPanel);
-//         targetPanel.setLayout(targetPanelLayout);
-//         targetPanelLayout.setHorizontalGroup(
-//             targetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//             .addGap(0, 930, Short.MAX_VALUE)
-//         );
-//         targetPanelLayout.setVerticalGroup(
-//             targetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//             .addGap(0, 470, Short.MAX_VALUE)
-//         );
-
-//         getContentPane().add(targetPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 0, 930, 470));
-
-//         jLabel6.setText("jLabel6");
-//         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 420, 77, -1));
-
-//         jLabel3.setText("jLabel3");
-//         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 420, -1, -1));
-
-//         jLabel4.setText("Wi Care");
-//         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 420, 90, -1));
-
-//         pack();
-//     }// </editor-fold>//GEN-END:initComponents
-
-//     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//         // TODO add your handling code here:
-
-//         //login button
-//         if (jRadioButton1.isSelected()) {
-
-//             adminLoginFrame ad = new adminLoginFrame();
-
-//         } else if (jRadioButton2.isSelected()) {
-
-//             femaleUserLoginFrame fm = new femaleUserLoginFrame();
-
-//         } else if (jRadioButton3.isSelected()) {
-
-//             enterpriseLoginFrame et = new enterpriseLoginFrame();
-
-//         } else if (jRadioButton4.isSelected()) {
-
-//             EmployeeLoginFrame et = new EmployeeLoginFrame();
-
-//         }
-
-
-//     }//GEN-LAST:event_jButton1ActionPerformed
-
-//     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//         // TODO add your handling code here:
-
-//         //logout button
-//         p1.setVisible(false);
-//         p2.setVisible(false);
-//         ngoPanel.setVisible(false);
-//         femalePanel.setVisible(false);
-//         workArea.setVisible(false);
-//         policePanel.setVisible(false);
-//         lawyerPanel.setVisible(false);
-//         reception.setVisible(false);
-//         nurseReading.setVisible(false);
-//         pharmacy.setVisible(false);
-//         diagonasticCenter.setVisible(false);
-// registerPatient.setVisible(false);
-// appointmentFirst.setVisible(false);
-// appointmentRegister.setVisible(false);
-// doctorePanel.setVisible(false);
-//     }//GEN-LAST:event_jButton2ActionPerformed
-
-//     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-//         // TODO add your handling code here:
-//     }//GEN-LAST:event_jRadioButton1ActionPerformed
-
-//     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-//         // TODO add your handling code here:
-//     }//GEN-LAST:event_jRadioButton2ActionPerformed
-
-//     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-//         // TODO add your handling code here:
-//     }//GEN-LAST:event_jRadioButton3ActionPerformed
-
-//     /**
-//      * @param args the command line arguments
-//      */
-//     public static void main(String args[]) {
-//         /* Set the Nimbus look and feel */
-//         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//          */
-//         try {
-//             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                 if ("Nimbus".equals(info.getName())) {
-//                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                     break;
-//                 }
-//             }
-//         } catch (ClassNotFoundException ex) {
-//             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//         } catch (InstantiationException ex) {
-//             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//         } catch (IllegalAccessException ex) {
-//             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//         }
-//         //</editor-fold>
-
-//         /* Create and display the form */
-//         java.awt.EventQueue.invokeLater(new Runnable() {
-//             public void run() {
-//                 new MainFrame().setVisible(true);
-//             }
-//         });
-//     }
-
-//     // Variables declaration - do not modify//GEN-BEGIN:variables
-//     private javax.swing.ButtonGroup buttonGroup1;
-//     private javax.swing.JButton jButton1;
-//     private javax.swing.JButton jButton2;
-//     private javax.swing.JLabel jLabel3;
-//     private javax.swing.JLabel jLabel4;
-//     private javax.swing.JLabel jLabel6;
-//     private javax.swing.JPanel jPanel2;
-//     private javax.swing.JRadioButton jRadioButton1;
-//     private javax.swing.JRadioButton jRadioButton2;
-//     private javax.swing.JRadioButton jRadioButton3;
-//     private javax.swing.JRadioButton jRadioButton4;
-//     private javax.swing.JPanel targetPanel;
-//     // End of variables declaration//GEN-END:variables
-// }
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.ui.wecare;
+
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import java.time.format.DateTimeFormatter;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author Sreyoshi Ghosh
+ */
+public class MainFrame extends javax.swing.JFrame {
+
+    GridBagLayout gl = new GridBagLayout();
+    static Panel1 p1;
+    static Panel2 p2;
+
+    static FeatureForFemalePanel femalePanel;
+    static WorkAreaAdminPanel workArea;
+    static EmployeeLoginFrame employeeLoginFrame;
+
+    static ngoManagementPanel ngoPanel;
+    static Police policePanel;
+    static Lawyer lawyerPanel;
+    static NurseReading nurseReading;
+    static Reception reception;
+    static Pharmacy pharmacy;
+    static DiagonasticCenter diagonasticCenter;
+
+static RegisterPatient registerPatient;
+static AppointmentFirst appointmentFirst;
+static AppointmentRegister appointmentRegister;
+static DoctorsPanel doctorePanel;
+static ExaminerAllRequestView examinerAllRequestView;
+
+    public void tickTock() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        jLabel6.setText((java.time.LocalTime.now()).format(dtf));
+    }
+
+    public MainFrame() {
+
+        initComponents();
+        buttonGroup1.add(jRadioButton1);
+        buttonGroup1.add(jRadioButton2);
+        buttonGroup1.add(jRadioButton3);
+        buttonGroup1.add(jRadioButton4);
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+        Timer t = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tickTock();
+
+            }
+        });
+        t.setRepeats(true);
+        t.setCoalesce(true);
+        t.setInitialDelay(0);
+        t.start();
+
+        //------------------------------------------
+        dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        jLabel3.setText((java.time.LocalDate.now()).format(dtf));
+
+        //-------------------------------------------
+        p1 = new Panel1();
+        p2 = new Panel2();
+        ngoPanel = new ngoManagementPanel();
+        femalePanel = new FeatureForFemalePanel();
+        workArea = new WorkAreaAdminPanel();
+        policePanel = new Police();
+        lawyerPanel = new Lawyer();
+        nurseReading = new NurseReading();
+        reception = new Reception();
+        pharmacy = new Pharmacy();
+        diagonasticCenter = new DiagonasticCenter();
+registerPatient = new  RegisterPatient() ;
+appointmentFirst = new  AppointmentFirst() ;
+appointmentRegister = new  AppointmentRegister() ;
+doctorePanel = new DoctorsPanel();
+examinerAllRequestView = new ExaminerAllRequestView();
+        //----------------------
+        targetPanel.setLayout(gl);
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        targetPanel.add(p1, c);
+        p1.setVisible(false);
+
+        targetPanel.add(p2, c);
+        p2.setVisible(false);
+
+        targetPanel.add(ngoPanel, c);
+        ngoPanel.setVisible(false);
+
+        targetPanel.add(femalePanel, c);
+        femalePanel.setVisible(false);
+
+        targetPanel.add(workArea, c);
+        workArea.setVisible(false);
+
+        targetPanel.add(policePanel, c);
+        policePanel.setVisible(false);
+
+        targetPanel.add(lawyerPanel, c);
+        lawyerPanel.setVisible(false);
+
+        targetPanel.add(nurseReading, c);
+        nurseReading.setVisible(false);
+
+        targetPanel.add(reception, c);
+        reception.setVisible(false);
+
+        targetPanel.add(pharmacy, c);
+        pharmacy.setVisible(false);
+
+        targetPanel.add(diagonasticCenter, c);
+        diagonasticCenter.setVisible(false);
+
+        targetPanel.add(registerPatient, c);
+                registerPatient.setVisible(false);
+        targetPanel.add(appointmentFirst, c);
+                appointmentFirst.setVisible(false);
+        targetPanel.add(appointmentRegister, c);
+                appointmentRegister.setVisible(false);
+targetPanel.add(doctorePanel,c);
+doctorePanel.setVisible(false);
+targetPanel.add(examinerAllRequestView,c);
+examinerAllRequestView.setVisible(false);
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel2 = new javax.swing.JPanel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        targetPanel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 204, 204));
+        setLocation(new java.awt.Point(200, 200));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(102, 204, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jRadioButton1.setText("Admin");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+
+        jRadioButton2.setText("Female User");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, -1, -1));
+
+        jRadioButton3.setText("Enterprise");
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
+
+        jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
+
+        jButton2.setText("Logout");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
+
+        jRadioButton4.setText("Employee");
+        jPanel2.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 290, 470));
+
+        targetPanel.setBackground(new java.awt.Color(204, 204, 204));
+        targetPanel.setPreferredSize(new java.awt.Dimension(700, 397));
+
+        javax.swing.GroupLayout targetPanelLayout = new javax.swing.GroupLayout(targetPanel);
+        targetPanel.setLayout(targetPanelLayout);
+        targetPanelLayout.setHorizontalGroup(
+            targetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 930, Short.MAX_VALUE)
+        );
+        targetPanelLayout.setVerticalGroup(
+            targetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 470, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(targetPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 0, 930, 470));
+
+        jLabel6.setText("jLabel6");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 420, 77, -1));
+
+        jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 420, -1, -1));
+
+        jLabel4.setText("Wi Care");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 420, 90, -1));
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        //login button
+        if (jRadioButton1.isSelected()) {
+
+            adminLoginFrame ad = new adminLoginFrame();
+
+        } else if (jRadioButton2.isSelected()) {
+
+            femaleUserLoginFrame fm = new femaleUserLoginFrame();
+
+        } else if (jRadioButton3.isSelected()) {
+
+            enterpriseLoginFrame et = new enterpriseLoginFrame();
+
+        } else if (jRadioButton4.isSelected()) {
+
+            EmployeeLoginFrame et = new EmployeeLoginFrame();
+
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+
+        //logout button
+        p1.setVisible(false);
+        p2.setVisible(false);
+        ngoPanel.setVisible(false);
+        femalePanel.setVisible(false);
+        workArea.setVisible(false);
+        policePanel.setVisible(false);
+        lawyerPanel.setVisible(false);
+        reception.setVisible(false);
+        nurseReading.setVisible(false);
+        pharmacy.setVisible(false);
+        diagonasticCenter.setVisible(false);
+registerPatient.setVisible(false);
+appointmentFirst.setVisible(false);
+appointmentRegister.setVisible(false);
+doctorePanel.setVisible(false);
+examinerAllRequestView.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainFrame().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JPanel targetPanel;
+    // End of variables declaration//GEN-END:variables
+}
