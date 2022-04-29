@@ -263,9 +263,6 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
                 JOptionPane.showMessageDialog(null, "Record saved successfully");
             else
                  JOptionPane.showMessageDialog(null, "Record could not be added");
-
-           
-
             con.close();
             
         } catch (SQLException ex) {
