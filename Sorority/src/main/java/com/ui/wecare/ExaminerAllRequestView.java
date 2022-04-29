@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -170,7 +172,30 @@ public class ExaminerAllRequestView extends javax.swing.JPanel {
         String emailId = (String) jTable1.getValueAt(selectedrow, 5);
         String contentForEmail = jTextArea1.getText().trim();
         //send email logic to add here
-                
+        
+        // delete report from request table
+        try {
+            Connection con = null;
+            if (con == null) {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                con = DriverManager.getConnection(url, user, password);
+            }
+            Statement stmt1 = con.createStatement();
+            BigDecimal PATIENTID = (BigDecimal) jTable1.getValueAt(selectedrow, 0);
+            
+            String sql4 = "delete from examinerrequest where femaleid = (select femaleid from patient where patientid = "+PATIENTID+")";
+            int result4 = stmt1.executeUpdate(sql4);
+            if (result4 > 0) {
+                JOptionPane.showConfirmDialog(null, "Test Report Saved Successfully");
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        JOptionPane.showMessageDialog(null, "Email sent successfully");
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
