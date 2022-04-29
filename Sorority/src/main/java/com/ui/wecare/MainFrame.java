@@ -47,6 +47,7 @@ static RegisterPatient registerPatient;
 static AppointmentFirst appointmentFirst;
 static AppointmentRegister appointmentRegister;
 static DoctorsPanel doctorePanel;
+static ExaminerAllRequestView examinerAllRequestView;
 
     public void tickTock() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -96,6 +97,7 @@ registerPatient = new  RegisterPatient() ;
 appointmentFirst = new  AppointmentFirst() ;
 appointmentRegister = new  AppointmentRegister() ;
 doctorePanel = new DoctorsPanel();
+examinerAllRequestView = new ExaminerAllRequestView();
         //----------------------
         targetPanel.setLayout(gl);
         GridBagConstraints c = new GridBagConstraints();
@@ -142,6 +144,8 @@ doctorePanel = new DoctorsPanel();
                 appointmentRegister.setVisible(false);
 targetPanel.add(doctorePanel,c);
 doctorePanel.setVisible(false);
+targetPanel.add(examinerAllRequestView,c);
+examinerAllRequestView.setVisible(false);
     }
 
     /**
@@ -291,6 +295,7 @@ registerPatient.setVisible(false);
 appointmentFirst.setVisible(false);
 appointmentRegister.setVisible(false);
 doctorePanel.setVisible(false);
+examinerAllRequestView.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
