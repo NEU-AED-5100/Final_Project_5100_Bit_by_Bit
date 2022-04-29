@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class NewWorkAreaFrame extends javax.swing.JFrame {
 
-      Connection conn=null;
+      Connection con=null;
         Statement st=null;
         ResultSet rs=null;
         
@@ -30,45 +30,15 @@ public class NewWorkAreaFrame extends javax.swing.JFrame {
         //Doctor,Nurse,Receptionist,Pharma,Examination
         
 //enterpriseLoginFrame.user;
-
-    String type="";
-
-
-  try {
-//               String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
-//               String user = "SYSTEM";
-//               String password = "trisha";
-//               Class.forName("oracle.jdbc.driver.OracleDriver");
-//               conn = DriverManager.getConnection(url, user, password);--- commenting to connect to Sreyoshi
-            // sreyoshi connection below
-
-                    String url = "jdbc:oracle:thin:@10.0.0.173:1522:xe";
-                    String user ="SYSTEM";
-                    String password1 = "Mihi@1234";
-                 //   Class.forName("oracle.jdbc.driver.OracleDriver");
-                    conn =  DriverManager.getConnection(url,user,password1);
-          
-            st = conn.createStatement();
-
-            String s = String.format("select type from enterprise where name='" +enterpriseLoginFrame.Enterprise_name + "'");
-            rs = st.executeQuery(s);  // execute query
-           
-
-            if (rs.next()) {
-
-              type=rs.getString(1);
-            }
-
-        } catch (SQLException ex) {
-
-        }
-
-//----------------------------------------
-
         
-         if(type.equalsIgnoreCase("Hospital"))
+         if(enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("h1")|| 
+                 enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("h2")
                  
+                 ||enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("h3")
+                  ||enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("h4")||
+                  enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("h5")
                  
+                 )
          {
              
              jComboBox1.addItem("Doctor");
@@ -78,27 +48,40 @@ public class NewWorkAreaFrame extends javax.swing.JFrame {
                      jComboBox1.addItem("Examination");
              
          }
-         else if(type.equalsIgnoreCase("NGO"))
+         else if(enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("n1")|| 
+                 enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("n2")
                  
-                 {
+                 ||enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("n3")
+                  ||enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("n4")||
+                  enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("n5")
+                 
+                 ){
              
              
              jComboBox1.addItem("NGO");
              
          }
          
-          else if(type.equalsIgnoreCase("Police"))
+          else if(enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("p1")|| 
+                 enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("p2")
+                  ||enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("p3")
+                  ||enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("p4")||
+                  enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("p5")
                   
-                  {
+                  ){
              
-            
+             
              jComboBox1.addItem("Police");
              
          }
          
-          else if(type.equalsIgnoreCase("Judiciary"))
+          else if(enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("j1")|| 
+                 enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("j2")||
+             enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("j3")
+                  ||enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("j4")||
+                  enterpriseLoginFrame.Enterprise_name.equalsIgnoreCase("j5")
                   
-                  {
+                  ){
              
              jComboBox1.addItem("Lawyer");
              
@@ -263,28 +246,16 @@ public class NewWorkAreaFrame extends javax.swing.JFrame {
              
 //             con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-                try{
-                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
-                        String user ="SYSTEM";
-                        String password1 = "trisha";
-                Class.forName("oracle.jdbc.driver.OracleDriver");
-                 conn =  DriverManager.getConnection(url,user,password1);
-                }catch(Exception e){
-                }
-//        if(conn == null){
-//            try{
-//            String url = "jdbc:oracle:thin:@10.0.0.173:1522:xe";
-//                    String user ="SYSTEM";
-//                    String password1 = "Mihi@1234";
-//            Class.forName("oracle.jdbc.driver.OracleDriver");
-//             conn =  DriverManager.getConnection(url,user,password1);
-//            }
-//            catch(Exception e){
-//                JOptionPane.showMessageDialog(null, e);
-//            }
-//        }
+try{
+String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+        String user ="SYSTEM";
+        String password1 = "trisha";
+Class.forName("oracle.jdbc.driver.OracleDriver");
+ con =  DriverManager.getConnection(url,user,password1);
+}catch(Exception e){
+}
 
-            st=conn.createStatement();
+            st=con.createStatement();
 
              String s=String.format("insert into work_area(organization , emp_name ,email ,contact_no ,username ,password) values('%s','%s','%s','%s','%s','%s')",organization , emp_name ,email ,contact_no ,username ,password );
             int n=st.executeUpdate(s);  // execute query
@@ -292,8 +263,7 @@ public class NewWorkAreaFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Record saved successfully");
             else
                  JOptionPane.showMessageDialog(null, "Record could not be added");
-
-            conn.close();
+            con.close();
             
         } catch (SQLException ex) {
 
