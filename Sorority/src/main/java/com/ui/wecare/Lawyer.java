@@ -23,7 +23,6 @@ public class Lawyer extends javax.swing.JPanel {
      * Creates new form Lawyer
      */
     Connection con = null;
- Connection conn = null;
     Statement st = null;
     Statement st1 = null;
     ResultSet rs = null;
@@ -60,6 +59,8 @@ rs = st.executeQuery(s);
     }
 
 public void updateTableForLawyer(){
+Connection conn = null;
+ 
 try {
             if (conn == null) {
                 String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
@@ -73,6 +74,7 @@ try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+conn.close();
         } catch (Exception e) {
             System.out.print(e.getMessage());
         }
@@ -223,6 +225,8 @@ try {
 
     private void btnapproverequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnapproverequestActionPerformed
         // TODO add your handling code here:
+Connection conn = null;
+ 
 try {
 
             if (conn == null) {
@@ -230,7 +234,7 @@ try {
                 String user = "SYSTEM";
                 String password = "trisha";
                 Class.forName("oracle.jdbc.driver.OracleDriver");
-                Connection conn = DriverManager.getConnection(url, user, password);
+                conn = DriverManager.getConnection(url, user, password);
             }
             int selectedrow = jTable1.getSelectedRow();
             int selectedcolumn = 0;
@@ -239,7 +243,22 @@ try {
             String sql4 = "update REGISTEREDCASES set LAWYERUSERNAME = '"+EmployeeLoginFrame.Emp_name+"' where FEMALEID = '"+femaleUsername+"'";
             int result4 = stmt.executeUpdate(sql4);
             //System.out.print("result: " + result);
+
+//get lawyer emailid
+            String emailid = "";
+            String sql = "select email from work_area where username = '"+EmployeeLoginFrame.Emp_name+"'";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+            emailid= rs.getString(1);
+            }
+            
+            Statement stmt7 = conn.createStatement();
+            String sql7 = String.format("insert into examinerrequest (FEMALEID,police_lawyer,ispolice,islawyer,police_lawyer_emailID) values('%s','%s','%s','%s','%s')", femaleUsername, EmployeeLoginFrame.Emp_name, 'N', 'Y', emailid);
+            int result7 = stmt7.executeUpdate(sql7);
+            JOptionPane.showMessageDialog(null, "Task asigned successfully!! Request for all test report raised successfully");
             JOptionPane.showMessageDialog(null, "Record Updated successfully");
+conn.close();
         } 
         catch (Exception e) {
             System.out.print(e.getMessage());
