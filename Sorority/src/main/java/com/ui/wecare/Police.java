@@ -192,8 +192,20 @@ void updateTableForPolice(){
             Statement stmt = conn.createStatement();
             String sql4 = "update REGISTEREDCASES set POLICEUSERNAME = '"+EmployeeLoginFrame.Emp_name+"' where FEMALEID = '"+femaleUsername+"'";
             int result4 = stmt.executeUpdate(sql4);
-            //System.out.print("result: " + result);
-            JOptionPane.showMessageDialog(null, "Task asigned successfully!");
+            
+            //get police emailid
+            String emailid = "";
+            String sql = "select email from work_area where username = '"+EmployeeLoginFrame.Emp_name+"'";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+            emailid= rs.getString(1);
+            }
+            
+            Statement stmt7 = conn.createStatement();
+            String sql7 = String.format("insert into examinerrequest (FEMALEID,police_lawyer,ispolice,islawyer,police_lawyer_emailID) values('%s','%s','%s','%s','%s')", femaleUsername, EmployeeLoginFrame.Emp_name, 'Y', 'N', emailid);
+            int result7 = stmt7.executeUpdate(sql7);
+            JOptionPane.showMessageDialog(null, "Task asigned successfully!! Request for all test report raised successfully");
         } 
         catch (Exception e) {
             System.out.print(e.getMessage());
