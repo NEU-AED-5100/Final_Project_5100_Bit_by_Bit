@@ -5,8 +5,6 @@
  */
 package com.ui.wecare;
 
-import java.awt.BorderLayout;
-import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -22,13 +20,13 @@ public class CalculateRiskFrame extends javax.swing.JFrame {
     /**
      * Creates new form CalculateRiskFrame
      */
-//    static int risk=0;
+    static int risk=0;
     
     public CalculateRiskFrame() {
         initComponents();
         setVisible(true);
         
-         jComboBox1.addItem("I don't drink");
+        jComboBox1.addItem("I don't drink");
          jComboBox1.addItem("frequently");
          
                 
@@ -39,13 +37,13 @@ public class CalculateRiskFrame extends javax.swing.JFrame {
          jComboBox3.addItem("frequently");
         
          
-          jComboBox4.addItem("yes");//parent has cancer
+          jComboBox4.addItem("yes");
          jComboBox4.addItem("no");
          
-            jComboBox5.addItem("yes");//sugar
+            jComboBox5.addItem("yes");
          jComboBox5.addItem("no");
          
-            jComboBox6.addItem("yes");//thyroid
+            jComboBox6.addItem("yes");
          jComboBox6.addItem("no");
          
             jComboBox7.addItem("yes");
@@ -57,16 +55,16 @@ public class CalculateRiskFrame extends javax.swing.JFrame {
          
          
         for(int i=1;i<=5;i++)
-             jComboBox9.addItem(i+""); //hungry
+             jComboBox9.addItem(i+"");
         
             for(int i=1;i<=5;i++)
-             jComboBox10.addItem(i+"");//tired
+             jComboBox10.addItem(i+"");
             
                 for(int i=1;i<=5;i++)
-                     jComboBox11.addItem(i+"");//stressful
+                     jComboBox11.addItem(i+"");
                 
                     for(int i=1;i<=5;i++)
-                         jComboBox12.addItem(i+"");//hapiness
+                         jComboBox12.addItem(i+"");
          
          
          
@@ -110,13 +108,11 @@ public class CalculateRiskFrame extends javax.swing.JFrame {
         jComboBox12 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(200, 0));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
         jLabel1.setText("Calculate Risk");
 
         jLabel2.setText("How often do you drink alcohol");
@@ -152,23 +148,15 @@ public class CalculateRiskFrame extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 547, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,19 +187,11 @@ public class CalculateRiskFrame extends javax.swing.JFrame {
                             .addComponent(jComboBox10, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox11, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox12, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
-                        .addGap(33, 33, 33)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTextField1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(202, 202, 202)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(231, 231, 231)
-                                .addComponent(jButton1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(231, 231, 231)
+                        .addComponent(jButton1)))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,53 +199,50 @@ public class CalculateRiskFrame extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1)
                 .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -273,7 +250,7 @@ public class CalculateRiskFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -284,91 +261,37 @@ public class CalculateRiskFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //generate risk
+        if(jComboBox1.getSelectedIndex()==1)
+            risk+=1;
+        if(jComboBox2.getSelectedIndex()==1)
+            risk+=1;
         
-        int chanceOfCancer=0;
-        int chanceOfSugar=0;
-         int chanceOfThyroid=0;
-           int chanceOfMenopause=0;
-             int chanceOfCalciumDeficiency=0;
-             double BMI=0;
-             
-             try{
-                 
-                   BMI=Double.parseDouble(jTextField1.getText()); 
-             }
-           catch(Exception e){
-               
-               JOptionPane.showMessageDialog(null, "Please Enter valid data");
-               return;
-           }
-     
-             
-          chanceOfSugar+=BMI;
-          chanceOfCancer+=BMI;
-             
-        if(jComboBox1.getSelectedIndex()==1)//alcohol
-            chanceOfCancer+=1;
-        if(jComboBox2.getSelectedIndex()==1)//smoke
-            chanceOfCancer+=1;
-        
-        if(jComboBox3.getSelectedIndex()==1)//recreational drug
-             chanceOfCancer+=1;
+        if(jComboBox3.getSelectedIndex()==1)
+            risk+=1;
         
       
         
         
          if(jComboBox4.getSelectedIndex()==0)
-            chanceOfCancer+=1;
+            risk+=1;
          if(jComboBox5.getSelectedIndex()==0)
-            chanceOfSugar+=1;
+            risk+=1;
          if(jComboBox6.getSelectedIndex()==0)
-            chanceOfThyroid+=1;
-         if(jComboBox7.getSelectedIndex()==0)//early menopause
-            chanceOfMenopause+=1;
-         if(jComboBox8.getSelectedIndex()==0)//calcium
-            chanceOfCalciumDeficiency+=1;
+            risk+=1;
+         if(jComboBox7.getSelectedIndex()==0)
+            risk+=1;
+         if(jComboBox8.getSelectedIndex()==0)
+            risk+=1;
          
          
-         chanceOfThyroid+= Integer.parseInt((String) jComboBox9.getSelectedItem());
-            chanceOfThyroid+= Integer.parseInt((String) jComboBox10.getSelectedItem());
-             chanceOfSugar+= Integer.parseInt((String) jComboBox10.getSelectedItem());
-             
-               chanceOfThyroid+= Integer.parseInt((String) jComboBox11.getSelectedItem());
-                 
-               chanceOfThyroid-= Integer.parseInt((String) jComboBox12.getSelectedItem());
-               if(chanceOfThyroid<0)
-                   chanceOfThyroid=0;
-               
-                    
+         risk+= Integer.parseInt((String) jComboBox9.getSelectedItem());
+            risk+= Integer.parseInt((String) jComboBox10.getSelectedItem());
+               risk+= Integer.parseInt((String) jComboBox11.getSelectedItem());
+                  risk+= Integer.parseInt((String) jComboBox12.getSelectedItem());
          
-              
+       ChartFrame cf=new ChartFrame();
          
-        DefaultCategoryDataset dataset = 
-            new DefaultCategoryDataset( );  
-
-        dataset.setValue( chanceOfCancer ,"Cancer" , "Chance of Cancer" );  
-        dataset.setValue( chanceOfSugar ,"Sugar" , "Chance of Sugar" );
-        dataset.setValue( chanceOfThyroid ,"Thyroid" , "Chance of Thyroid");
-        dataset.setValue( chanceOfMenopause ,"Menopause" , "Chance of Menopause");
-        dataset.setValue( chanceOfCalciumDeficiency ,"Calcium Def" , "Chance of Calcium Deficiency");
-        
-        
-
- JFreeChart barChart = ChartFactory.createBarChart(
-         "Risk Analysis Chart",           
-         "",            
-         "Risk",            
-         dataset,          
-         PlotOrientation.VERTICAL,           
-         true, true, false);
          
-      ChartPanel chartPanel = new ChartPanel( barChart );  
-           jPanel2.removeAll();
-           BorderLayout bl= new BorderLayout();
-           jPanel2.setLayout(bl);
-           jPanel2.add(chartPanel);
-            chartPanel.setPreferredSize(new java.awt.Dimension( 450 , 250 ) );
-           jPanel2.validate();
          
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -406,7 +329,6 @@ public class CalculateRiskFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
