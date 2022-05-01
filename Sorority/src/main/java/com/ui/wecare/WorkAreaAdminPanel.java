@@ -178,7 +178,7 @@ public class WorkAreaAdminPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 MainFrame.manageWorkArea.setVisible(true);
-MainFrame.manageWorkArea.updateTableForPolice();
+MainFrame.manageWorkArea.updateTableForPolice(enterpriseLoginFrame.Enterprise_name);
 this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -19,36 +19,40 @@ import net.proteanit.sql.DbUtils;
  */
 public class ManageWorkArea extends javax.swing.JPanel {
 
+    String enterprise_user = "";
     /**
      * Creates new form ManageWorkArea
      */
     Connection conn = null;
+
     public ManageWorkArea() {
         initComponents();
-        
+
     }
 
-    void updateTableForPolice(){
-    try {
-            if (conn == null) {
+    void updateTableForPolice(String e_user) {
+        this.enterprise_user = e_user;
+        try {
+            Connection conn3 = null;
+            if (conn3 == null) {
                 String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                 String user = "SYSTEM";
                 String password = "trisha";
                 Class.forName("oracle.jdbc.driver.OracleDriver");
-                conn = DriverManager.getConnection(url, user, password);
+                conn3 = DriverManager.getConnection(url, user, password);
             }
 
-            String sql = "select workarea_id,organization,emp_name,email,contact_no,username from work_area where organization= '" + EmployeeLoginFrame.Emp_name+"'";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            manageTable.setModel(DbUtils.resultSetToTableModel(rs));
-            conn.close();
-            
+            String sql3 = "select workarea_id,organization,emp_name,email,contact_no,username from work_area where ENTERPRISE_NAME= '" + enterprise_user + "'";
+            PreparedStatement ps3 = conn3.prepareStatement(sql3);
+            ResultSet rs3 = ps3.executeQuery();
+            manageTable.setModel(DbUtils.resultSetToTableModel(rs3));
+            conn3.close();
+
         } catch (Exception e) {
             System.out.print(e.getMessage());
         }
 
-}
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -235,61 +239,75 @@ public class ManageWorkArea extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    try{
-        
-        if (conn == null) {
+        try {
+            Connection conn1 = null;
+            if (conn1 == null) {
                 String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                 String user = "SYSTEM";
                 String password = "trisha";
                 Class.forName("oracle.jdbc.driver.OracleDriver");
-                Connection conn = DriverManager.getConnection(url, user, password);
+                conn1 = DriverManager.getConnection(url, user, password);
             }
-         int selectedrow = manageTable.getSelectedRow();
-         String employeeName  = (String) manageTable.getValueAt(selectedrow, 2);
-         String emailId= manageTable.getValueAt(selectedrow, 3).toString();
-         String contactNumber= manageTable.getValueAt(selectedrow, 4).toString();
-        
-         
-         name.setText(employeeName);
-         email.setText(emailId);
-         number.setText(contactNumber);
-         
-         if(selectedrow==1){
-             String updateName=name.getText();
-             String updateEmail=email.getText();
-             String updateNumber=number.getText();
-            Statement stmt = conn.createStatement();
-            String sql4 = "update work_area set emp_name = '"+updateName+"',email='"+updateEmail+"',contact_no='"+updateNumber+"'";
-            int result4 = stmt.executeUpdate(sql4); 
-         }
-        JOptionPane.showMessageDialog(null, "Updated the profile successfully!");
-        conn.close();
-    }  
-    catch(Exception e){}
-       
+            int selectedrow = manageTable.getSelectedRow();
+            String employeeName = (String) manageTable.getValueAt(selectedrow, 2);
+            String emailId = manageTable.getValueAt(selectedrow, 3).toString();
+            String contactNumber = manageTable.getValueAt(selectedrow, 4).toString();
+            BigDecimal workarea_id = (BigDecimal) manageTable.getValueAt(selectedrow, 0);
+
+//         name.setText(employeeName);
+//         email.setText(emailId);
+//         number.setText(contactNumber);
+//         
+//         if(selectedrow==1){
+            String updateName = name.getText().isEmpty() ? employeeName : name.getText();
+            String updateEmail = email.getText().isEmpty() ? emailId : email.getText();
+            String updateNumber = number.getText().isEmpty() ? contactNumber : number.getText();
+            Statement stmt1 = conn1.createStatement();
+            String sql4 = "update work_area set emp_name = '" + updateName + "',email='" + updateEmail + "',contact_no='" + updateNumber + "' where workarea_id = " + workarea_id;
+            int result4 = stmt1.executeUpdate(sql4);
+//         }
+            JOptionPane.showMessageDialog(null, "Updated the profile successfully!");
+            name.setText("");
+            email.setText("");
+            number.setText("");
+            updateTableForPolice(this.enterprise_user);
+            conn1.close();
+        } catch (Exception e) {
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         int selectedrow = manageTable.getSelectedRow();
-         String work_areaId=manageTable.getValueAt(selectedrow, 0).toString();
-         try{
-              if (conn == null) {
+        int selectedrow = manageTable.getSelectedRow();
+
+        try {
+            Connection conn2 = null;
+            if (conn2 == null) {
                 String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                 String user = "SYSTEM";
                 String password = "trisha";
                 Class.forName("oracle.jdbc.driver.OracleDriver");
-                Connection conn = DriverManager.getConnection(url, user, password);
+                conn2 = DriverManager.getConnection(url, user, password);
             }
-              
-            Statement stmt = conn.createStatement();
-            String sql4 = "delete from work_area where workarea_id='"+work_areaId+"'";
-            int result4 = stmt.executeUpdate(sql4); 
-         }
-         catch(Exception e){
-             
-         }
-         
+
+            String employeeName = (String) manageTable.getValueAt(selectedrow, 2);
+            String emailId = manageTable.getValueAt(selectedrow, 3).toString();
+            String contactNumber = manageTable.getValueAt(selectedrow, 4).toString();
+            BigDecimal workarea_id = (BigDecimal) manageTable.getValueAt(selectedrow, 0);
+
+            Statement stmt2 = conn2.createStatement();
+            String sql5 = "delete from work_area where workarea_id='" + workarea_id + "'";
+            int result5 = stmt2.executeUpdate(sql5);
+            updateTableForPolice(this.enterprise_user);
+            name.setText("");
+            email.setText("");
+            number.setText("");
+            conn2.close();
+        } catch (Exception e) {
+
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
