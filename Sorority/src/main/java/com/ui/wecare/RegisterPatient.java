@@ -324,6 +324,9 @@ jDateChooser1.setMinSelectableDate(date);
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int selectedrow = jTable1.getSelectedRow();
+if(selectedrow < 0){
+JOptionPane.showMessageDialog(null, "Please select at least 1 patient from table");return;
+}
         BigDecimal FEMALEID = (BigDecimal) jTable1.getValueAt(selectedrow, 0);
         if (!checkExistingPatient(FEMALEID)) {
             try {

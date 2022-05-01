@@ -270,15 +270,6 @@ jDateChooser1.setMaxSelectableDate(date);
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //submit button
-if(con == null){
-        try {
-            String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
-            String user = "SYSTEM";
-            String password = "trisha";
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            con = DriverManager.getConnection(url, user, password);
-        } catch (Exception e) {
-        }}
         String username = jTextField1.getText();
         String password = jPasswordField1.getText();
         String name = jTextField9.getText();
@@ -288,9 +279,37 @@ if(con == null){
         String State = jTextField4.getText();
         String zipcode = (jTextField5.getText());
         String emailId = jTextField6.getText();
-        long mobileNo = Long.parseLong(jTextField7.getText());
+long mobileNo = 0;
+try{
+mobileNo = Long.parseLong(jTextField7.getText().trim());
+if(jTextField7.getText().trim().length() != 10){
+JOptionPane.showMessageDialog(null, "Please enter valid(10 digits) contact number");
+return;
 
-        
+}
+
+}catch(Exception e){
+JOptionPane.showMessageDialog(null, " Please enter valid mobile number"); return;
+}
+ if( username.isEmpty() || password.isEmpty() || name.isEmpty() || DOB.isEmpty() || city.isEmpty() || State.isEmpty() || zipcode.isEmpty() || emailId.isEmpty()){
+JOptionPane.showMessageDialog(null, " Please enter all details"); return;
+}
+
+if(emailId.contains("@") && emailId.contains(".")){
+JOptionPane.showMessageDialog(null, "Please enter valid emailid");
+return;
+}
+
+
+if(con == null){
+        try {
+            String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+            String user = "SYSTEM";
+            String password1 = "trisha";
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            con = DriverManager.getConnection(url, user, password1);
+        } catch (Exception e) {
+        }}
         
         try {
 

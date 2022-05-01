@@ -507,7 +507,9 @@ jLabel3.setVisible(false);
 jLabel1.setVisible(false);
 jPanel3.setVisible(false);
 jPanel8.setVisible(false);
-        }
+        }else {
+JOptionPane.showMessageDialog(null, "Select one from above options");return;
+}
 
 
     }//GEN-LAST:event_jButton1ActionPerformed

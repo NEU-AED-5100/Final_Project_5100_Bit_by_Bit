@@ -238,7 +238,9 @@ public class Panel1 extends javax.swing.JPanel {
         String location=(String) jComboBox1.getSelectedItem();
         String type=(String) jComboBox2.getSelectedItem();
         String name=jTextField1.getText();
-        
+        if(name.isEmpty()){
+JOptionPane.showMessageDialog(null, "Please enter Name"); return;
+}
         
         try {
            

@@ -647,6 +647,9 @@ Date date = new Date();
 //String sql = "select FEMALEID as ID,PATIENTID as Patient_ID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO,REGISTRATIONDATE from patient";
         try {
             int selectedrow = jTable1.getSelectedRow();
+if(selectedrow < 0){
+JOptionPane.showMessageDialog(null, "Please select atleast 1 patient from table");return;
+}
             int selectedcolumn = 1;
             BigDecimal patientId = (BigDecimal) jTable1.getValueAt(selectedrow, selectedcolumn);
 
