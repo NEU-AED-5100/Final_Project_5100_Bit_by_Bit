@@ -10,11 +10,13 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -28,38 +30,27 @@ import org.jfree.data.category.DefaultCategoryDataset;
 public class MedicineInventoryPanel extends javax.swing.JPanel {
 
 //     Connection con=null;
-        Statement st=null;
-        ResultSet rs=null;
-          DefaultTableModel model ;
-          int total;
-          String enterpriseName="";
+    Statement st = null;
+    Statement st1 = null;
+    ResultSet rs = null;
+    ResultSet rs1 = null;
+    DefaultTableModel model;
+    int total;
+    String enterpriseName = "";
 //            String user_name=enterpriseLoginFrame.enterprise_name;
-            
+
     public MedicineInventoryPanel() {
         initComponents();
-//      enterpriseName=enterpriseLoginFrame.enterprise_name;
-      
-     
-               
-        //Paracetamol, EcoSprin, FlavadonMR, CaberGolin
-        
-      
-        
         model = new DefaultTableModel();
                
         jTable1.setModel(model);
         model.addColumn("Medicine Name");
         model.addColumn("Quantity");
-       
-        
-          clearMedicineInventoryTable();
-        
-//        user_name=enterpriseLoginFrame.enterprise_name;
-        
-           try {
+        clearMedicineInventoryTable();
+        try {
 //               con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1522:xe","SYSTEM","Mihi@1234");
-Connection con = null;
+            Connection con = null;
             if (con == null) {
                 String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                 String user = "SYSTEM";
@@ -68,42 +59,36 @@ Connection con = null;
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 con = DriverManager.getConnection(url, user, password);
             }
-            st=con.createStatement();
-            
+            st = con.createStatement();
+
 //            String user_name=enterpriseLoginFrame.enterprise_name;
-             String enterpriseid=getEnterpriseId();
-            String s= "select * from medicineinventory where enterpriseid='"+enterpriseid+"'"  ;
-            rs=st.executeQuery(s);  // execute query
+            String enterpriseid = getEnterpriseId();
+            String s = "select * from medicineinventory where enterpriseid='" + enterpriseid + "'";
+            rs = st.executeQuery(s);  // execute query
             jComboBox1.removeAllItems();
-            
-            while(rs.next()){
 
-               jComboBox1.addItem(rs.getString(2));
+            while (rs.next()) {
+
+                jComboBox1.addItem(rs.getString(2));
 
             }
-            
-           
-con.close();
-        } catch (SQLException ex) {
-                    ex.printStackTrace();
-        }catch(Exception e){}
-         
-          
-           
-           
-           //----------------------------
-           //creating chart
-           
-              DefaultCategoryDataset dataset = 
-            new DefaultCategoryDataset( );  
 
-           
-         
-           
-              try {
+            con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //----------------------------
+        //creating chart
+        DefaultCategoryDataset dataset
+                = new DefaultCategoryDataset();
+
+        try {
 //               con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1522:xe","SYSTEM","Mihi@1234");
-Connection con = null;
+            Connection con = null;
             if (con == null) {
                 String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                 String user = "SYSTEM";
@@ -112,56 +97,74 @@ Connection con = null;
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 con = DriverManager.getConnection(url, user, password);
             }
-            st=con.createStatement();
+            st = con.createStatement();
 
 //            String user_name=enterpriseLoginFrame.enterprise_name;
-            
-            String enterpriseid=getEnterpriseId();
-            
-            String s= "select * from medicineinventory where enterpriseid='"+enterpriseid+"'"  ;
-            rs=st.executeQuery(s);  // execute query
-           
-            
-            while(rs.next()){
-                        //setting values in chart
-               dataset.setValue( rs.getInt(3) ,rs.getString(2) , rs.getString(2) );        
+            String enterpriseid = getEnterpriseId();
+
+            String s = "select * from medicineinventory where enterpriseid='" + enterpriseid + "'";
+            rs = st.executeQuery(s);  // execute query
+
+            while (rs.next()) {
+                //setting values in chart
+                dataset.setValue(rs.getInt(3), rs.getString(2), rs.getString(2));
 
             }
-            
-           con.close();
+
+            con.close();
 
         } catch (SQLException ex) {
-                    ex.printStackTrace();
-        }catch(Exception e){}
-           
-           
-       
-         JFreeChart barChart = ChartFactory.createBarChart(
-         "Medicine Inventory Chart",           
-         "",            
-         "Stock",            
-         dataset,          
-         PlotOrientation.VERTICAL,           
-         true, true, false);
-         
-      ChartPanel chartPanel = new ChartPanel( barChart );  
-           jPanel5.removeAll();
-           BorderLayout bl= new BorderLayout();
-           jPanel5.setLayout(bl);
-           jPanel5.add(chartPanel);
-            chartPanel.setPreferredSize(new java.awt.Dimension( 450 , 250 ) );
-           jPanel5.validate();
-        
-       
-           //------------------------
-           setSize(new Dimension(700,700));
-          
-         
+            ex.printStackTrace();
+        } catch (Exception e) {
+        }
+
+        JFreeChart barChart = ChartFactory.createBarChart(
+                "Medicine Inventory Chart",
+                "",
+                "Stock",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true, true, false);
+
+        ChartPanel chartPanel = new ChartPanel(barChart);
+        jPanel5.removeAll();
+        BorderLayout bl = new BorderLayout();
+        jPanel5.setLayout(bl);
+        jPanel5.add(chartPanel);
+        chartPanel.setPreferredSize(new java.awt.Dimension(450, 250));
+        jPanel5.validate();
+
+        //------------------------
+        setSize(new Dimension(700, 700));
+
         setVisible(true);
-          jComboBox2.removeAllItems();  
-        
-       
-        
+        jComboBox2.removeAllItems();
+
+        for (int i = 1; i < 11; i++) {
+            jComboBox2.addItem(i + "");
+        }
+
+    }
+
+    public void displayPatient() {
+        Connection conn = null;
+        try {
+            if (conn == null) {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                conn = DriverManager.getConnection(url, user, password);
+            }
+            String sql = "select p.PATIENTID , p.NAME, h.REPORTGENERATIONDATE,h.PRESCRIPTION from patient p ,patienthistory h where p.PATIENTID = h.PATIENTUSERNAME";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+            conn.close();
+            updateMedicineNameCombobox();
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
     }
 
     /**
@@ -178,11 +181,6 @@ Connection con = null;
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -196,6 +194,12 @@ Connection con = null;
         jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setPreferredSize(new java.awt.Dimension(750, 832));
 
@@ -249,20 +253,7 @@ Connection con = null;
                 .addContainerGap())
         );
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 737, -1));
-
-        jLabel3.setText("Patient Name");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
-
-        jLabel4.setText("Prescription");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 66, -1));
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 166, -1));
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, -1, 40));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 737, -1));
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 255));
 
@@ -290,20 +281,20 @@ Connection con = null;
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
         jLabel5.setText("Medicine Name");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         jLabel7.setText("Quantity");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 120, -1));
+        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 120, -1));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
-        jPanel2.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 120, -1));
+        jPanel2.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 120, -1));
 
         jButton1.setText("Add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -311,7 +302,7 @@ Connection con = null;
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -326,7 +317,7 @@ Connection con = null;
         ));
         jScrollPane2.setViewportView(jTable1);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 254, 76));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 254, 76));
 
         jLabel8.setText("Amount");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
@@ -334,7 +325,7 @@ Connection con = null;
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField2.setDisabledTextColor(new java.awt.Color(0, 0, 255));
         jTextField2.setEnabled(false);
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 104, -1));
+        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 104, -1));
 
         jButton2.setText("Next to add in Inventory");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -342,7 +333,7 @@ Connection con = null;
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -355,7 +346,49 @@ Connection con = null;
             .addGap(0, 182, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 220, -1));
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 220, -1));
+
+        jLabel10.setText("Enter Name : ");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 100, -1));
+
+        jButton3.setText("Search");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, -1));
+
+        jButton4.setText("View All");
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, -1, -1));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable2);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -372,30 +405,29 @@ Connection con = null;
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //add button
-        String medicineName=(String) jComboBox1.getSelectedItem();
-        int qty= Integer.parseInt((String) jComboBox2.getSelectedItem());  
-        
-          
-            total+=qty*10;
-              model.addRow(new Object[]{medicineName,qty});
+        String medicineName = (String) jComboBox1.getSelectedItem();
+        int qty = Integer.parseInt((String) jComboBox2.getSelectedItem());
 
-            jTextField2.setText("$"+String.valueOf(total));
-            
-            //--------------------------------------
-           String enterpriseid=getEnterpriseId();
-              try {
+        total += qty * 10;
+        model.addRow(new Object[]{medicineName, qty});
+
+        jTextField2.setText("$" + String.valueOf(total));
+
+        //--------------------------------------
+        String enterpriseid = getEnterpriseId();
+        try {
 
 //                   con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1522:xe","SYSTEM","Mihi@1234");
-Connection con = null;
+            Connection con = null;
             if (con == null) {
                 String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                 String user = "SYSTEM";
@@ -404,23 +436,22 @@ Connection con = null;
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 con = DriverManager.getConnection(url, user, password);
             }
-                    st=con.createStatement();
-                        
-                    String s=String.format("update MedicineInventory set quantityAvailable=quantityAvailable-%s where medicinename='%s' and enterpriseId='%s'",qty,medicineName,enterpriseid);
-                    int n=st.executeUpdate(s);  // execute query
-                   if(n>0)
-                   {
-                       updateChartOfMedicineInventoryPanel();
-                   }
-con.close();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
+            st = con.createStatement();
 
-                }catch(Exception e){}
-            
-            
+            String s = String.format("update MedicineInventory set quantityAvailable=quantityAvailable-%s where medicinename='%s' and enterpriseId='%s'", qty, medicineName, enterpriseid);
+            int n = st.executeUpdate(s);  // execute query
+            if (n > 0) {
+                updateChartOfMedicineInventoryPanel();
+            }
+            con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+
+        } catch (Exception e) {
+        }
+
         jComboBox2.removeAllItems();
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -429,173 +460,205 @@ con.close();
         MainFrame.add_Inventory_panel.setVisible(true);
         MainFrame.add_Inventory_panel.updateInventoryTable();
         setVisible(false);
-         clearMedicineInventoryTable();
-         jTextField2.setText("");
-         total=0;
-        
+        clearMedicineInventoryTable();
+        jTextField2.setText("");
+        total = 0;
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         //select medicine combobox
-        
-        
-        if(jComboBox1.hasFocus()){
-            
-                try {
-                                String enterpriseid=getEnterpriseId();
+
+        if (jComboBox1.hasFocus()) {
+
+            try {
+                String enterpriseid = getEnterpriseId();
 //                                con = DriverManager.getConnection(
 //                                      "jdbc:oracle:thin:@localhost:1522:xe","SYSTEM","Mihi@1234");
-Connection con = null;
-            if (con == null) {
-                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
-                String user = "SYSTEM";
-                String password = "trisha";
-                //Class.forName("oracle.jdbc.driver.OracleDriver");
-                Class.forName("oracle.jdbc.driver.OracleDriver");
-                con = DriverManager.getConnection(url, user, password);
+                Connection con = null;
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    //Class.forName("oracle.jdbc.driver.OracleDriver");
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+                st = con.createStatement();
+
+                String s = String.format("select quantityAvailable from MedicineInventory where medicineName='%s' and  enterpriseId='%s'", (String) jComboBox1.getSelectedItem(), enterpriseid);
+                rs = st.executeQuery(s);  // execute query
+                jComboBox2.removeAllItems();
+
+                if (rs.next()) {
+
+                    int qty = rs.getInt(1);
+                    for (int i = 1; i <= qty; i++) {
+                        jComboBox2.addItem(i + "");
+                    }
+                }
+                con.close();
+
+            } catch (SQLException ex) {
+
+            } catch (Exception e) {
             }
-                              st=con.createStatement();
 
-                              String s=String.format("select quantityAvailable from MedicineInventory where medicineName='%s' and  enterpriseId='%s'",(String)jComboBox1.getSelectedItem(),enterpriseid);
-                             rs=st.executeQuery(s);  // execute query
-                             jComboBox2.removeAllItems();
-
-                            if(rs.next()){
-
-                                int qty=rs.getInt(1);
-                                for(int i=1;i<=qty;i++)
-                                     jComboBox2.addItem(i+"");
-                            }
-           con.close();
-          
-                    } catch (SQLException ex) {
-
-                    }catch(Exception e){}
-            
-            
         }
-         
-        
+
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    void updateMedicineNameCombobox(){
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            Connection conn = null;
+            if (conn == null) {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                conn = DriverManager.getConnection(url, user, password);
+            }
+            String sql = "select p.PATIENTID , p.NAME, h.REPORTGENERATIONDATE,h.PRESCRIPTION from patient p ,patienthistory h where p.PATIENTID = h.PATIENTUSERNAME and p.NAME = '" + jTextField1.getText().trim() + "'";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            jTable2.removeAll();
+            jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+            conn.close();
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            Connection conn = null;
+            if (conn == null) {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                conn = DriverManager.getConnection(url, user, password);
+            }
+            String sql = "select p.PATIENTID , p.NAME, h.REPORTGENERATIONDATE,h.PRESCRIPTION from patient p ,patienthistory h where p.PATIENTID = h.PATIENTUSERNAME";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+            conn.close();
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    public void updateMedicineNameCombobox() {
 //         String user_name=enterpriseLoginFrame.enterprise_name;
-        
-           try {
+
+        try {
 //               con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-Connection con = null;
-            if (con == null) {
+            Connection con1 = null;
+            if (con1 == null) {
                 String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                 String user = "SYSTEM";
                 String password = "trisha";
                 //Class.forName("oracle.jdbc.driver.OracleDriver");
                 Class.forName("oracle.jdbc.driver.OracleDriver");
-                con = DriverManager.getConnection(url, user, password);
+                con1 = DriverManager.getConnection(url, user, password);
             }
-            st=con.createStatement();
-            
-        String enterpriseid=getEnterpriseId();
-            String s= "select * from medicineinventory where enterpriseId='"+  enterpriseid+"'"  ;
-            rs=st.executeQuery(s);  // execute query
+            st1 = con1.createStatement();
+
+            String enterpriseid = getEnterpriseId();
+            String s = "select * from medicineinventory where enterpriseId='" + enterpriseid + "'";
+            rs1 = st1.executeQuery(s);  // execute query
             jComboBox1.removeAllItems();
-            
-            while(rs.next()){
 
-               jComboBox1.addItem(rs.getString(2));
+            while (rs1.next()) {
+
+                jComboBox1.addItem(rs1.getString(2));
 
             }
-            
-           con.close();
+
+            con1.close();
 
         } catch (SQLException ex) {
-                    ex.printStackTrace();
-        }catch(Exception e){}
-         
-        
-        
-    }
-    
-    
-    void updateChartOfMedicineInventoryPanel(){
-        
-//         String user_name=enterpriseLoginFrame.enterprise_name;
-         //creating chart
-           
-              DefaultCategoryDataset dataset = 
-            new DefaultCategoryDataset( );  
+            ex.printStackTrace();
+        } catch (Exception e) {
+        }
 
-           
-         
-           
-              try {
+    }
+
+    void updateChartOfMedicineInventoryPanel() {
+
+//         String user_name=enterpriseLoginFrame.enterprise_name;
+        //creating chart
+        DefaultCategoryDataset dataset
+                = new DefaultCategoryDataset();
+
+        try {
 //               con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1522:xe","SYSTEM","Mihi@1234");
-Connection con = null;
-            if (con == null) {
+            Connection con2 = null;
+            if (con2 == null) {
                 String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                 String user = "SYSTEM";
                 String password = "trisha";
                 //Class.forName("oracle.jdbc.driver.OracleDriver");
                 Class.forName("oracle.jdbc.driver.OracleDriver");
-                con = DriverManager.getConnection(url, user, password);
+                con2 = DriverManager.getConnection(url, user, password);
             }
-            st=con.createStatement();
-                String enterpriseid=getEnterpriseId();
-            String s= "select * from medicineinventory where enterpriseid='"+enterpriseid+"'"  ;
-            rs=st.executeQuery(s);  // execute query
-           
-            
-            while(rs.next()){
-                        //setting values in chart
-               dataset.setValue( rs.getInt(3) ,rs.getString(2) , rs.getString(2) );        
+            Statement st2 = con2.createStatement();
+            String enterpriseid = getEnterpriseId();
+            String s = "select * from medicineinventory where enterpriseid='" + enterpriseid + "'";
+            ResultSet rs2 = st2.executeQuery(s);  // execute query
+
+            while (rs2.next()) {
+                //setting values in chart
+                dataset.setValue(rs2.getInt(3), rs2.getString(2), rs2.getString(2));
 
             }
-            
-           con.close();
+
+            con2.close();
 
         } catch (SQLException ex) {
-                    ex.printStackTrace();
+            ex.printStackTrace();
+        } catch (Exception e) {
         }
-           catch(Exception e){}
-           
-       
-         JFreeChart barChart = ChartFactory.createBarChart(
-         "Medicine inventory chart",           
-         "",            
-         "Stock",            
-         dataset,          
-         PlotOrientation.VERTICAL,           
-         true, true, false);
-         
-      ChartPanel chartPanel = new ChartPanel( barChart );  
-           jPanel5.removeAll();
-           BorderLayout bl= new BorderLayout();
-           jPanel5.setLayout(bl);
-           jPanel5.add(chartPanel);
-            chartPanel.setPreferredSize(new java.awt.Dimension( 450 , 250 ) );
-           jPanel5.validate();
-        
-       
-           //------------------------
-           setSize(new Dimension(700,700));
-           
-        
-        
-        
+
+        JFreeChart barChart = ChartFactory.createBarChart(
+                "Medicine inventory chart",
+                "",
+                "Stock",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true, true, false);
+
+        ChartPanel chartPanel = new ChartPanel(barChart);
+        jPanel5.removeAll();
+        BorderLayout bl = new BorderLayout();
+        jPanel5.setLayout(bl);
+        jPanel5.add(chartPanel);
+        chartPanel.setPreferredSize(new java.awt.Dimension(450, 250));
+        jPanel5.validate();
+
+        //------------------------
+        setSize(new Dimension(700, 700));
+
     }
-   
-     String getEnterpriseId(){
-        
-        
-        String enterprise_id="";
-        
-         try {
+
+    String getEnterpriseId() {
+
+        String enterprise_id = "";
+
+        try {
 
 //                    con = DriverManager.getConnection(
 //                          "jdbc:oracle:thin:@localhost:1522:xe","SYSTEM","Mihi@1234");
-Connection con = null;
+            Connection con = null;
             if (con == null) {
                 String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                 String user = "SYSTEM";
@@ -604,47 +667,48 @@ Connection con = null;
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 con = DriverManager.getConnection(url, user, password);
             }
-                  st=con.createStatement();
+            st = con.createStatement();
 
-                  //employee name can be PH1h1 
-                  //enterprise_name can be h1, h2 etc
-                  //we have to collect h1 or h2 enterprise for PH1h1 employee
-                  String s=String.format("select enterprise_name from work_area where username='%s'",EmployeeLoginFrame.Emp_name);
-                 rs=st.executeQuery(s);  // execute query
+            //employee name can be PH1h1 
+            //enterprise_name can be h1, h2 etc
+            //we have to collect h1 or h2 enterprise for PH1h1 employee
+            String s = String.format("select enterprise_name from work_area where username='%s'", EmployeeLoginFrame.Emp_name);
+            rs = st.executeQuery(s);  // execute query
 
-                    if(rs.next()){
+            if (rs.next()) {
 
-                         enterprise_id=rs.getString(1);
-                     }
+                enterprise_id = rs.getString(1);
+            }
 
-con.close();
-          } catch (SQLException ex) {
+            con.close();
+        } catch (SQLException ex) {
 
-          } catch(Exception e){}
-        
+        } catch (Exception e) {
+        }
+
         return enterprise_id;
-        
+
     }
-     
-     void clearMedicineInventoryTable(){
-         
-          if (jTable1.getRowCount() > 0) {
-                        for (int i = jTable1.getRowCount() - 1; i >=0; i--) {
-                            model.removeRow(i);
-                        }
-                 }
-         
-     }
-     
+
+    void clearMedicineInventoryTable() {
+
+//          if (jTable1.getRowCount() > 0) {
+//                        for (int i = jTable1.getRowCount() - 1; i >=0; i--) {
+//                            model.removeRow(i);
+//                        }
+//                 }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -657,7 +721,7 @@ con.close();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
