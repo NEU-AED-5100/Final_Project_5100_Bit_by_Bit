@@ -352,6 +352,9 @@ Connection con = null;
 if(selectedrow < 0){
 JOptionPane.showMessageDialog(null, "Select atleast 1 patient from table");return;
 }
+if(jTextArea1.getText().trim().isEmpty()){
+JOptionPane.showMessageDialog(null, "Please enter report description"); return;
+}
 
             BigDecimal PATIENTID = (BigDecimal) jTable1.getValueAt(selectedrow, 0);
             Format formatter = new SimpleDateFormat("dd-MMM-yy");
@@ -382,6 +385,9 @@ Connection conn1 = null;
             Format formatter = new SimpleDateFormat("dd-MMM-yy");
             String reportGenerationDate = (String) formatter.format(this.jDateChooser1.getDate());
             String reportContents = jTextArea1.getText().trim();
+            if(reportContents.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter report description"); return;
+            }
             String sql = "select emailid from patient where patientid="+PATIENTID;         
             PreparedStatement ps = conn1.prepareStatement(sql);
             ResultSet result4 = ps.executeQuery();
