@@ -19,8 +19,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DeleteFrame extends javax.swing.JFrame {
 
-        Connection con=null;
+        //Connection con=null;
           Connection con2=null;
+String ngo_user = "";
         Statement st=null;
         ResultSet rs=null;
           DefaultTableModel model ;
@@ -45,8 +46,9 @@ public class DeleteFrame extends javax.swing.JFrame {
 
 //              con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+Connection con = null;
 try {
-                Connection con = null;
+                
                 if (con == null) {
                     String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                     String user = "SYSTEM";
@@ -78,7 +80,9 @@ try {
               
           }
     }
-
+public void ngoUser(String user){
+String ngo_user = user;
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -304,8 +308,9 @@ try {
                             
 //                             con = DriverManager.getConnection(
 //                                      "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+Connection con = null;
 try {
-                Connection con = null;
+                
                 if (con == null) {
                     String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                     String user = "SYSTEM";
@@ -341,7 +346,7 @@ try {
                  }
                      
                    //------------------------  
-                     MainFrame.ngoPanel.updateTableForNgo();
+                     MainFrame.ngoPanel.updateTableForNgo(ngo_user);
                      
                      updateCombobox1();
                  
@@ -358,8 +363,9 @@ try {
 
 //              con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+Connection con = null;
 try {
-                Connection con = null;
+                
                 if (con == null) {
                     String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                     String user = "SYSTEM";

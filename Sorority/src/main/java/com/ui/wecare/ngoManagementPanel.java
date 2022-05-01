@@ -19,10 +19,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ngoManagementPanel extends javax.swing.JPanel {
 
-    Connection con = null;
+    //Connection con = null;
     Statement st = null;
     ResultSet rs = null;
     DefaultTableModel model;
+String ngo_user = "";
 
     public ngoManagementPanel() {
         initComponents();
@@ -48,8 +49,9 @@ public class ngoManagementPanel extends javax.swing.JPanel {
 
 //             con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-            try {
-                Connection con = null;
+Connection con = null;           
+ try {
+                
                 if (con == null) {
                     String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                     String user = "SYSTEM";
@@ -84,8 +86,9 @@ public class ngoManagementPanel extends javax.swing.JPanel {
 
 //              con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-            try {
-                Connection con = null;
+Connection con = null;            
+try {
+                
                 if (con == null) {
                     String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                     String user = "SYSTEM";
@@ -121,8 +124,8 @@ public class ngoManagementPanel extends javax.swing.JPanel {
 
     }
 
-    void updateTableForNgo() {
-
+    void updateTableForNgo(String n_user) {
+ngo_user = n_user;
         model = new DefaultTableModel();
         jTable1.setModel(model);
         model.addColumn("NGO Id");
@@ -143,8 +146,9 @@ public class ngoManagementPanel extends javax.swing.JPanel {
 
 //            con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe", "system", "admin");
-            try {
-                Connection con = null;
+Connection con = null;            
+try {
+                
                 if (con == null) {
                     String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                     String user = "SYSTEM";
@@ -489,8 +493,9 @@ public class ngoManagementPanel extends javax.swing.JPanel {
 
 //                con = DriverManager.getConnection(
 //                        "jdbc:oracle:thin:@localhost:1521:xe", "system", "admin");
-                try {
-                    Connection con = null;
+ Connection con = null;                
+try {
+                   
                     if (con == null) {
                         String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                         String user = "SYSTEM";
@@ -524,8 +529,9 @@ public class ngoManagementPanel extends javax.swing.JPanel {
 
 //            con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe", "system", "admin");
-            try {
-                Connection con = null;
+Connection con = null;            
+try {
+                
                 if (con == null) {
                     String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                     String user = "SYSTEM";
@@ -555,7 +561,7 @@ public class ngoManagementPanel extends javax.swing.JPanel {
         }
 
         //update the table             
-        MainFrame.ngoPanel.updateTableForNgo();
+        MainFrame.ngoPanel.updateTableForNgo(ngo_user);
         jTextField2.setText("");
 
 
@@ -565,6 +571,7 @@ public class ngoManagementPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         //edit button
         EditFrame e = new EditFrame();
+e.ngoUser(ngo_user);
         e.setVisible(true);
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -572,7 +579,9 @@ public class ngoManagementPanel extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         //delete frame
+
         DeleteFrame df = new DeleteFrame();
+df.ngoUser(ngo_user);
         //df.setVisible(true);
 
     }//GEN-LAST:event_jButton3ActionPerformed

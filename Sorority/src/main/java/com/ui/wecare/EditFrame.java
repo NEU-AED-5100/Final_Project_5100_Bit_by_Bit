@@ -19,9 +19,10 @@ import javax.swing.JOptionPane;
 public class EditFrame extends javax.swing.JFrame {
 
       
-      Connection con=null;
+      //Connection con=null;
         Statement st=null;
         ResultSet rs=null;
+String ngo_user = "";
         
         String ngo="";
     public EditFrame() {
@@ -36,8 +37,9 @@ public class EditFrame extends javax.swing.JFrame {
 
 //              con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+Connection con = null;
 try {
-                Connection con = null;
+                
                 if (con == null) {
                     String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                     String user = "SYSTEM";
@@ -334,8 +336,9 @@ try {
 
 //                                con = DriverManager.getConnection(
 //                                      "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+Connection con = null;
 try {
-                Connection con = null;
+                
                 if (con == null) {
                     String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                     String user = "SYSTEM";
@@ -376,8 +379,9 @@ try {
                             
 //                             con = DriverManager.getConnection(
 //                                      "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+Connection con = null;
 try {
-                Connection con = null;
+                
                 if (con == null) {
                     String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                     String user = "SYSTEM";
@@ -408,18 +412,21 @@ st=con.createStatement();
           }
                     
           //update the ngo detail table       
-          MainFrame.ngoPanel.updateTableForNgo();
+          MainFrame.ngoPanel.updateTableForNgo(ngo_user);
           
        jTextField2.setText("");
         
     }//GEN-LAST:event_jButton1ActionPerformed
-
+public void ngoUser(String user){
+String ngo_user = user;
+}
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
 
         //location combobox click event
         
         jComboBox4.removeAllItems();
+if(jComboBox1.getSelectedItem() != null)
         if (((String)jComboBox1.getSelectedItem()).equalsIgnoreCase("new jersey")){
             
             jComboBox4.addItem("07302");

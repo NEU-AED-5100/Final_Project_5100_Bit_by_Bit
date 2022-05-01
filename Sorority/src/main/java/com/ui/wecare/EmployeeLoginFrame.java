@@ -222,7 +222,7 @@ public class EmployeeLoginFrame extends javax.swing.JFrame {
             if (rs.next()) {
                 // MainFrame. ngoPanel.setVisible(true);
                 MainFrame.ngoPanel.setVisible(true);
-                //MainFrame.ngoPanel.updateTableForNgo();
+                MainFrame.ngoPanel.updateTableForNgo(Emp_name);
                 Emp_org = rs.getString("ENTERPRISE_NAME");
                 setVisible(false);
 
@@ -332,7 +332,7 @@ MainFrame.medicine_Inventory_Panel.displayPatient();
 
                                             if (rs.next()) {
                                                 MainFrame.ngoPanel.setVisible(true);
-                                                MainFrame.ngoPanel.updateTableForNgo();
+                                                MainFrame.ngoPanel.updateTableForNgo(Emp_name);
                                                 Emp_org = rs.getString("ENTERPRISE_NAME");
                                                 setVisible(false);
 

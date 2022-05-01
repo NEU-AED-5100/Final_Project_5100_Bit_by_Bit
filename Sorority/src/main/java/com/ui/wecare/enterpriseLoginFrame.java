@@ -213,7 +213,7 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
             if (rs.next()) {
                 // MainFrame. ngoPanel.setVisible(true);
                 MainFrame.workArea.setVisible(true);
-                MainFrame.ngoPanel.updateTableForNgo();
+                MainFrame.ngoPanel.updateTableForNgo(user);
                 setVisible(false);
 
             } else {
@@ -259,7 +259,7 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
 
                             if (rs.next()) {
                                 MainFrame.ngoPanel.setVisible(true);
-                                MainFrame.ngoPanel.updateTableForNgo();
+                                MainFrame.ngoPanel.updateTableForNgo(user);
 
                                 setVisible(false);
 
