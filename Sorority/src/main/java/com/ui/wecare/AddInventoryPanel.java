@@ -22,6 +22,7 @@ public class AddInventoryPanel extends javax.swing.JPanel {
 Statement st1 = null;
 Statement st2 = null;ResultSet rs2 = null;
     DefaultTableModel model;
+String pharma_username = "";
 //             String user_name=Empl.enterprise_name;
 
     public AddInventoryPanel() {
@@ -41,6 +42,7 @@ Statement st2 = null;ResultSet rs2 = null;
                 model.removeRow(i);
             }
         }
+
 
         /*
             try {
@@ -65,34 +67,31 @@ Statement st2 = null;ResultSet rs2 = null;
          */
     }
 
-private void addMedicineListInDropDown(){
+public void addMedicineListInDropDown(String Emp_name){
 try {
 //               con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1522:xe","SYSTEM","Mihi@1234");
-            Connection con = null;
-            if (con == null) {
+pharma_username = Emp_name;
+            Connection con3 = null;
+            if (con3 == null) {
                 String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                 String user = "SYSTEM";
                 String password = "trisha";
                 //Class.forName("oracle.jdbc.driver.OracleDriver");
                 Class.forName("oracle.jdbc.driver.OracleDriver");
-                con = DriverManager.getConnection(url, user, password);
+                con3 = DriverManager.getConnection(url, user, password);
             }
-            st = con.createStatement();
-
+            Statement st3 = con3.createStatement();
 //            String user_name=enterpriseLoginFrame.enterprise_name;
             String enterpriseid = getEnterpriseId();
             String s = "select * from medicineinventory where enterpriseid='" + enterpriseid + "'";
-            rs = st.executeQuery(s);  // execute query
+            ResultSet rs3 = st3.executeQuery(s);  // execute query
             jComboBox1.removeAllItems();
-
-            while (rs.next()) {
-
-                jComboBox1.addItem(rs.getString(2));
-
+            while (rs3.next()) {
+                jComboBox1.addItem(rs3.getString(2));
             }
-
-            con.close();
+            jComboBox1.addItem("None");
+            con3.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (Exception e) {
@@ -110,81 +109,76 @@ try {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox<>();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(0, 51, 153));
+        setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        setMinimumSize(new java.awt.Dimension(860, 690));
+        setPreferredSize(new java.awt.Dimension(1900, 1397));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(102, 0, 153));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 51, 255));
         jLabel1.setText("Drug Store- Always Available Pharma");
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Trisha\\Downloads\\womenlogo.jpeg")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72)
                 .addComponent(jLabel1)
-                .addGap(60, 60, 60))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel2.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        jPanel2.setMinimumSize(new java.awt.Dimension(860, 690));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1900, 1397));
 
-        jPanel4.setBackground(new java.awt.Color(51, 51, 255));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Add Inventory");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addComponent(jLabel6)
-                .addContainerGap(218, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 153));
         jLabel5.setText("Medicine Name");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 153));
         jLabel7.setText("Quantity");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paracetamol", "EcoSprin", "FlavadonMR", "CaberGolin", "None" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 204));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,17 +199,14 @@ try {
         ));
         jScrollPane2.setViewportView(jTable1);
 
-        jButton3.setText("Update");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 153));
         jLabel2.setText("New Medicine");
 
         jTextField1.setEnabled(false);
 
+        jButton4.setBackground(new java.awt.Color(255, 255, 204));
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton4.setText("<<Go Back");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,91 +223,101 @@ try {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jButton4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(34, 34, 34)
-                                .addComponent(jButton3))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel7))
-                                .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
                                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(71, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton1))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jTextField1)))))
+                        .addGap(67, 67, 67)
+                        .addComponent(jButton4))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(76, 76, 76)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
-                .addContainerGap(121, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(10, 10, 10)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(407, Short.MAX_VALUE)))
+                .addContainerGap(377, Short.MAX_VALUE))
+        );
+
+        jPanel4.setBackground(new java.awt.Color(0, 0, 153));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Add Inventory");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(346, 346, 346)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(2, 2, 2)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
+                .addGap(42, 42, 42))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -347,6 +348,7 @@ try {
         //save button
         String medicine_name = "";
         int qty = 0;
+        String operation = "Add";
 
         String enterprise_id = "";
 
@@ -368,7 +370,7 @@ try {
             //employee name can be PH1h1 
             //enterprise_name can be h1, h2 etc
             //we have to collect h1 or h2 enterprise for PH1h1 employee
-            String s = String.format("select enterprise_name from work_area where username='%s'", EmployeeLoginFrame.Emp_name);
+            String s = String.format("select enterprise_name from work_area where username='%s'", pharma_username);
             rs = st.executeQuery(s);  // execute query
 
             if (rs.next()) {
@@ -390,6 +392,7 @@ try {
 
         try {
             qty = Integer.parseInt(jTextField2.getText());
+operation = jComboBox2.getSelectedItem().toString();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Please enter a valid Quantity");
             return;
@@ -397,35 +400,36 @@ try {
 
         //------------------------------
         //checking whether medicine with same name already there or not
-        try {
-            Connection con = null;
-            if (con == null) {
-                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
-                String user = "SYSTEM";
-                String password = "trisha";
-                //Class.forName("oracle.jdbc.driver.OracleDriver");
-                Class.forName("oracle.jdbc.driver.OracleDriver");
-                con = DriverManager.getConnection(url, user, password);
-            }
-            st = con.createStatement();
-            String enterpriseid = getEnterpriseId();
-            String s = "select * from medicineinventory where medicinename='" + medicine_name + "'" + "and enterpriseid='" + enterpriseid + "'";
-            rs = st.executeQuery(s);  // execute query
-
-            if (rs.next()) {
-
-                JOptionPane.showMessageDialog(null, "Medicine Already Exists");
-                return;
-
-            }
-            con.close();
-        } catch (SQLException ex) {
-
-        } catch (Exception e) {
-            System.out.println();
-        }
+//        try {
+//            Connection con = null;
+//            if (con == null) {
+//                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+//                String user = "SYSTEM";
+//                String password = "trisha";
+//                //Class.forName("oracle.jdbc.driver.OracleDriver");
+//                Class.forName("oracle.jdbc.driver.OracleDriver");
+//                con = DriverManager.getConnection(url, user, password);
+//            }
+//            st = con.createStatement();
+//            String enterpriseid = getEnterpriseId();
+//            String s = "select * from medicineinventory where medicinename='" + medicine_name + "'" + "and enterpriseid='" + enterpriseid + "'";
+//            rs = st.executeQuery(s);  // execute query
+//
+//            if (rs.next()) {
+//
+//                JOptionPane.showMessageDialog(null, "Medicine Already Exists");
+//                return;
+//
+//            }
+//            con.close();
+//        } catch (SQLException ex) {
+//
+//        } catch (Exception e) {
+//            System.out.println();
+//        }
 
         //-----------------
+if(((String) jComboBox1.getSelectedItem()).equalsIgnoreCase("None") && operation.equalsIgnoreCase("Add")){
         try {
             Connection con = null;
             if (con == null) {
@@ -452,7 +456,48 @@ try {
 
         } catch (Exception e) {
 System.out.println(e.getMessage());
+        }}else if(medicine_name.equalsIgnoreCase("None")){
+JOptionPane.showMessageDialog(null, "Only perform Add operation on new medicine");return;
+}else{
+
+try {
+            Connection con = null;
+            if (con == null) {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                //Class.forName("oracle.jdbc.driver.OracleDriver");
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                con = DriverManager.getConnection(url, user, password);
+            }
+            st1 = con.createStatement();
+            String enterpriseid = getEnterpriseId();
+
+            //String s = String.format("insert into MedicineInventory (medicinename,quantityavailable,enterpriseid) values('%s',%s,'%s')", medicine_name, qty, enterpriseid);
+String s = "";
+if(operation.equalsIgnoreCase("Remove"))           
+ s = String.format("update MedicineInventory set quantityAvailable=quantityAvailable-%s where medicinename='%s' and enterpriseId='%s'", qty, medicine_name, enterpriseid);
+else 
+s = String.format("update MedicineInventory set quantityAvailable=quantityAvailable+%s where medicinename='%s' and enterpriseId='%s'", qty, medicine_name, enterpriseid);
+
+
+           int n = st1.executeUpdate(s);  // execute query
+            if (n > 0) {
+                JOptionPane.showMessageDialog(null, "Record updated successfully");
+            } else {
+                JOptionPane.showMessageDialog(null, "Record could not be added");
+            }
+
+            jTextField1.setText("");
+            con.close();
+        } catch (SQLException ex) {
+
+        } catch (Exception e) {
+System.out.println(e.getMessage());
         }
+
+
+}//else close
 
         //--------------------------
         model = new DefaultTableModel();
@@ -484,10 +529,8 @@ System.out.println(e.getMessage());
             rs2 = st2.executeQuery(s);  // execute query
 
             while (rs2.next()) {
-
                 model.addRow(new Object[]{rs2.getInt(1), rs2.getString(2), rs2.getInt(3), rs2.getString(4)});
-
-            }
+                }
             con.close();
         } catch (SQLException ex) {
 
@@ -496,17 +539,6 @@ System.out.println(e.getMessage());
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        //update button
-        MainFrame.inventory_update_panel.setVisible(true);
-        MainFrame.inventory_update_panel.updateInventoryTable();
-        MainFrame.inventory_update_panel.inventoryIdComboBoxUpdate();
-        setVisible(false);
-
-
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     void updateInventoryTable() {
 //         String user_name=enterpriseLoginFrame.enterprise_name;
@@ -569,7 +601,7 @@ System.out.println(e.getMessage());
             //employee name can be PH1h1 
             //enterprise_name can be h1, h2 etc
             //we have to collect h1 or h2 enterprise for PH1h1 employee
-            String s = String.format("select enterprise_name from work_area where username='%s'", EmployeeLoginFrame.Emp_name);
+            String s = String.format("select enterprise_name from work_area where username='%s'", pharma_username);
             rs = st.executeQuery(s);  // execute query
 
             if (rs.next()) {
@@ -589,12 +621,12 @@ System.out.println(e.getMessage());
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

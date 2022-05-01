@@ -19,17 +19,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DeleteFrame extends javax.swing.JFrame {
 
-        Connection con=null;
-          Connection con2=null;
-        Statement st=null;
-        ResultSet rs=null;
-          DefaultTableModel model ;
-          
-          
+    //Connection con=null;
+    //Connection con2=null;
+    String ngo_user = "";
+    Statement st = null;
+    ResultSet rs = null;
+    DefaultTableModel model;
+
     public DeleteFrame() {
         initComponents();
         setVisible(true);
-        
+
         //-------------------
         model = new DefaultTableModel();
         jTable1.setModel(model);
@@ -38,41 +38,47 @@ public class DeleteFrame extends javax.swing.JFrame {
         model.addColumn("Location");
         model.addColumn("Zip Code");
         model.addColumn("Authorization");
-        
+
         //----------------------
-        
-         try {
+        try {
 
 //              con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-try{
-String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
-        String user ="SYSTEM";
-        String password1 = "trisha";
-Class.forName("oracle.jdbc.driver.OracleDriver");
- con =  DriverManager.getConnection(url,user,password1);
-}catch(Exception e){
-}
-            st=con.createStatement();
+            Connection con = null;
+            try {
 
-           String  s=("select ngo_id from ngo_detail");
-           rs=st.executeQuery(s);  // execute query
-           jComboBox1.removeAllItems();
-           
-            while(rs.next()){
-               
-               jComboBox1.addItem(String.valueOf(rs.getInt(1)));
-               
-                
-           }
-            
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+
+            } catch (Exception e) {
+            }
+            st = con.createStatement();
+
+            String s = ("select ngo_id from ngo_detail");
+            rs = st.executeQuery(s);  // execute query
+            jComboBox1.removeAllItems();
+
+            while (rs.next()) {
+
+                jComboBox1.addItem(String.valueOf(rs.getInt(1)));
+
+            }
+
             con.close();
-            
-          }
-          catch(Exception e){
-              e.printStackTrace();
-              
-          }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    public void ngoUser(String user) {
+        String ngo_user = user;
     }
 
     @SuppressWarnings("unchecked")
@@ -126,6 +132,9 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
         );
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        jPanel1.setMinimumSize(new java.awt.Dimension(860, 690));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1900, 1397));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 153));
@@ -216,7 +225,7 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
                         .addComponent(jLabel1)))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(1157, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -240,124 +249,155 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        
+
         //id combo box click
-      if(jComboBox1.hasFocus()) {
-                    if (jTable1.getRowCount() > 0) {
-                     for (int i = jTable1.getRowCount() - 1; i >=0; i--) {
-                         model.removeRow(i);
-                     }
-                 }
-        
-                    try {
+        if (jComboBox1.hasFocus()) {
+            if (jTable1.getRowCount() > 0) {
+                for (int i = jTable1.getRowCount() - 1; i >= 0; i--) {
+                    model.removeRow(i);
+                }
+            }
 
-                        con2 = DriverManager.getConnection(
-                               "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+            try {
 
-                       st=con2.createStatement();
+//                        con2 = DriverManager.getConnection(
+//                               "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+                Connection con3 = null;
+                try {
 
-                       String s= "select * from ngo_detail where ngo_id="+jComboBox1.getSelectedItem()  ;
-                       rs=st.executeQuery(s);  // execute query
+                    if (con3 == null) {
+                        String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                        String user = "SYSTEM";
+                        String password = "trisha";
+                        Class.forName("oracle.jdbc.driver.OracleDriver");
+                        con3 = DriverManager.getConnection(url, user, password);
+                    }
 
-                       while(rs.next()){
+                } catch (Exception e) {
+                }
+                st = con3.createStatement();
 
-                           model.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)});
+                String s = "select * from ngo_detail where ngo_id=" + jComboBox1.getSelectedItem();
+                rs = st.executeQuery(s);  // execute query
 
-                       }
+                while (rs.next()) {
 
-                       con2.close();
-                       
+                    model.addRow(new Object[]{rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)});
 
-                   } catch (SQLException ex) {
+                }
 
-                   }
-          
-          
-      } 
-         
-        
+                con3.close();
+
+            } catch (SQLException ex) {
+
+            }
+
+        }
+
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //delete button
-       int result= JOptionPane.showConfirmDialog(null, "Are you sure to delete ?");
-         if(result == JOptionPane.YES_OPTION){
-             
-                 
-                    try{
-                            
-                             con = DriverManager.getConnection(
-                                      "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-                                st=con.createStatement();
-                                String sql="delete from ngo_detail  where ngo_id=%s";
-                                    int id= Integer.parseInt((String) jComboBox1.getSelectedItem());
-                                String s=String.format(sql,id);
-                               int n=st.executeUpdate(s);  // execute query
-                               if(n>0)
-                                   JOptionPane.showMessageDialog(null, "Record Deleted");
-                               else
-                                   JOptionPane.showMessageDialog(null, "Record could not be deleted");
-                               
-                                con.close(); 
-                        }   
-                        catch(Exception e){
-                            System.out.println(e.getMessage());
-                        }
-                 
-                    
-                    //-----------------------clear the table
-                    if (jTable1.getRowCount() > 0) {
-                     for (int i = jTable1.getRowCount() - 1; i >=0; i--) {
-                         model.removeRow(i);
-                     }
-                 }
-                     
-                   //------------------------  
-                     MainFrame.ngoPanel.updateTableForNgo();
-                     
-                     updateCombobox1();
-                 
-             }
-         else
-             return;
-        
-        
+        int result = JOptionPane.showConfirmDialog(null, "Are you sure to delete ?");
+        if (result == JOptionPane.YES_OPTION) {
+
+            try {
+
+//                             con = DriverManager.getConnection(
+//                                      "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+                Connection con = null;
+                try {
+
+                    if (con == null) {
+                        String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                        String user = "SYSTEM";
+                        String password = "trisha";
+                        Class.forName("oracle.jdbc.driver.OracleDriver");
+                        con = DriverManager.getConnection(url, user, password);
+                    }
+
+                } catch (Exception e) {
+                }
+                st = con.createStatement();
+                String sql = "delete from ngo_detail  where ngo_id=%s";
+                int id = Integer.parseInt((String) jComboBox1.getSelectedItem());
+                String s = String.format(sql, id);
+                int n = st.executeUpdate(s);  // execute query
+                if (n > 0) {
+                    JOptionPane.showMessageDialog(null, "Record Deleted");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Record could not be deleted");
+                }
+
+                con.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+            //-----------------------clear the table
+            if (jTable1.getRowCount() > 0) {
+                for (int i = jTable1.getRowCount() - 1; i >= 0; i--) {
+                    model.removeRow(i);
+                }
+            }
+
+            //------------------------  
+            MainFrame.ngoPanel.updateTableForNgo(ngo_user);
+
+            updateCombobox1();
+
+        } else {
+            return;
+        }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    void updateCombobox1(){
-        
-           try {
+    void updateCombobox1() {
 
-              con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-            st=con.createStatement();
+        try {
 
-           String  s=("select ngo_id from ngo_detail");
-           rs=st.executeQuery(s);  // execute query
-           jComboBox1.removeAllItems();
-           
-            while(rs.next()){
-               
-               jComboBox1.addItem(String.valueOf(rs.getInt(1)));
-               
-                
-           }
-            
+//              con = DriverManager.getConnection(
+//                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+            Connection con = null;
+            try {
+
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+
+            } catch (Exception e) {
+            }
+            st = con.createStatement();
+
+            String s = ("select ngo_id from ngo_detail");
+            rs = st.executeQuery(s);  // execute query
+            jComboBox1.removeAllItems();
+
+            while (rs.next()) {
+
+                jComboBox1.addItem(String.valueOf(rs.getInt(1)));
+
+            }
+
             con.close();
-            
-          }
-          catch(Exception e){
-              e.printStackTrace();
-              
-          }
-        
-        
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
     }
     /**
      * @param args the command line arguments
      */
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;

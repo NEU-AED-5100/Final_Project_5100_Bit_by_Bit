@@ -98,6 +98,8 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Password");
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 204));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,7 +215,7 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
             if (rs.next()) {
                 // MainFrame. ngoPanel.setVisible(true);
                 MainFrame.workArea.setVisible(true);
-                MainFrame.ngoPanel.updateTableForNgo();
+                MainFrame.ngoPanel.updateTableForNgo(user);
                 setVisible(false);
 
             } else {
@@ -259,7 +261,7 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
 
                             if (rs.next()) {
                                 MainFrame.ngoPanel.setVisible(true);
-                                MainFrame.ngoPanel.updateTableForNgo();
+                                MainFrame.ngoPanel.updateTableForNgo(user);
 
                                 setVisible(false);
 

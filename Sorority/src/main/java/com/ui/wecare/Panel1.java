@@ -159,8 +159,7 @@ public class Panel1 extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
-        setMaximumSize(new java.awt.Dimension(32767, 32767));
-        setPreferredSize(new java.awt.Dimension(900, 397));
+        setPreferredSize(new java.awt.Dimension(1900, 1397));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -176,7 +175,7 @@ public class Panel1 extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 440, 90));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 670, 90));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 204));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -186,7 +185,7 @@ public class Panel1 extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 230, 70));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 340, 70));
 
         jButton2.setBackground(new java.awt.Color(255, 255, 204));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -196,19 +195,19 @@ public class Panel1 extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 240, 60));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 330, 70));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Location");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 110, -1));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 110, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Enterprise");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
 
-        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 110, -1));
+        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 110, -1));
 
         jButton3.setBackground(new java.awt.Color(255, 255, 204));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -218,19 +217,19 @@ public class Panel1 extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 430, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Name");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 110, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 110, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Trisha\\Downloads\\login-blue-hi.png")); // NOI18N
         jLabel3.setText("jLabel3");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 450, 340));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 580, 530));
 
         jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Trisha\\Downloads\\womenlogo.jpeg")); // NOI18N
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 150));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 80));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

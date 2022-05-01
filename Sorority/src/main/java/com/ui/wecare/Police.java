@@ -71,6 +71,9 @@ void updateTableForPolice(){
         jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
+        setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        setMinimumSize(new java.awt.Dimension(860, 690));
+        setPreferredSize(new java.awt.Dimension(1900, 1397));
 
         jPanel1.setBackground(new java.awt.Color(102, 0, 153));
 

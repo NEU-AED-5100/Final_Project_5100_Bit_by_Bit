@@ -5,13 +5,13 @@
  */
 package com.ui.wecare;
 
-    import java.sql.Connection;
+import java.sql.Connection;
 import java.sql.DriverManager;
-    import java.sql.ResultSet;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-    import java.sql.Statement;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
-    import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,112 +19,113 @@ import javax.swing.JOptionPane;
  */
 public class ngoManagementPanel extends javax.swing.JPanel {
 
-     Connection con=null;
-        Statement st=null;
-        ResultSet rs=null;
-          DefaultTableModel model ;
-         
-   
+    //Connection con = null;
+    Statement st = null;
+    ResultSet rs = null;
+    DefaultTableModel model;
+String ngo_user = "";
+
     public ngoManagementPanel() {
         initComponents();
         jLabel1.setVisible(false);
         jTextField1.setVisible(false);
-        
-        
-          model = new DefaultTableModel();
+
+        model = new DefaultTableModel();
         jTable1.setModel(model);
         model.addColumn("NGO Id");
         model.addColumn("NGO Name");
         model.addColumn("Location");
         model.addColumn("Zip Code");
         model.addColumn("Authorization");
-        
+
         //------------------------
-             if (jTable1.getRowCount() > 0) {
-            for (int i = jTable1.getRowCount() - 1; i >=0; i--) {
+        if (jTable1.getRowCount() > 0) {
+            for (int i = jTable1.getRowCount() - 1; i >= 0; i--) {
                 model.removeRow(i);
             }
         }
-        
-         try {
-             
+
+        try {
+
 //             con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-try{
-String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
-        String user ="SYSTEM";
-        String password = "trisha";
-Class.forName("oracle.jdbc.driver.OracleDriver");
- con =  DriverManager.getConnection(url,user,password);
-}catch(Exception e){
-}
+Connection con = null;           
+ try {
+                
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
 
-            st=con.createStatement();
+            } catch (Exception e) {
+            }
 
-            String s= "select * from ngo_detail"  ;
-            rs=st.executeQuery(s);  // execute query
+            st = con.createStatement();
 
-            while(rs.next()){
+            String s = "select * from ngo_detail";
+            rs = st.executeQuery(s);  // execute query
 
-                model.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)});
+            while (rs.next()) {
+
+                model.addRow(new Object[]{rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)});
 
             }
 
             con.close();
-            
+
         } catch (SQLException ex) {
 
         }
-         
-         //--------------------------
-        
-        
-        
+
+        //--------------------------
         jComboBox1.removeAllItems();
         try {
 
-              con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-                     
-              st=con.createStatement();
-
-            String s="select location from enterprise";
-           rs=st.executeQuery(s);  // execute query
-           
-         /*
-           while(rs.next()){
-               
-               jComboBox1.addItem(rs.getString(1));
-              
+//              con = DriverManager.getConnection(
+//                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+Connection con = null;            
+try {
                 
-           }
-            */
-                     jComboBox1.addItem("New Jersey");
-                     jComboBox1.addItem("Boston");
-                     jComboBox1.addItem("California");
-                     
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+
+            } catch (Exception e) {
+            }
+            st = con.createStatement();
+
+            String s = "select location from enterprise";
+            rs = st.executeQuery(s);  // execute query
+
+            while (rs.next()) {
+
+                jComboBox1.addItem(rs.getString(1));
+
+            }
+
+//                     jComboBox1.addItem("New Jersey");
+//                     jComboBox1.addItem("Boston");
+//                     jComboBox1.addItem("California");
             con.close();
-                     
 
         } catch (SQLException ex) {
-                    
+
         }
-        
-                 
-       
-        
+
         jComboBox4.addItem("Private");
         jComboBox4.addItem("Government");
-        
-        
-        
-        
+
     }
 
-    
-    void updateTableForNgo(){
-        
-        
+    void updateTableForNgo(String n_user) {
+        ngo_user = n_user;
         model = new DefaultTableModel();
         jTable1.setModel(model);
         model.addColumn("NGO Id");
@@ -134,38 +135,50 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
         model.addColumn("Authorization");
         model.addColumn("funtionality");
         //------------------------clear the table--------
-             if (jTable1.getRowCount() > 0) {
-            for (int i = jTable1.getRowCount() - 1; i >=0; i--) {
+        if (jTable1.getRowCount() > 0) {
+            for (int i = jTable1.getRowCount() - 1; i >= 0; i--) {
                 model.removeRow(i);
             }
         }
-        
-             
-             //---------------populate the table----------------
-         try {
-             
-             con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
 
-            st=con.createStatement();
+        //---------------populate the table----------------
+        try {
 
-            String s= "select * from ngo_detail where ngo_name='"+enterpriseLoginFrame.Enterprise_name+"'"  ;
-            rs=st.executeQuery(s);  // execute query
+//            con = DriverManager.getConnection(
+//                    "jdbc:oracle:thin:@localhost:1521:xe", "system", "admin");
+Connection con = null;            
+try {
+                
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
 
-            while(rs.next()){
+            } catch (Exception e) {
+            }
 
-                model.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(7)});
+            st = con.createStatement();
+
+            String s = "select * from ngo_detail where ngo_name='" + n_user + "'";
+            rs = st.executeQuery(s);  // execute query
+
+            while (rs.next()) {
+
+                model.addRow(new Object[]{rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(7)});
 
             }
 
             con.close();
-            
+
         } catch (SQLException ex) {
 
         }
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -226,6 +239,9 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
         );
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        jPanel1.setMinimumSize(new java.awt.Dimension(860, 690));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1900, 1397));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 0, 153));
@@ -264,6 +280,12 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 0, 153));
         jLabel1.setText("Enter ID");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(255, 255, 204));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -355,7 +377,7 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
                                         .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 8, Short.MAX_VALUE))))
+                        .addGap(0, 1212, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,7 +416,7 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(1107, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -421,47 +443,42 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        
+
         //location combobox click event
-       
-        
         jComboBox3.removeAllItems();
-        
-        if (((String)jComboBox1.getSelectedItem()).equalsIgnoreCase("new jersey")){
-            
+
+        if (((String) jComboBox1.getSelectedItem()).equalsIgnoreCase("new jersey")) {
+
             jComboBox3.addItem("07302");
-             jComboBox3.addItem("07303");
-              jComboBox3.addItem("07304");
-              jComboBox3.addItem("07305");
-               jComboBox3.addItem("07306");
+            jComboBox3.addItem("07303");
+            jComboBox3.addItem("07304");
+            jComboBox3.addItem("07305");
+            jComboBox3.addItem("07306");
+        } else {
+            jComboBox3.addItem("02101");
+            jComboBox3.addItem("02102");
+            jComboBox3.addItem("02103");
+            jComboBox3.addItem("02104");
+            jComboBox3.addItem("02105");
+
         }
-        else{
-             jComboBox3.addItem("02101");
-              jComboBox3.addItem("02102");
-               jComboBox3.addItem("02103");
-               jComboBox3.addItem("02104");
-               jComboBox3.addItem("02105");
-               
-        }
-        
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
         // TODO add your handling code here:
         //aythorization button
-        EditFrame idfr=  new EditFrame();
-        String s=(String) jComboBox4.getSelectedItem();
-        if(s.equals("Government"))
-        {
+        EditFrame idfr = new EditFrame();
+        String s = (String) jComboBox4.getSelectedItem();
+        if (s.equals("Government")) {
             jLabel1.setVisible(true);
             jTextField1.setVisible(true);
-        }
-        else{
-            
-             jLabel1.setVisible(false);
+        } else {
+
+            jLabel1.setVisible(false);
             jTextField1.setVisible(false);
         }
-        
+
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -469,100 +486,118 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
         //add button
 
 //we are assuming user name is the NGO name        
-         //submit button Govt ID
-        String ngo_name=enterpriseLoginFrame.Enterprise_name;
-         String location=(String) jComboBox1.getSelectedItem();
-        
-           String zip=(String) jComboBox3.getSelectedItem();
-          String auth=(String) jComboBox4.getSelectedItem();
-          String address=jTextField2.getText();
-          String functionality=(String) jComboBox5.getSelectedItem();
-          
-          
-         
-         String s="";
-          if(auth.equals("Government")){
-              
-              
-                        try {
+        //submit button Govt ID
+        String ngo_name = enterpriseLoginFrame.Enterprise_name;
+        String location = (String) jComboBox1.getSelectedItem();
 
-                                con = DriverManager.getConnection(
-                                      "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+        String zip = (String) jComboBox3.getSelectedItem();
+        String auth = (String) jComboBox4.getSelectedItem();
+        String address = jTextField2.getText();
+        String functionality = (String) jComboBox5.getSelectedItem();
 
-                                st=con.createStatement();
+        String s = "";
+        if (auth.equals("Government")) {
 
-                                 s="select * from govt_ids where id='"+jTextField1.getText()+"'";
-                               rs=st.executeQuery(s);  // execute query
+            try {
 
-         
-                          if(!rs.next()){
-
-                               JOptionPane.showMessageDialog(null, "Invalid ID");
-                                return;
-
-                            }
-                                        
+//                con = DriverManager.getConnection(
+//                        "jdbc:oracle:thin:@localhost:1521:xe", "system", "admin");
+ Connection con = null;                
+try {
                    
-                            
+                    if (con == null) {
+                        String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                        String user = "SYSTEM";
+                        String password = "trisha";
+                        Class.forName("oracle.jdbc.driver.OracleDriver");
+                        con = DriverManager.getConnection(url, user, password);
+                    }
 
+                } catch (Exception e) {
+                }
 
-                            } catch (SQLException ex) {
-                                         System.out.println(ex.getMessage()); 
-                            }
+                st = con.createStatement();
 
-              
-              
-              
-          }
-          
-                      
-          try{
-                            
-                             con = DriverManager.getConnection(
-                                      "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-                                st=con.createStatement();
-                                String sql="insert into ngo_detail (ngo_name,location,zipcode,authorization_type,address,functionality ) values('%s','%s','%s','%s','%s','%s')";
+                s = "select * from govt_ids where id='" + jTextField1.getText() + "'";
+                rs = st.executeQuery(s);  // execute query
 
-                                s=String.format(sql,ngo_name,location,zip,auth,address,functionality);
-                               int n=st.executeUpdate(s);  // execute query
-                               if(n>0)
-                                   JOptionPane.showMessageDialog(null, "Record saved");
-                               else
-                                   JOptionPane.showMessageDialog(null, "Record could not be saved");
-                               
-                                con.close(); 
-                        
-          }   
-                        
-          catch(Exception e){
-                            System.out.println("error");
-                        
-          }
-                    
-                 
+                if (!rs.next()) {
+
+                    JOptionPane.showMessageDialog(null, "Invalid ID");
+                    return;
+
+                }
+
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        }
+
+        try {
+
+//            con = DriverManager.getConnection(
+//                    "jdbc:oracle:thin:@localhost:1521:xe", "system", "admin");
+Connection con = null;            
+try {
+                
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+
+            } catch (Exception e) {
+            }
+            st = con.createStatement();
+            String sql = "insert into ngo_detail (ngo_name,location,zipcode,authorization_type,address,functionality ) values('%s','%s','%s','%s','%s','%s')";
+
+            s = String.format(sql, ngo_user, location, zip, auth, address, functionality);
+            int n = st.executeUpdate(s);  // execute query
+            if (n > 0) {
+                JOptionPane.showMessageDialog(null, "Record saved");
+            } else {
+                JOptionPane.showMessageDialog(null, "Record could not be saved");
+            }
+
+            con.close();
+
+        } catch (Exception e) {
+            System.out.println("error");
+
+        }
+
         //update the table             
-          MainFrame.ngoPanel.updateTableForNgo();
-          jTextField2.setText("");
-        
-        
-        
+        MainFrame.ngoPanel.updateTableForNgo(ngo_user);
+        jTextField2.setText("");
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         //edit button
-        EditFrame e=new EditFrame();
+        EditFrame e = new EditFrame();
+e.ngoUser(ngo_user);
         e.setVisible(true);
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         //delete frame
-        DeleteFrame df=new DeleteFrame();
+
+        DeleteFrame df = new DeleteFrame();
+df.ngoUser(ngo_user);
         //df.setVisible(true);
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
