@@ -278,6 +278,7 @@ public class EmployeeLoginFrame extends javax.swing.JFrame {
                                 //MainFrame.pharmacy.setVisible(true);
                                 MainFrame.medicine_Inventory_Panel.setVisible(true);
                                 Emp_org = rs.getString("ENTERPRISE_NAME");
+MainFrame.medicine_Inventory_Panel.displayPatient();
                                 setVisible(false);
 
                             } else {
