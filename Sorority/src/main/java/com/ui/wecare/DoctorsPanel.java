@@ -4,11 +4,15 @@
  */
 package com.ui.wecare;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 /**
@@ -22,6 +26,8 @@ public class DoctorsPanel extends javax.swing.JPanel {
      */
     public DoctorsPanel() {
         initComponents();
+Date date = new Date();
+        jDateChooser1.setMinSelectableDate(date);
     }
 
     /**
@@ -49,6 +55,7 @@ public class DoctorsPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        jButton5 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,6 +97,11 @@ public class DoctorsPanel extends javax.swing.JPanel {
         jScrollPane4.setViewportView(jTable2);
 
         jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -101,6 +113,13 @@ public class DoctorsPanel extends javax.swing.JPanel {
         jTextArea2.setRows(5);
         jScrollPane3.setViewportView(jTextArea2);
 
+        jButton5.setText("Send Instruction to Diagostic Center");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -110,15 +129,19 @@ public class DoctorsPanel extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addContainerGap(46, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(46, 46, 46)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap()))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton5)
+                        .addGap(28, 28, 28))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +153,9 @@ public class DoctorsPanel extends javax.swing.JPanel {
                     .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -140,6 +165,9 @@ public class DoctorsPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,10 +182,6 @@ public class DoctorsPanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +201,7 @@ public class DoctorsPanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57))
         );
@@ -206,7 +230,7 @@ public void displayAllPatient() {
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 conn = DriverManager.getConnection(url, user, password);
             }
-            String sql = "select FEMALEID as ID,PATIENTID as Patient_ID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO,REGISTRATIONDATE from patient";
+            String sql = "select FEMALEID as ID,PATIENTID as Patient_ID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO,REGISTRATIONDATE from patient where ENTERPRISEID = '"+EmployeeLoginFrame.Emp_org+"'";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
@@ -218,23 +242,143 @@ public void displayAllPatient() {
 
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int selectedrow = jTable1.getSelectedRow();
-        int selectedcolumn = 1;
-        long patientId = (long) jTable1.getValueAt(selectedrow, selectedcolumn);
-        String report = "";
-        //        for(PatientReport hr : historyReport){
-            //            if(hr.getPatientId() == patientId){
-                //                report = report+"\r\n"+hr.getReportDate()+": \r\n"+hr.getGeneratedReport()+"\r\n";
-                //            }
-            //        }
+          try{
+            int selectedcolumn = 1;
+            int selectedrow = jTable1.getSelectedRow();
+            BigDecimal patientId = (BigDecimal) jTable1.getValueAt(selectedrow, selectedcolumn);
+          
+        Connection conn1=null;
+        try {
+            if (conn1 == null) {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                conn1 = DriverManager.getConnection(url, user, password);
+            }
+        }
+         catch(Exception e){
+            }// patientusername is patientId in patient table
+            String sql2 = "select patientUsername,femaleUsername,root_concern,height_INcm,weight_INkg,pulseRate_InBeatsPerMin,respirationrate,bodytemperature_F,hemoglobin from PatientHistory where patientusername='"+patientId+"'";
+            PreparedStatement ps = conn1.prepareStatement(sql2);
+            ResultSet rs1 = ps.executeQuery();
+            jTable2.setModel(DbUtils.resultSetToTableModel(rs1));
+            conn1.close();
+      }
+    catch(Exception ex){
+        }
 
-        JOptionPane.showMessageDialog(this, report, "Patient History", JOptionPane.INFORMATION_MESSAGE);
+
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here: int selectedrow = jTable1.getSelectedRow();
+        try{
+            int selectedcolumn = 1;
+            int selectedrow = jTable1.getSelectedRow();
+            BigDecimal patientId = (BigDecimal) jTable1.getValueAt(selectedrow, selectedcolumn);
+            String prescription=jTextArea1.getText();
+//update PatientHistory set prescription = 'gandu' where patientusername = 1 and PATIENTHISTORY_ID = (select max(PATIENTHISTORY_ID) from patienthistory where patientusername = 1);
+        Connection conn1 = null;
+        try {
+            if (conn1 == null) {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                conn1 = DriverManager.getConnection(url, user, password);
+            }
+        }
+         catch(Exception e){
+            }// patient username is patient Id in patient table
+            Statement stmt = conn1.createStatement();
+            String sql1="update PatientHistory set prescription = '"+prescription+"' where patientusername = '"+patientId+"' and PATIENTHISTORY_ID = (select max(PATIENTHISTORY_ID) from patienthistory where patientusername='"+patientId+"')";
+            int result4 = stmt.executeUpdate(sql1);
+JOptionPane.showMessageDialog(null,"Prescription saved successfully");
+            conn1.close();
+      }
+    catch(Exception ex){
+        }
+
+
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+            int selectedrow = jTable1.getSelectedRow();
+            BigDecimal femaleId = (BigDecimal) jTable1.getValueAt(selectedrow, 0);
+            BigDecimal patientId = (BigDecimal) jTable1.getValueAt(selectedrow, 1);
+            Format formatter = new SimpleDateFormat("dd-MMM-yy");
+            String testRegistrationDate = (String) formatter.format(this.jDateChooser1.getDate());
+            String testDetails=jTextArea2.getText().trim();
+            try{
+            Connection conn2 = null;
+              try {
+                    if (conn2 == null) {
+                        String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                        String user = "SYSTEM";
+                        String password = "trisha";
+                        Class.forName("oracle.jdbc.driver.OracleDriver");
+                        conn2 = DriverManager.getConnection(url, user, password);
+                    }
+                }
+               catch(Exception e){
+                    }// patient username is patient Id in patient table
+               Statement stmt = conn2.createStatement();
+//             String sql4= String.format("insert into PatientHistory (PATIENTID,"
+//                    + "TESTNAME,"
+//                    + "TESTNAME_REGISTRATION,"
+//                    + "FEMALEID,)"+
+//                   "values(%s,'%s','%s','%s')", patientId,testDetails,testRegistrationDate,femaleId);
+                 String sql4=String.format("insert into Examiner(PATIENTID ,TESTNAME  ,TESTNAME_RegistrationDate ,FEMALEID) values(%s,'%s','%s','%s')",patientId , testDetails ,testRegistrationDate ,femaleId);
+
+               int result4 = stmt.executeUpdate(sql4);
+               conn2.close();
+            }
+            catch(Exception ex){}
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        int selectedrow = jTable1.getSelectedRow();
+            BigDecimal femaleId = (BigDecimal) jTable1.getValueAt(selectedrow, 0);
+            BigDecimal patientId = (BigDecimal) jTable1.getValueAt(selectedrow, 1);
+            Format formatter = new SimpleDateFormat("dd-MMM-yy");
+            String testRegistrationDate = (String) formatter.format(this.jDateChooser1.getDate());
+            String testDetails=jTextArea2.getText().trim();
+            try{
+            Connection conn2 = null;
+              try {
+                    if (conn2 == null) {
+                        String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                        String user = "SYSTEM";
+                        String password = "trisha";
+                        Class.forName("oracle.jdbc.driver.OracleDriver");
+                        conn2 = DriverManager.getConnection(url, user, password);
+                    }
+                }
+               catch(Exception e){
+                    }// patient username is patient Id in patient table
+               Statement stmt = conn2.createStatement();
+//             String sql4= String.format("insert into PatientHistory (PATIENTID,"
+//                    + "TESTNAME,"
+//                    + "TESTNAME_REGISTRATION,"
+//                    + "FEMALEID,)"+
+//                   "values(%s,'%s','%s','%s')", patientId,testDetails,testRegistrationDate,femaleId);
+                 String sql4=String.format("insert into Examiner(PATIENTID ,TESTNAME  ,TESTNAME_RegistrationDate ,FEMALEID) values(%s,'%s','%s','%s')",patientId , testDetails ,testRegistrationDate ,femaleId);
+
+               int result4 = stmt.executeUpdate(sql4);
+JOptionPane.showMessageDialog(null,"Instruction sent successfully");
+               conn2.close();
+            }
+            catch(Exception ex){}
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

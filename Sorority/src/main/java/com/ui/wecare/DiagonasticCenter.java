@@ -13,6 +13,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 /**
@@ -26,7 +34,29 @@ public class DiagonasticCenter extends javax.swing.JPanel {
      */
     public DiagonasticCenter() {
         initComponents();
+Date date = new Date();
+        jDateChooser1.setMinSelectableDate(date);
     }
+
+public void displayPatient(){
+Connection conn = null;
+        try {
+            if (conn == null) {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                conn = DriverManager.getConnection(url, user, password);
+            }
+           // String sql = "select FEMALEID as ID,PATIENTID as Patient_ID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO,REGISTRATIONDATE from patient";
+String sql = "select * from Examiner";           
+ PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+            conn.close();
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+        }}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,22 +95,24 @@ public class DiagonasticCenter extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(51, 0, 102));
 
         lblheading.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblheading.setForeground(new java.awt.Color(255, 255, 255));
+        lblheading.setForeground(new java.awt.Color(255, 51, 255));
         lblheading.setText("Diagonastic Center- We Care for You");
+
+        lblmedicinepic.setIcon(new javax.swing.ImageIcon("C:\\Users\\Trisha\\Downloads\\womenlogo.jpeg")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(lblmedicinepic, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblmedicinepic, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(lblheading, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblmedicinepic, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(lblmedicinepic, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(lblheading, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -157,7 +189,7 @@ public class DiagonasticCenter extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jLabel10)
@@ -251,8 +283,9 @@ public class DiagonasticCenter extends javax.swing.JPanel {
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 conn = DriverManager.getConnection(url, user, password);
             }
-            String sql = "select FEMALEID as ID,PATIENTID as Patient_ID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO,REGISTRATIONDATE from patient where name ='" + jTextField1.getText().trim() + "'";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            //String sql = "select * from Examiner where name ='" + jTextField1.getText().trim() + "'";
+String sql = "select * from Examiner";            
+PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
             conn.close();
@@ -271,8 +304,9 @@ public class DiagonasticCenter extends javax.swing.JPanel {
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 conn = DriverManager.getConnection(url, user, password);
             }
-            String sql = "select FEMALEID as ID,PATIENTID as Patient_ID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO,REGISTRATIONDATE from patient";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            //String sql = "select FEMALEID as ID,PATIENTID as Patient_ID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO,REGISTRATIONDATE from patient";
+String sql = "select * from Examiner";            
+PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
             conn.close();
@@ -294,11 +328,12 @@ Connection con = null;
             Statement stmt4 = con.createStatement();
             int selectedrow = jTable1.getSelectedRow();
             BigDecimal PATIENTID = (BigDecimal) jTable1.getValueAt(selectedrow, 0);
-            
-            String sql4 = "update examiner set testResult = '"+jTextArea1.getText().trim()+"' , examinationDate = '"+jDateChooser1.getDate()+"' where patientid ="+PATIENTID;
+            Format formatter = new SimpleDateFormat("dd-MMM-yy");
+            String reportGenerationDate = (String) formatter.format(this.jDateChooser1.getDate());
+            String sql4 = "update examiner set testResult = '"+jTextArea1.getText().trim()+"' , examinationDate = '"+reportGenerationDate+"' where patientid ="+PATIENTID;
             int result4 = stmt4.executeUpdate(sql4);
             if (result4 > 0) {
-                JOptionPane.showConfirmDialog(null, "Test Report Saved Successfully");
+                JOptionPane.showMessageDialog(null, "Test Report Saved Successfully");
             }
             con.close();
         } catch (Exception e) {
@@ -306,11 +341,61 @@ Connection con = null;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        try {
+Connection conn1 = null;
+            if (conn1 == null) {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                conn1 = DriverManager.getConnection(url, user, password);
+            }
+            Statement stmt4 = conn1.createStatement();
+            int selectedrow = jTable1.getSelectedRow();
+            BigDecimal PATIENTID = (BigDecimal) jTable1.getValueAt(selectedrow, 0);
+            Format formatter = new SimpleDateFormat("dd-MMM-yy");
+            String reportGenerationDate = (String) formatter.format(this.jDateChooser1.getDate());
+            String reportContents = jTextArea1.getText().trim();
+            String sql = "select emailid from patient where patientid="+PATIENTID;         
+            PreparedStatement ps = conn1.prepareStatement(sql);
+            ResultSet result4 = ps.executeQuery();
+            String patientEmailId = "";
+            while(result4.next()){
+                patientEmailId = result4.getString(1);
+        }
+        String fromEmail="sororitywomenhealth@gmail.com";
+        String emailPass="sorority@12";
+        String Subject="Patient medical Update";
+        String body="The test report are given below:- "+ reportContents +"\n Test examination date is: " + reportGenerationDate; 
+
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        Session session= Session.getDefaultInstance(properties, new javax.mail.Authenticator(){
+             protected PasswordAuthentication getPasswordAuthentication()
+            {
+                return new PasswordAuthentication(fromEmail,emailPass);
+            }
+        });
+            MimeMessage message=new MimeMessage(session);
+             message.setFrom(new InternetAddress(fromEmail));
+             message.setRecipient(Message.RecipientType.TO, new InternetAddress(patientEmailId));
+             message.setSubject(Subject);
+             message.setText(body);
+             Transport.send(message);
+
+
+         conn1.close();
+        } catch (Exception e) {
+        }
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         MainFrame.examinerAllRequestView.setVisible(true);
+        MainFrame.examinerAllRequestView.displayAllRequestTable();
         this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 

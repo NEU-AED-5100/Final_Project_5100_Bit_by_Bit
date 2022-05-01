@@ -40,7 +40,7 @@ public class MainFrame extends javax.swing.JFrame {
     static Lawyer lawyerPanel;
     static NurseReading nurseReading;
     static Reception reception;
-    static Pharmacy pharmacy;
+   // static Pharmacy pharmacy;
     static DiagonasticCenter diagonasticCenter;
 
 static RegisterPatient registerPatient;
@@ -48,6 +48,13 @@ static AppointmentFirst appointmentFirst;
 static AppointmentRegister appointmentRegister;
 static DoctorsPanel doctorePanel;
 static ExaminerAllRequestView examinerAllRequestView;
+
+static MedicineInventoryPanel medicine_Inventory_Panel;
+    static AddInventoryPanel add_Inventory_panel;
+    static InventoryUpdatePanel inventory_update_panel;
+static MedicalHistoryToFemale medicalHistoryToFemale;
+static RegisteredCasesForFemale registeredCasesForFemale;
+
 
     public void tickTock() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -91,13 +98,19 @@ static ExaminerAllRequestView examinerAllRequestView;
         lawyerPanel = new Lawyer();
         nurseReading = new NurseReading();
         reception = new Reception();
-        pharmacy = new Pharmacy();
+        //pharmacy = new Pharmacy();
         diagonasticCenter = new DiagonasticCenter();
 registerPatient = new  RegisterPatient() ;
 appointmentFirst = new  AppointmentFirst() ;
 appointmentRegister = new  AppointmentRegister() ;
 doctorePanel = new DoctorsPanel();
 examinerAllRequestView = new ExaminerAllRequestView();
+ medicine_Inventory_Panel = new MedicineInventoryPanel();
+      add_Inventory_panel = new AddInventoryPanel();
+     inventory_update_panel = new InventoryUpdatePanel();
+
+ medicalHistoryToFemale = new MedicalHistoryToFemale();
+ registeredCasesForFemale = new RegisteredCasesForFemale();
         //----------------------
         targetPanel.setLayout(gl);
         GridBagConstraints c = new GridBagConstraints();
@@ -130,8 +143,8 @@ examinerAllRequestView = new ExaminerAllRequestView();
         targetPanel.add(reception, c);
         reception.setVisible(false);
 
-        targetPanel.add(pharmacy, c);
-        pharmacy.setVisible(false);
+//        targetPanel.add(pharmacy, c);
+//        pharmacy.setVisible(false);
 
         targetPanel.add(diagonasticCenter, c);
         diagonasticCenter.setVisible(false);
@@ -146,6 +159,24 @@ targetPanel.add(doctorePanel,c);
 doctorePanel.setVisible(false);
 targetPanel.add(examinerAllRequestView,c);
 examinerAllRequestView.setVisible(false);
+
+targetPanel.add(medicine_Inventory_Panel,c);
+        medicine_Inventory_Panel.setVisible(false);
+                 
+      
+         targetPanel.add(add_Inventory_panel,c);
+        add_Inventory_panel.setVisible(false);
+        
+         targetPanel.add(inventory_update_panel,c);
+         inventory_update_panel.setVisible(false);
+
+targetPanel.add(medicalHistoryToFemale,c);
+        medicalHistoryToFemale.setVisible(false);
+        
+         targetPanel.add(registeredCasesForFemale,c);
+         registeredCasesForFemale.setVisible(false);
+
+
     }
 
     /**
@@ -165,79 +196,128 @@ examinerAllRequestView.setVisible(false);
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jRadioButton4 = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
         targetPanel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
         setLocation(new java.awt.Point(200, 200));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(102, 204, 255));
+        jPanel2.setBackground(new java.awt.Color(102, 0, 153));
+        jPanel2.setPreferredSize(new java.awt.Dimension(400, 1200));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jRadioButton1.setBackground(new java.awt.Color(102, 0, 153));
+        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton1.setText("Admin");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+        jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
+        jRadioButton2.setBackground(new java.awt.Color(102, 0, 153));
+        jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("Female User");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, -1, -1));
+        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
 
+        jRadioButton3.setBackground(new java.awt.Color(102, 0, 153));
+        jRadioButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton3.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton3.setText("Enterprise");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
+        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton2.setText("Logout");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, -1, -1));
 
+        jRadioButton4.setBackground(new java.awt.Color(102, 0, 153));
+        jRadioButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton4.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton4.setText("Employee");
-        jPanel2.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
+        jPanel2.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 290, 470));
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Trisha\\Downloads\\flower1.jpg")); // NOI18N
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, 160));
 
-        targetPanel.setBackground(new java.awt.Color(204, 204, 204));
-        targetPanel.setPreferredSize(new java.awt.Dimension(700, 397));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 240, 680));
+
+        targetPanel.setBackground(new java.awt.Color(255, 255, 255));
+        targetPanel.setPreferredSize(new java.awt.Dimension(1900, 1397));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Trisha\\Downloads\\w3j79f.jpeg")); // NOI18N
+
+        jLabel10.setIcon(new javax.swing.ImageIcon("C:\\Users\\Trisha\\Downloads\\woemmnrights1.jpeg")); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 0, 255));
+        jLabel9.setText("SORORITY");
 
         javax.swing.GroupLayout targetPanelLayout = new javax.swing.GroupLayout(targetPanel);
         targetPanel.setLayout(targetPanelLayout);
         targetPanelLayout.setHorizontalGroup(
             targetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 930, Short.MAX_VALUE)
+            .addGroup(targetPanelLayout.createSequentialGroup()
+                .addGroup(targetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(targetPanelLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel9))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(475, Short.MAX_VALUE))
         );
         targetPanelLayout.setVerticalGroup(
             targetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGroup(targetPanelLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel9)
+                .addGap(93, 93, 93)
+                .addComponent(jLabel10)
+                .addContainerGap(221, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, targetPanelLayout.createSequentialGroup()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        getContentPane().add(targetPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 0, 930, 470));
+        getContentPane().add(targetPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 940, 660));
 
         jLabel6.setText("jLabel6");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 420, 77, -1));
@@ -247,6 +327,38 @@ examinerAllRequestView.setVisible(false);
 
         jLabel4.setText("Wi Care");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 420, 90, -1));
+
+        jPanel1.setBackground(new java.awt.Color(102, 0, 153));
+        jPanel1.setForeground(new java.awt.Color(102, 0, 153));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Trisha\\Downloads\\womenlogo.jpeg")); // NOI18N
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 0, 255));
+        jLabel11.setText("Welcome To The Good Life");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(302, 302, 302)
+                .addComponent(jLabel11)
+                .addContainerGap(476, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 100));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -258,18 +370,30 @@ examinerAllRequestView.setVisible(false);
         if (jRadioButton1.isSelected()) {
 
             adminLoginFrame ad = new adminLoginFrame();
+jLabel5.setVisible(false);
+jLabel10.setVisible(false);
+jLabel9.setVisible(false);
+
 
         } else if (jRadioButton2.isSelected()) {
 
-            femaleUserLoginFrame fm = new femaleUserLoginFrame();
+            femaleUserLoginFrame fm = new femaleUserLoginFrame();jLabel5.setVisible(false);
+jLabel10.setVisible(false);
+jLabel9.setVisible(false);
 
         } else if (jRadioButton3.isSelected()) {
 
             enterpriseLoginFrame et = new enterpriseLoginFrame();
+jLabel5.setVisible(false);
+jLabel10.setVisible(false);
+jLabel9.setVisible(false);
 
         } else if (jRadioButton4.isSelected()) {
 
             EmployeeLoginFrame et = new EmployeeLoginFrame();
+jLabel5.setVisible(false);
+jLabel10.setVisible(false);
+jLabel9.setVisible(false);
 
         }
 
@@ -289,13 +413,19 @@ examinerAllRequestView.setVisible(false);
         lawyerPanel.setVisible(false);
         reception.setVisible(false);
         nurseReading.setVisible(false);
-        pharmacy.setVisible(false);
+//        pharmacy.setVisible(false);
         diagonasticCenter.setVisible(false);
 registerPatient.setVisible(false);
 appointmentFirst.setVisible(false);
 appointmentRegister.setVisible(false);
 doctorePanel.setVisible(false);
 examinerAllRequestView.setVisible(false);
+medicine_Inventory_Panel.setVisible(false);
+         add_Inventory_panel.setVisible(false);
+         inventory_update_panel.setVisible(false);
+
+ medicalHistoryToFemale.setVisible(false);
+ registeredCasesForFemale.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -349,9 +479,16 @@ examinerAllRequestView.setVisible(false);
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;

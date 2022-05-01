@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -24,6 +25,8 @@ public class RegisterPatient extends javax.swing.JPanel {
      */
     public RegisterPatient() {
         initComponents();
+Date date = new Date();
+jDateChooser1.setMinSelectableDate(date);
 
         try {
             if (conn == null) {
@@ -43,9 +46,8 @@ public class RegisterPatient extends javax.swing.JPanel {
         }
     }
 
-
-public void populateFemaleData(){
-try {
+    public void populateFemaleData() {
+        try {
             if (conn == null) {
                 String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                 String user = "SYSTEM";
@@ -60,7 +62,33 @@ try {
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
             System.out.print(e.getMessage());
-        }}
+        }
+    }
+
+    private Boolean checkExistingPatient(BigDecimal FEMALEID) {
+        try {
+
+            Connection conn = null;
+            if (conn == null) {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                conn = DriverManager.getConnection(url, user, password);
+            }
+            String sql = "select FEMALEID from patient where FEMALEID='" + FEMALEID + "'";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return Boolean.TRUE;
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
+        return Boolean.FALSE;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,6 +100,7 @@ try {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -82,33 +111,41 @@ try {
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
 
-        jPanel1.setBackground(new java.awt.Color(51, 0, 102));
+        jPanel1.setBackground(new java.awt.Color(102, 0, 153));
 
+        jLabel1.setBackground(new java.awt.Color(102, 0, 153));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 102, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Register patient");
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Trisha\\Downloads\\womenlogo.jpeg")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(88, 88, 88))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(51, 0, 153));
         jLabel10.setText("Enter Name : ");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +154,8 @@ try {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 204));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Search");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +163,8 @@ try {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 255, 204));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("View All");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -132,8 +173,12 @@ try {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 0, 153));
         jLabel2.setText("Enter Patient Registration Date : ");
 
+        jButton3.setBackground(new java.awt.Color(255, 255, 204));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setText("Register Patient ");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,60 +199,69 @@ try {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel4.setForeground(new java.awt.Color(51, 0, 153));
+        jLabel4.setText("**************************************************************************");
+
+        jLabel5.setForeground(new java.awt.Color(51, 0, 153));
+        jLabel5.setText("**************************************************************************");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton2))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                        .addComponent(jLabel9)))
-                .addContainerGap())
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton3)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1)
                             .addComponent(jButton2))
-                        .addGap(105, 105, 105)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3))))
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -253,55 +307,59 @@ try {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-
-            if (conn == null) {
-                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
-                String user = "SYSTEM";
-                String password = "trisha";
-                Class.forName("oracle.jdbc.driver.OracleDriver");
-                Connection conn = DriverManager.getConnection(url, user, password);
-            }
+        int selectedrow = jTable1.getSelectedRow();
+        BigDecimal FEMALEID = (BigDecimal) jTable1.getValueAt(selectedrow, 0);
+        if (!checkExistingPatient(FEMALEID)) {
+            try {
+                Connection conn1 = null;
+                if (conn1 == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    conn1 = DriverManager.getConnection(url, user, password);
+                }
 
 //            String sql1 = "select ORGANIZATION from work_area where USERNAME = '"+EmployeeLoginFrame.Emp_name+"'";
 //            PreparedStatement ps = conn.prepareStatement(sql1);
 //            ResultSet rs1 = ps.executeQuery();
-            int selectedrow = jTable1.getSelectedRow();
+                String NAME = (String) jTable1.getValueAt(selectedrow, 1);
+                Format formatter = new SimpleDateFormat("dd-MMM-yy");
+                String registrationDate = (String) formatter.format(this.jDateChooser1.getDate());
+                String DOB = (String) formatter.format(jTable1.getValueAt(selectedrow, 2));
+                String CITY = (String) jTable1.getValueAt(selectedrow, 3);
+                String STATE = (String) jTable1.getValueAt(selectedrow, 4);
+                BigDecimal ZIPCODE = (BigDecimal) jTable1.getValueAt(selectedrow, 5);
+                String EMAILID = (String) jTable1.getValueAt(selectedrow, 6);
+                int MOBILENO = Integer.parseInt((String) jTable1.getValueAt(selectedrow, 7));
+                String s = EmployeeLoginFrame.Emp_name;
+                String Enterprise = EmployeeLoginFrame.Emp_org; // get hos1
 
-            BigDecimal FEMALEID = (BigDecimal) jTable1.getValueAt(selectedrow, 0);
-            String NAME = (String) jTable1.getValueAt(selectedrow, 1);
-            Format formatter = new SimpleDateFormat("dd-MMM-yy");
-            String registrationDate = (String) formatter.format(this.jDateChooser1.getDate());
-            String DOB = (String) formatter.format(jTable1.getValueAt(selectedrow,2));
-            String CITY = (String) jTable1.getValueAt(selectedrow, 3);
-            String STATE = (String) jTable1.getValueAt(selectedrow, 4);
-            BigDecimal ZIPCODE = (BigDecimal) jTable1.getValueAt(selectedrow, 5);
-            String EMAILID = (String) jTable1.getValueAt(selectedrow, 6);
-            int MOBILENO = Integer.parseInt((String)jTable1.getValueAt(selectedrow, 7));
-        
+                // Patient table insert
+                Statement stmt = conn1.createStatement();
+                String sql2 = String.format("insert into Patient (FEMALEID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO,REGISTRATIONDATE,ENTERPRISEID) values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')", FEMALEID, NAME, DOB, CITY, STATE, ZIPCODE, EMAILID, MOBILENO, registrationDate, Enterprise);
+                int result2 = stmt.executeUpdate(sql2);
 
-            // Patient table insert
-            Statement stmt = conn.createStatement();
-            String sql2 = String.format("insert into Patient (FEMALEID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO,REGISTRATIONDATE) values('%s','%s','%s','%s','%s','%s','%s','%s','%s')", FEMALEID, NAME, DOB, CITY, STATE, ZIPCODE, EMAILID, MOBILENO, registrationDate);
-            int result2 = stmt.executeUpdate(sql2);
+                //get id from patient table where femaleid = selected femaleid from jtable
+                String sql3 = "select PATIENTID from Patient where FEMALEID='" + FEMALEID + "'";
+                PreparedStatement ps3 = conn1.prepareStatement(sql3);
+                ResultSet rs3 = ps3.executeQuery();
+                String PATIENTID = "";
+                while (rs3.next()) {
+                    PATIENTID = rs3.getString(1);
+                }
 
-            //get id from patient table
-            String sql3 = "select PATIENTID from Patient where PATIENTID='"+FEMALEID+"'";
-            PreparedStatement ps3 = conn.prepareStatement(sql3);
-            ResultSet rs3 = ps3.executeQuery();
-            String PATIENTID = "";
-            while(rs3.next()){
-            PATIENTID = rs3.getString(1);
+                // update female user as patient
+                String sql4 = "update female set PATIENTID = " + PATIENTID + " where FEMALEID = " + FEMALEID;
+                int result4 = stmt.executeUpdate(sql4);
+                //System.out.print("result: " + result);
+                JOptionPane.showMessageDialog(null, "Record saved successfully");
+                conn1.close();
+            } catch (Exception e) {
+                System.out.print(e.getMessage());
             }
-
-            // update female user as patient
-            String sql4 = "update female set PATIENTID = "+PATIENTID+" where FEMALEID = "+FEMALEID;
-            int result4 = stmt.executeUpdate(sql4);
-            //System.out.print("result: " + result);
-            JOptionPane.showMessageDialog(null, "Record saved successfully");
-        } catch (Exception e) {
-            System.out.print(e.getMessage());
-        }
+        }else 
+        JOptionPane.showMessageDialog(null, "Already Registered as Patient");
     }//GEN-LAST:event_jButton3ActionPerformed
 
 
@@ -313,6 +371,9 @@ try {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

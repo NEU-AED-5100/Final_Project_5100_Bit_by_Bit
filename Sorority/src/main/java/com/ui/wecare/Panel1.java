@@ -146,17 +146,21 @@ public class Panel1 extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(549, 397));
+        setBackground(new java.awt.Color(204, 204, 255));
+        setMaximumSize(new java.awt.Dimension(32767, 32767));
+        setPreferredSize(new java.awt.Dimension(900, 397));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -172,45 +176,61 @@ public class Panel1 extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 550, 120));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 440, 90));
 
-        jLabel1.setText("Location");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, -1));
-
-        jLabel2.setText("Enterprise");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, -1, -1));
-
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 110, -1));
-
-        jButton3.setText("Submit");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 110, -1));
-
+        jButton1.setBackground(new java.awt.Color(255, 255, 204));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Manage Enterprise");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -7, 260, 70));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 230, 70));
 
+        jButton2.setBackground(new java.awt.Color(255, 255, 204));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Manage Enterprise Admin");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 290, 60));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 240, 60));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Location");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 110, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Enterprise");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+
+        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 110, -1));
+
+        jButton3.setBackground(new java.awt.Color(255, 255, 204));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton3.setText("Submit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Name");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, -1, -1));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 110, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 110, -1));
 
-        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 110, -1));
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Trisha\\Downloads\\login-blue-hi.png")); // NOI18N
+        jLabel3.setText("jLabel3");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 450, 340));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Trisha\\Downloads\\womenlogo.jpeg")); // NOI18N
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 150));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -317,7 +337,9 @@ public class Panel1 extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;

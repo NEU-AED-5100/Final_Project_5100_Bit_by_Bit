@@ -127,18 +127,26 @@ if(conn == (null)){
         jComboBox2 = new javax.swing.JComboBox<>();
         jPasswordField1 = new javax.swing.JPasswordField();
         jTextField2 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(549, 397));
+        setBackground(new java.awt.Color(204, 204, 255));
+        setMaximumSize(new java.awt.Dimension(32767, 32767));
+        setPreferredSize(new java.awt.Dimension(700, 397));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton2.setBackground(new java.awt.Color(255, 255, 204));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Manage Enterprise Admin");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, -10, 290, 70));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, -10, 280, 70));
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 204));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Manage Enterprise");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,47 +168,69 @@ if(conn == (null)){
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 550, 130));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 540, 80));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setText("Location");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 110, -1));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 110, -1));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 153));
         jLabel2.setText("Enterprise");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 153));
         jLabel4.setText("User name");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, -1, -1));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 110, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, -1, -1));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 110, -1));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 153));
         jLabel5.setText("Password");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 153));
         jLabel3.setText("Name");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, -1, -1));
 
+        jButton3.setBackground(new java.awt.Color(255, 255, 204));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setText("Submit");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 110, -1));
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 110, -1));
 
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
             }
         });
-        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 263, 106, -1));
-        add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 106, -1));
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 106, -1));
+        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 106, -1));
+        add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 106, -1));
+        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 106, -1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel6.setText("*****************************************************************");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel8.setText("***************************************************************");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 510, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -328,6 +358,8 @@ else s = "select * from enterprise";
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

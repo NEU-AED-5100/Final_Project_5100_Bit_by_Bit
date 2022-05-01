@@ -12,6 +12,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -28,6 +36,18 @@ public class AppointmentRegister extends javax.swing.JPanel {
      */
     public AppointmentRegister() {
         initComponents();
+        Date date = new Date();
+        jDateChooser1.setMinSelectableDate(date);
+        jComboBox3.removeAllItems();
+        jComboBox4.removeAllItems();
+        int i = 1;
+        while (i < 25) {
+            jComboBox3.addItem(i + "");
+            i++;
+        }
+        jComboBox4.addItem(00 + "");
+        jComboBox4.addItem(30 + "");
+
     }
 
 // populate all patient data in table
@@ -46,15 +66,70 @@ public class AppointmentRegister extends javax.swing.JPanel {
             ResultSet rs1 = ps1.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs1));
 
-            String sql2 = "select username from enterprise_detail";
+//            String sql2 = "select ENTERPRISE_NAME from work_area where USERNAME = '"+EmployeeLoginFrame.Emp_name;
+//            PreparedStatement ps2 = conn.prepareStatement(sql2);
+//            ResultSet rs2 = ps2.executeQuery();
+//            jComboBox2.removeAllItems();
+//            while (rs2.next()) {
+//                jComboBox2.addItem(rs2.getString("username"));
+//            }
+            jComboBox2.removeAllItems();
+            jComboBox2.addItem(EmployeeLoginFrame.Emp_org);
+            String sql3 = "select username from work_area where ORGANIZATION = 'Doctor' and ENTERPRISE_NAME = '" + EmployeeLoginFrame.Emp_org + "'";
+            PreparedStatement ps3 = conn.prepareStatement(sql3);
+            ResultSet rs3 = ps3.executeQuery();
+            jComboBox1.removeAllItems();
+            while (rs3.next()) {
+                jComboBox1.addItem(rs3.getString("username"));
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
+
+    }
+
+    public void appointmentRegisterAndDropdownValuesForFemaleUser() {
+        String f = femaleUserLoginFrame.Female_USER;
+        try {
+            if (conn == null) {
+                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                String user = "SYSTEM";
+                String password = "trisha";
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                conn = DriverManager.getConnection(url, user, password);
+            }
+
+            String sql1 = "select FEMALEID as ID,PATIENTID as Patient_ID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO,REGISTRATIONDATE from patient where femaleid = (select femaleid from female where username ='" + f + "')";
+            PreparedStatement ps1 = conn.prepareStatement(sql1);
+            ResultSet rs1 = ps1.executeQuery();
+//            ResultSet rs5 = rs1;
+//            int count = 0;
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs1));
+//            while (rs5.next()) {
+//                count = rs5.getInt("ID");
+//            }
+//            if (!(count > 0)) {
+//                JOptionPane.showMessageDialog(null, "You are not a registered Patient");
+//                setVisible(false);
+//                MainFrame.femalePanel.setVisible(true);
+//                conn.close();
+//                return;
+//
+//            }
+            //jTable1.setModel(DbUtils.resultSetToTableModel(rs1));
+
+            String sql2 = "select ENTERPRISEID from patient where femaleid='" + f + "'";
             PreparedStatement ps2 = conn.prepareStatement(sql2);
             ResultSet rs2 = ps2.executeQuery();
             jComboBox2.removeAllItems();
+            String femaleEnterprise = "";
             while (rs2.next()) {
                 jComboBox2.addItem(rs2.getString("username"));
+                femaleEnterprise = rs2.getString("username");
             }
 
-            String sql3 = "select username from work_area where ORGANIZATION = 'Doctor'";
+            String sql3 = "select username from work_area where ORGANIZATION = 'Doctor' and ENTERPRISE_NAME = '" + femaleEnterprise + "'";
             PreparedStatement ps3 = conn.prepareStatement(sql3);
             ResultSet rs3 = ps3.executeQuery();
             jComboBox1.removeAllItems();
@@ -93,6 +168,8 @@ public class AppointmentRegister extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jButton4 = new javax.swing.JButton();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox4 = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(204, 204, 255));
 
@@ -182,6 +259,10 @@ public class AppointmentRegister extends javax.swing.JPanel {
             }
         });
 
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,19 +286,28 @@ public class AppointmentRegister extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(85, 85, 85)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jComboBox1, 0, 313, Short.MAX_VALUE)
-                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
-                .addGap(117, 117, 117))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jComboBox1, 0, 313, Short.MAX_VALUE)
+                                .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(117, 117, 117))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,14 +334,21 @@ public class AppointmentRegister extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton4))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -260,7 +357,35 @@ public class AppointmentRegister extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        int selectedrow = jTable1.getSelectedRow();
+        String emailId = (String) jTable1.getValueAt(selectedrow, 4);
+//        String contentForEmail = jTextArea1.getText().trim();
+        //send email logic to add here
+        String toEmail = "gloriasingh08@gmail.com";
+        String fromEmail = "sororitywomenhealth@gmail.com";
+        String emailPass = "sorority@12";
+        String Subject = "Appointment  Update";
+        String body = "The appointment date is fixed on:- " + jDateChooser1.getDate() + " \n Please be on Time.";
+
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, emailPass);
+            }
+        });
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(fromEmail));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+            message.setSubject(Subject);
+            message.setText(body);
+            Transport.send(message);
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -280,7 +405,7 @@ public class AppointmentRegister extends javax.swing.JPanel {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
-conn.close();
+            conn.close();
         } catch (Exception e) {
             System.out.print(e.getMessage());
         }
@@ -299,7 +424,7 @@ conn.close();
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
-conn.close();
+            conn.close();
         } catch (Exception e) {
             System.out.print(e.getMessage());
         }
@@ -307,7 +432,7 @@ conn.close();
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
-Connection con = null;
+            Connection con = null;
             if (con == null) {
                 String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
                 String user = "SYSTEM";
@@ -317,14 +442,35 @@ Connection con = null;
             }
             Statement stmt4 = con.createStatement();
             int selectedrow = jTable1.getSelectedRow();
+if(selectedrow < 0){
+JOptionPane.showMessageDialog(null, "You are not a registered Patient");
+}
             BigDecimal FEMALEID = (BigDecimal) jTable1.getValueAt(selectedrow, 0);
             BigDecimal PATIENTID = (BigDecimal) jTable1.getValueAt(selectedrow, 1);
             String ENTERPRISEID = (String) jTable1.getValueAt(selectedrow, 2);
             String ASSIGNEDDR = (String) jComboBox1.getSelectedItem().toString();
             Format formatter = new SimpleDateFormat("dd-MMM-yy");
             String APPOINTMENTDATE = (String) formatter.format(this.jDateChooser1.getDate());
+            String hh = (String) jComboBox3.getSelectedItem();
+            String mm = (String) jComboBox4.getSelectedItem();
+            String scheduledTime = hh + ":" + mm;
 
-            String sql4 = String.format("insert into appointment (PATIENTID,FEMALEID,ENTERPRISEUSERNAME,ASSIGNEDDR,APPOINTMENTDATE) values(%s,%s,'%s','%s','%s')", PATIENTID, FEMALEID, ENTERPRISEID, ASSIGNEDDR, APPOINTMENTDATE);
+            String sql8 = "select scheduledTime from Appointment where APPOINTMENTDATE = '" + APPOINTMENTDATE + "' and ASSIGNEDDR = '" + ASSIGNEDDR + "'";
+            PreparedStatement ps8 = con.prepareStatement(sql8);
+            ResultSet rs8 = ps8.executeQuery();
+            while (rs8.next()) {
+                String alreadyRegisteredTime = rs8.getString(1);
+                String[] splitTime = alreadyRegisteredTime.split(":");
+                if (hh.equals(splitTime[0])) {
+                    if (mm.equals(splitTime[1])) {
+                        JOptionPane.showMessageDialog(null, "Time slot not available");
+                        return;
+                    }
+                }
+
+            }
+
+            String sql4 = String.format("insert into appointment (PATIENTID,FEMALEID,ENTERPRISEUSERNAME,ASSIGNEDDR,APPOINTMENTDATE,scheduledTime) values(%s,%s,'%s','%s','%s','%s')", PATIENTID, FEMALEID, ENTERPRISEID, ASSIGNEDDR, APPOINTMENTDATE, scheduledTime);
             int result4 = stmt4.executeUpdate(sql4);
             if (result4 > 0) {
                 String sql5 = "select MAX(APPOINTMENTNO) from Appointment";
@@ -347,6 +493,8 @@ Connection con = null;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

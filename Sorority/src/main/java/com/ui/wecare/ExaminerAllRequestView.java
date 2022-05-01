@@ -12,7 +12,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
-
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
 /**
  *
  * @author gloriasingh
@@ -118,7 +124,7 @@ public class ExaminerAllRequestView extends javax.swing.JPanel {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jButton2)
                                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,17 +154,28 @@ public class ExaminerAllRequestView extends javax.swing.JPanel {
                 conn = DriverManager.getConnection(url, user, password);
             }
             int selectedrow = jTable1.getSelectedRow();
-            BigDecimal FEMALEID = (BigDecimal) jTable1.getValueAt(selectedrow, 0);
-            String sql = "select testresult from examiner where femaleid = "+FEMALEID;
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            String femaleUsername = (String) jTable1.getValueAt(selectedrow, 0);//f1 from examinerrequest
+            String sql1 = "select femaleid from female where username = '"+femaleUsername+"'";
+            PreparedStatement ps1 = conn.prepareStatement(sql1);
+            ResultSet rs1 = ps1.executeQuery();
+BigDecimal FEMALEID = null;
+while(rs1.next()){
+FEMALEID = rs1.getBigDecimal(1);
+}
+if(FEMALEID!=null){
+            String sql2 = "select testresult from examiner where femaleid = "+FEMALEID;
+            PreparedStatement ps2 = conn.prepareStatement(sql2);
+            ResultSet rs2 = ps2.executeQuery();
             StringBuffer report = new StringBuffer();
-            while(rs.next()){
+            while(rs2.next()){
                 report.append("--------Report for female "+FEMALEID+"--------");
-                report.append(rs.getString(1));
+                report.append(rs2.getString(1));
             }
             jTextArea1.setText(report.toString());
             jTextArea1.setEnabled(false);
+}else {
+JOptionPane.showMessageDialog(null,"Invalid Female User. Contact Administration");
+}
             conn.close();
         } catch (Exception e) {
             System.out.print(e.getMessage());
@@ -169,9 +186,27 @@ public class ExaminerAllRequestView extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int selectedrow = jTable1.getSelectedRow();
-        String emailId = (String) jTable1.getValueAt(selectedrow, 5);
+        String emailId = (String) jTable1.getValueAt(selectedrow, 4);
         String contentForEmail = jTextArea1.getText().trim();
         //send email logic to add here
+        String toEmail="judiciarymanagementsorority@gmail.com";
+        String fromEmail="sororitywomenhealth@gmail.com";
+        String emailPass="sorority@12";
+        String Subject="Female patient medical Update";
+        String body="The test report are given below:- "+ jTextArea1.getText().trim();
+        //send email logic to add here
+       
+         Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        Session session= Session.getDefaultInstance(properties, new javax.mail.Authenticator(){
+             protected PasswordAuthentication getPasswordAuthentication()
+            {
+                return new PasswordAuthentication(fromEmail,emailPass);
+            }
+        });
         
         // delete report from request table
         try {
@@ -184,13 +219,19 @@ public class ExaminerAllRequestView extends javax.swing.JPanel {
                 con = DriverManager.getConnection(url, user, password);
             }
             Statement stmt1 = con.createStatement();
-            BigDecimal PATIENTID = (BigDecimal) jTable1.getValueAt(selectedrow, 0);
-            
-            String sql4 = "delete from examinerrequest where femaleid = (select femaleid from patient where patientid = "+PATIENTID+")";
+            String PATIENTID = (String) jTable1.getValueAt(selectedrow, 0);
+            String email = (String) jTable1.getValueAt(selectedrow, 4);
+            String sql4 = "delete from examinerrequest where femaleid = '"+PATIENTID+"' and POLICE_LAWYER_EMAILID = '"+email+"'";
             int result4 = stmt1.executeUpdate(sql4);
             if (result4 > 0) {
-                JOptionPane.showConfirmDialog(null, "Test Report Saved Successfully");
+                JOptionPane.showConfirmDialog(null, "Test Report Saved Successfully!!");
             }
+            MimeMessage message=new MimeMessage(session);
+             message.setFrom(new InternetAddress(fromEmail));
+             message.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+             message.setSubject(Subject);
+             message.setText(body);
+             Transport.send(message);
             con.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
