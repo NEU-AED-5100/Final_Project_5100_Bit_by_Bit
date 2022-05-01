@@ -333,8 +333,16 @@ public void displayAllPatient() {
         try{
             int selectedcolumn = 1;
             int selectedrow = jTable1.getSelectedRow();
+if(selectedrow < 0){
+JOptionPane.showMessageDialog(null, "Please select at least 1 patient from table");return;
+}
+
             BigDecimal patientId = (BigDecimal) jTable1.getValueAt(selectedrow, selectedcolumn);
-            String prescription=jTextArea1.getText();
+            String prescription=jTextArea1.getText().trim();
+if(prescription.isEmpty()){
+JOptionPane.showMessageDialog(null, "Please add prescription");return;
+}
+
 //update PatientHistory set prescription = 'gandu' where patientusername = 1 and PATIENTHISTORY_ID = (select max(PATIENTHISTORY_ID) from patienthistory where patientusername = 1);
         Connection conn1 = null;
         try {
