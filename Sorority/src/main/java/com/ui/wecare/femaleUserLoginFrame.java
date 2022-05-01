@@ -220,6 +220,11 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
         Female_USER = user;
         String pass=jPasswordField1.getText();
 
+if(user.isEmpty() || pass.isEmpty()){
+JOptionPane.showMessageDialog(null, "Please enter user name and password");
+return;
+}
+
         jTextField1.setText("");
         jPasswordField1.setText("");
 

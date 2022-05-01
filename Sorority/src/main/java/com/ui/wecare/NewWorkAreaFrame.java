@@ -327,6 +327,31 @@ conn.close();
         contact_no=jTextField3.getText();
         username=jTextField4.getText();
         password=jTextField5.getText();
+
+if(organization.isEmpty() || emp_name.isEmpty() || contact_no.isEmpty() || username.isEmpty() || password.isEmpty()){
+JOptionPane.showMessageDialog(null, "Please enter all details");
+return;
+}
+
+if(email.contains("@") && email.contains(".")){
+JOptionPane.showMessageDialog(null, "Please enter valid emailid");
+return;
+}
+
+try{
+long no = Long.parseLong(contact_no);
+if(contact_no.length() != 10){
+JOptionPane.showMessageDialog(null, "Please enter valid(10 digits) contact number");
+return;
+
+}
+}catch(Exception e){
+JOptionPane.showMessageDialog(null, "Please enter valid contact number");
+return;
+}
+
+
+
         Connection conn = null;
         
          try {

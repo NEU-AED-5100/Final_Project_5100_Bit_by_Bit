@@ -94,6 +94,12 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("User Name");
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Password");
@@ -203,6 +209,12 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
         Enterprise_name = user;
         String pass = jPasswordField1.getText();
 
+if(user.isEmpty() || pass.isEmpty()){
+JOptionPane.showMessageDialog(null, "Please enter user name and password");
+return;
+}
+
+
         jTextField1.setText("");
         jPasswordField1.setText("");
 
@@ -284,6 +296,10 @@ public class enterpriseLoginFrame extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments

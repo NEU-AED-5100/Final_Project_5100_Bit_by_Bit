@@ -240,6 +240,16 @@ if(conn == (null)){
 
         String name = jTextField2.getText();
 
+       if(username.isEmpty()){
+JOptionPane.showMessageDialog(null, "Please enter Username"); return;
+}
+       if(password.isEmpty()){
+JOptionPane.showMessageDialog(null, "Please enter Password"); return;
+}
+       if(name.isEmpty()){
+JOptionPane.showMessageDialog(null, "Please enter Name"); return;
+}
+
         try {
 
             st = conn.createStatement();

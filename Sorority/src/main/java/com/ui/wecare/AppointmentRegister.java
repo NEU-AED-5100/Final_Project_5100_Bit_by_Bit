@@ -384,7 +384,8 @@ public class AppointmentRegister extends javax.swing.JPanel {
         String emailId = (String) jTable1.getValueAt(selectedrow, 4);
 //        String contentForEmail = jTextArea1.getText().trim();
         //send email logic to add here
-        String toEmail = "gloriasingh08@gmail.com";
+        //String toEmail = "gloriasingh08@gmail.com";
+        String toEmail = emailId.trim();
         String fromEmail = "sororitywomenhealth@gmail.com";
         String emailPass = "sorority@12";
         String Subject = "Appointment  Update";
