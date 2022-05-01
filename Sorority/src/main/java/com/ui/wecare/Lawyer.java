@@ -103,6 +103,9 @@ conn.close();
         jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
+        setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        setMinimumSize(new java.awt.Dimension(860, 690));
+        setPreferredSize(new java.awt.Dimension(1900, 1397));
 
         pnllawheadingss.setBackground(new java.awt.Color(102, 0, 153));
 
@@ -235,7 +238,7 @@ conn.close();
                 .addGroup(layout.createSequentialGroup()
                     .addGap(123, 123, 123)
                     .addComponent(jLabel5)
-                    .addContainerGap(238, Short.MAX_VALUE)))
+                    .addContainerGap(551, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
