@@ -45,14 +45,18 @@ public class DeleteFrame extends javax.swing.JFrame {
 
 //              con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-try{
-String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
-        String user ="SYSTEM";
-        String password1 = "trisha";
-Class.forName("oracle.jdbc.driver.OracleDriver");
- con =  DriverManager.getConnection(url,user,password1);
-}catch(Exception e){
-}
+try {
+                Connection con = null;
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+               
+            } catch (Exception e) {
+            }
             st=con.createStatement();
 
            String  s=("select ngo_id from ngo_detail");
@@ -251,9 +255,20 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
         
                     try {
 
-                        con2 = DriverManager.getConnection(
-                               "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-
+//                        con2 = DriverManager.getConnection(
+//                               "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+try {
+                Connection con = null;
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+               
+            } catch (Exception e) {
+            }
                        st=con2.createStatement();
 
                        String s= "select * from ngo_detail where ngo_id="+jComboBox1.getSelectedItem()  ;
@@ -287,8 +302,20 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
                  
                     try{
                             
-                             con = DriverManager.getConnection(
-                                      "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+//                             con = DriverManager.getConnection(
+//                                      "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+try {
+                Connection con = null;
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+               
+            } catch (Exception e) {
+            }
                                 st=con.createStatement();
                                 String sql="delete from ngo_detail  where ngo_id=%s";
                                     int id= Integer.parseInt((String) jComboBox1.getSelectedItem());
@@ -329,8 +356,20 @@ Class.forName("oracle.jdbc.driver.OracleDriver");
         
            try {
 
-              con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+//              con = DriverManager.getConnection(
+//                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+try {
+                Connection con = null;
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+               
+            } catch (Exception e) {
+            }
             st=con.createStatement();
 
            String  s=("select ngo_id from ngo_detail");

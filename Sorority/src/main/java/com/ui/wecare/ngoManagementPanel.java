@@ -49,11 +49,15 @@ public class ngoManagementPanel extends javax.swing.JPanel {
 //             con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
             try {
-                String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
-                String user = "SYSTEM";
-                String password = "trisha";
-                Class.forName("oracle.jdbc.driver.OracleDriver");
-                con = DriverManager.getConnection(url, user, password);
+                Connection con = null;
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+
             } catch (Exception e) {
             }
 
@@ -80,6 +84,18 @@ public class ngoManagementPanel extends javax.swing.JPanel {
 
 //              con = DriverManager.getConnection(
 //                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+            try {
+                Connection con = null;
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+
+            } catch (Exception e) {
+            }
             st = con.createStatement();
 
             String s = "select location from enterprise";
@@ -125,8 +141,20 @@ public class ngoManagementPanel extends javax.swing.JPanel {
         //---------------populate the table----------------
         try {
 
-            con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:xe", "system", "admin");
+//            con = DriverManager.getConnection(
+//                    "jdbc:oracle:thin:@localhost:1521:xe", "system", "admin");
+            try {
+                Connection con = null;
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+
+            } catch (Exception e) {
+            }
 
             st = con.createStatement();
 
@@ -459,8 +487,20 @@ public class ngoManagementPanel extends javax.swing.JPanel {
 
             try {
 
-                con = DriverManager.getConnection(
-                        "jdbc:oracle:thin:@localhost:1521:xe", "system", "admin");
+//                con = DriverManager.getConnection(
+//                        "jdbc:oracle:thin:@localhost:1521:xe", "system", "admin");
+                try {
+                    Connection con = null;
+                    if (con == null) {
+                        String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                        String user = "SYSTEM";
+                        String password = "trisha";
+                        Class.forName("oracle.jdbc.driver.OracleDriver");
+                        con = DriverManager.getConnection(url, user, password);
+                    }
+
+                } catch (Exception e) {
+                }
 
                 st = con.createStatement();
 
@@ -482,8 +522,20 @@ public class ngoManagementPanel extends javax.swing.JPanel {
 
         try {
 
-            con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:xe", "system", "admin");
+//            con = DriverManager.getConnection(
+//                    "jdbc:oracle:thin:@localhost:1521:xe", "system", "admin");
+            try {
+                Connection con = null;
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+
+            } catch (Exception e) {
+            }
             st = con.createStatement();
             String sql = "insert into ngo_detail (ngo_name,location,zipcode,authorization_type,address,functionality ) values('%s','%s','%s','%s','%s','%s')";
 

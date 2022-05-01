@@ -34,8 +34,20 @@ public class EditFrame extends javax.swing.JFrame {
         //---------------------
          try {
 
-              con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+//              con = DriverManager.getConnection(
+//                    "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+try {
+                Connection con = null;
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+               
+            } catch (Exception e) {
+            }
             st=con.createStatement();
 
            String  s=String.format("select ngo_id from ngo_detail");
@@ -320,9 +332,20 @@ public class EditFrame extends javax.swing.JFrame {
               
                         try {
 
-                                con = DriverManager.getConnection(
-                                      "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-
+//                                con = DriverManager.getConnection(
+//                                      "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+try {
+                Connection con = null;
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+               
+            } catch (Exception e) {
+            }
                                 st=con.createStatement();
 
                                  s="select * from govt_ids where id='"+jTextField1.getText()+"'";
@@ -351,9 +374,21 @@ public class EditFrame extends javax.swing.JFrame {
                         
           try{
                             
-                             con = DriverManager.getConnection(
-                                      "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
-                                st=con.createStatement();
+//                             con = DriverManager.getConnection(
+//                                      "jdbc:oracle:thin:@localhost:1521:xe","system","admin");
+try {
+                Connection con = null;
+                if (con == null) {
+                    String url = "jdbc:oracle:thin:@10.0.0.107:1521:xe";
+                    String user = "SYSTEM";
+                    String password = "trisha";
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    con = DriverManager.getConnection(url, user, password);
+                }
+               
+            } catch (Exception e) {
+            }                                
+st=con.createStatement();
                                 String sql="update ngo_detail set ngo_name='%s',location='%s',zipcode='%s',authorization_type='%s',address='%s',functionality='%s' where ngo_id=%s ";
 
                                 s=String.format(sql,ngo_name,location,zip,auth,address,functionality,id);
