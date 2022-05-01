@@ -381,6 +381,9 @@ public class AppointmentRegister extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int selectedrow = jTable1.getSelectedRow();
+        if(selectedrow < 0){
+        JOptionPane.showMessageDialog(null, "Select atleast 1 patient");return;
+        }
         String emailId = (String) jTable1.getValueAt(selectedrow, 4);
 //        String contentForEmail = jTextArea1.getText().trim();
         //send email logic to add here
@@ -467,7 +470,7 @@ public class AppointmentRegister extends javax.swing.JPanel {
             Statement stmt4 = con.createStatement();
             int selectedrow = jTable1.getSelectedRow();
 if(selectedrow < 0){
-JOptionPane.showMessageDialog(null, "You are not a registered Patient");
+JOptionPane.showMessageDialog(null, "First Register as a Patient");
 }
             BigDecimal FEMALEID = (BigDecimal) jTable1.getValueAt(selectedrow, 0);
             BigDecimal PATIENTID = (BigDecimal) jTable1.getValueAt(selectedrow, 1);
