@@ -349,6 +349,10 @@ Connection con = null;
             }
             Statement stmt4 = con.createStatement();
             int selectedrow = jTable1.getSelectedRow();
+if(selectedrow < 0){
+JOptionPane.showMessageDialog(null, "Select atleast 1 patient from table");return;
+}
+
             BigDecimal PATIENTID = (BigDecimal) jTable1.getValueAt(selectedrow, 0);
             Format formatter = new SimpleDateFormat("dd-MMM-yy");
             String reportGenerationDate = (String) formatter.format(this.jDateChooser1.getDate());
