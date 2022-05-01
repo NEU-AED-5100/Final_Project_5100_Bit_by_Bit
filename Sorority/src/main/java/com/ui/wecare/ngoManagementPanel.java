@@ -125,7 +125,7 @@ try {
     }
 
     void updateTableForNgo(String n_user) {
-ngo_user = n_user;
+        ngo_user = n_user;
         model = new DefaultTableModel();
         jTable1.setModel(model);
         model.addColumn("NGO Id");
@@ -162,7 +162,7 @@ try {
 
             st = con.createStatement();
 
-            String s = "select * from ngo_detail where ngo_name='" + enterpriseLoginFrame.Enterprise_name + "'";
+            String s = "select * from ngo_detail where ngo_name='" + n_user + "'";
             rs = st.executeQuery(s);  // execute query
 
             while (rs.next()) {
@@ -277,6 +277,12 @@ try {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 0, 153));
         jLabel1.setText("Enter ID");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(255, 255, 204));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -545,7 +551,7 @@ try {
             st = con.createStatement();
             String sql = "insert into ngo_detail (ngo_name,location,zipcode,authorization_type,address,functionality ) values('%s','%s','%s','%s','%s','%s')";
 
-            s = String.format(sql, ngo_name, location, zip, auth, address, functionality);
+            s = String.format(sql, ngo_user, location, zip, auth, address, functionality);
             int n = st.executeUpdate(s);  // execute query
             if (n > 0) {
                 JOptionPane.showMessageDialog(null, "Record saved");
@@ -585,6 +591,10 @@ df.ngoUser(ngo_user);
         //df.setVisible(true);
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

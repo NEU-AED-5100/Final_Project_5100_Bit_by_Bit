@@ -397,8 +397,10 @@ st=con.createStatement();
 
                                 s=String.format(sql,ngo_name,location,zip,auth,address,functionality,id);
                                int n=st.executeUpdate(s);  // execute query
-                               if(n>0)
+                               if(n>0){
                                    JOptionPane.showMessageDialog(null, "Record updated");
+                                   setVisible(false);
+}
                                else
                                    JOptionPane.showMessageDialog(null, "Record could not be updated");
                                
