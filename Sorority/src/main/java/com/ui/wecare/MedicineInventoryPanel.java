@@ -459,6 +459,7 @@ public class MedicineInventoryPanel extends javax.swing.JPanel {
         //next to add inventory button
         MainFrame.add_Inventory_panel.setVisible(true);
         MainFrame.add_Inventory_panel.updateInventoryTable();
+        MainFrame.add_Inventory_panel.addMedicineListInDropDown(EmployeeLoginFrame.Emp_name);
         setVisible(false);
         clearMedicineInventoryTable();
         jTextField2.setText("");
