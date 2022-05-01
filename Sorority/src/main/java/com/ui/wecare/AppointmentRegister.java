@@ -21,6 +21,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -64,6 +65,8 @@ public class AppointmentRegister extends javax.swing.JPanel {
             String sql1 = "select FEMALEID as ID,PATIENTID as Patient_ID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO,REGISTRATIONDATE from patient";
             PreparedStatement ps1 = conn.prepareStatement(sql1);
             ResultSet rs1 = ps1.executeQuery();
+DefaultTableModel dm = (DefaultTableModel) jTable1.getModel();
+dm.setRowCount(0);
             jTable1.setModel(DbUtils.resultSetToTableModel(rs1));
 
 //            String sql2 = "select ENTERPRISE_NAME from work_area where USERNAME = '"+EmployeeLoginFrame.Emp_name;
@@ -99,7 +102,8 @@ public class AppointmentRegister extends javax.swing.JPanel {
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 conn = DriverManager.getConnection(url, user, password);
             }
-
+DefaultTableModel dm = (DefaultTableModel) jTable1.getModel();
+dm.setRowCount(0);
             String sql1 = "select FEMALEID as ID,PATIENTID as Patient_ID,NAME,DOB,CITY,STATE,ZIPCODE,EMAILID,MOBILENO,REGISTRATIONDATE from patient where femaleid = (select femaleid from female where username ='" + f + "')";
             PreparedStatement ps1 = conn.prepareStatement(sql1);
             ResultSet rs1 = ps1.executeQuery();
@@ -384,7 +388,7 @@ public class AppointmentRegister extends javax.swing.JPanel {
         if(selectedrow < 0){
         JOptionPane.showMessageDialog(null, "Select atleast 1 patient");return;
         }
-        String emailId = (String) jTable1.getValueAt(selectedrow, 4);
+        String emailId = (String) jTable1.getValueAt(selectedrow, 7);
 //        String contentForEmail = jTextArea1.getText().trim();
         //send email logic to add here
         //String toEmail = "gloriasingh08@gmail.com";
@@ -411,6 +415,7 @@ public class AppointmentRegister extends javax.swing.JPanel {
             message.setSubject(Subject);
             message.setText(body);
             Transport.send(message);
+            JOptionPane.showMessageDialog(null, "Email Sent");
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton1ActionPerformed

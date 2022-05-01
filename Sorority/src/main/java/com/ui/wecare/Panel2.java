@@ -249,6 +249,19 @@ JOptionPane.showMessageDialog(null, "Please enter Password"); return;
        if(name.isEmpty()){
 JOptionPane.showMessageDialog(null, "Please enter Name"); return;
 }
+//String password
+if(password.length() < 5){
+JOptionPane.showMessageDialog(null, "Please Enter String password: Minimum Length 5, 1 special character, 1 Digit");
+return;
+}
+if(!(password.contains("@") || password.contains("#") || password.contains("&") || password.contains("*") || password.contains("$") || password.contains("?"))){
+JOptionPane.showMessageDialog(null, "Please Enter String password: Minimum Length 5, 1 special character, 1 Digit");
+return;
+}
+if(!(password.contains("0") || password.contains("1") || password.contains("2") || password.contains("3") || password.contains("4") || password.contains("5") || password.contains("6") || password.contains("7") || password.contains("8") || password.contains("9"))){
+JOptionPane.showMessageDialog(null, "Please Enter String password: Minimum Length 5, 1 special character, 1 Digit");
+return;
+}
 
         try {
 

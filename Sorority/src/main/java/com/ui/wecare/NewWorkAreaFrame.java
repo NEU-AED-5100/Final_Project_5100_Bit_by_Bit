@@ -333,7 +333,7 @@ JOptionPane.showMessageDialog(null, "Please enter all details");
 return;
 }
 
-if(email.contains("@") && email.contains(".")){
+if(!(email.contains("@") && email.contains("."))){
 JOptionPane.showMessageDialog(null, "Please enter valid emailid");
 return;
 }
@@ -343,10 +343,23 @@ long no = Long.parseLong(contact_no);
 if(contact_no.length() != 10){
 JOptionPane.showMessageDialog(null, "Please enter valid(10 digits) contact number");
 return;
-
 }
 }catch(Exception e){
 JOptionPane.showMessageDialog(null, "Please enter valid contact number");
+return;
+}
+
+//String password
+if(password.length() < 5){
+JOptionPane.showMessageDialog(null, "Please Enter String password: Minimum Length 5, 1 special character, 1 Digit");
+return;
+}
+if(!(password.contains("@") || password.contains("#") || password.contains("&") || password.contains("*") || password.contains("$") || password.contains("?"))){
+JOptionPane.showMessageDialog(null, "Please Enter String password: Minimum Length 5, 1 special character, 1 Digit");
+return;
+}
+if(!(password.contains("0") || password.contains("1") || password.contains("2") || password.contains("3") || password.contains("4") || password.contains("5") || password.contains("6") || password.contains("7") || password.contains("8") || password.contains("9"))){
+JOptionPane.showMessageDialog(null, "Please Enter String password: Minimum Length 5, 1 special character, 1 Digit");
 return;
 }
 
