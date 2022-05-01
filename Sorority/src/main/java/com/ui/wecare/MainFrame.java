@@ -54,7 +54,7 @@ static MedicineInventoryPanel medicine_Inventory_Panel;
     static InventoryUpdatePanel inventory_update_panel;
 static MedicalHistoryToFemale medicalHistoryToFemale;
 static RegisteredCasesForFemale registeredCasesForFemale;
-
+static ManageWorkArea manageWorkArea;
 
     public void tickTock() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -115,6 +115,7 @@ examinerAllRequestView = new ExaminerAllRequestView();
 
  medicalHistoryToFemale = new MedicalHistoryToFemale();
  registeredCasesForFemale = new RegisteredCasesForFemale();
+ manageWorkArea = new ManageWorkArea();
         //----------------------
         targetPanel.setLayout(gl);
         GridBagConstraints c = new GridBagConstraints();
@@ -179,7 +180,9 @@ targetPanel.add(medicalHistoryToFemale,c);
         
          targetPanel.add(registeredCasesForFemale,c);
          registeredCasesForFemale.setVisible(false);
-
+         targetPanel.add(manageWorkArea,c);
+         manageWorkArea.setVisible(false);
+ 
 
     }
 
@@ -535,6 +538,7 @@ medicine_Inventory_Panel.setVisible(false);
 
  medicalHistoryToFemale.setVisible(false);
  registeredCasesForFemale.setVisible(false);
+manageWorkArea.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
