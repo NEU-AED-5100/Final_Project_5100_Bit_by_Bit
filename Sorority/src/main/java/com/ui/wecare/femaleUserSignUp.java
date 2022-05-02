@@ -270,6 +270,16 @@ jDateChooser1.setMaxSelectableDate(date);
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //submit button
+
+        if( jTextField1.getText().isEmpty() || jPasswordField1.getText().isEmpty() || jTextField9.getText().isEmpty()|| jTextField3.getText().isEmpty() || jTextField5.getText().isEmpty() || jTextField6.getText().isEmpty() || jTextField4.getText().isEmpty()){
+       JOptionPane.showMessageDialog(null, " Please enter all details"); return;
+       }
+
+       if(!(jTextField6.getText().contains("@") && jTextField6.getText().contains("."))){
+       JOptionPane.showMessageDialog(null, "Please enter valid emailid");
+       return;
+       }
+
         String username = jTextField1.getText();
         String password = jPasswordField1.getText();
         String name = jTextField9.getText();
@@ -285,18 +295,22 @@ mobileNo = Long.parseLong(jTextField7.getText().trim());
 if(jTextField7.getText().trim().length() != 10){
 JOptionPane.showMessageDialog(null, "Please enter valid(10 digits) contact number");
 return;
-
 }
-
 }catch(Exception e){
 JOptionPane.showMessageDialog(null, " Please enter valid mobile number"); return;
 }
- if( username.isEmpty() || password.isEmpty() || name.isEmpty() || DOB.isEmpty() || city.isEmpty() || State.isEmpty() || zipcode.isEmpty() || emailId.isEmpty()){
-JOptionPane.showMessageDialog(null, " Please enter all details"); return;
-}
 
-if(emailId.contains("@") && emailId.contains(".")){
-JOptionPane.showMessageDialog(null, "Please enter valid emailid");
+//String password
+if(password.length() < 5){
+JOptionPane.showMessageDialog(null, "Please Enter String password: Minimum Length 5, 1 special character, 1 Digit");
+return;
+}
+if(!(password.contains("@") || password.contains("#") || password.contains("&") || password.contains("*") || password.contains("$") || password.contains("?"))){
+JOptionPane.showMessageDialog(null, "Please Enter String password: Minimum Length 5, 1 special character, 1 Digit");
+return;
+}
+if(!(password.contains("0") || password.contains("1") || password.contains("2") || password.contains("3") || password.contains("4") || password.contains("5") || password.contains("6") || password.contains("7") || password.contains("8") || password.contains("9"))){
+JOptionPane.showMessageDialog(null, "Please Enter String password: Minimum Length 5, 1 special character, 1 Digit");
 return;
 }
 

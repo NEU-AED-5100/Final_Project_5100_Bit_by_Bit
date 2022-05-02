@@ -350,7 +350,16 @@ JOptionPane.showMessageDialog(null, "Please select at least 1 patient from table
                 String STATE = (String) jTable1.getValueAt(selectedrow, 4);
                 BigDecimal ZIPCODE = (BigDecimal) jTable1.getValueAt(selectedrow, 5);
                 String EMAILID = (String) jTable1.getValueAt(selectedrow, 6);
-                int MOBILENO = Integer.parseInt((String) jTable1.getValueAt(selectedrow, 7));
+long MOBILENO = 0;
+try{
+                MOBILENO = Long.parseLong(jTable1.getValueAt(selectedrow, 7).toString());
+}catch(NumberFormatException e){
+JOptionPane.showMessageDialog(null, "Enter valid mobile number(10 digit)");return;
+}catch(Exception ex){
+JOptionPane.showMessageDialog(null, "Enter valid mobile number");return;
+
+}
+
                 String s = EmployeeLoginFrame.Emp_name;
                 String Enterprise = EmployeeLoginFrame.Emp_org; // get hos1
 
