@@ -59,34 +59,34 @@ Faker module from faker.com for random data generation.
 
 # Enterprises Involved-
 
-[] Hospital
-[] Police
-[]Judiciary
-[]NGO
+-Hospital
+-Police
+-Judiciary
+-NGO
 
 ------------------------------------------------------------------------------------------------------
 
 # Organization Involved-
 
-[]Doctor
-[]Reception
-[]Nurse
-[]Pharmacy
-[]Examination
-[]Lawyer
-[]Police
-[]NGO
+-Doctor
+-Reception
+-Nurse
+-Pharmacy
+-Examination
+-Lawyer
+-Police
+-NGO
 
 # Roles-
 
-[]Female Users
-[]System Admin
-[]Work area admin
-[]Reception
-[]Doctor
-[]Pharmacy
-[]Police
-[]Lawyer
-[]Examination
-[]NGO
-[]Nurse
+-Female Users
+-System Admin
+-Work area admin
+-Reception
+-Doctor
+-Pharmacy
+-Police
+-Lawyer
+-Examination
+-NGO
+-Nurse
