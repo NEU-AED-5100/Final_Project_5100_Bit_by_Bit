@@ -1,27 +1,41 @@
 # Final_Project_5100_Bit_by_Bit
 
-                                                         #SORORITY#
+## SORORITY
 
+--------------------------------------------------------------------------------------------------------------------
 
- ------------------------------------------------------Problem statement----------------------------------------------------------------
- The application provides a health care and security solution for women. Our application will give a risk analysis of the most common health problems related to women. It provides the female user as a customer with a period tracker. It will enable the female user to complain about any type of violence or sexual harassment, if they consent to report the case then the medical results after the examination of the female’s body will be directly sent to the police department for investigation and to the lawyer as well. This feature is developed because sometimes the violence starts at home and women do not feel safe to report that incident or sometimes, they are not comfortable sharing the details of that horrendous encounter with everyone all the time. They will get a list of NGOs nearby based on their pin code where they can go for help.. The reception will generate an appointment email to the user. Project aims to establish connection between different enterprises for a better flow of operation.
+# Problem statement-
+
+The application provides a health care and security solution for women. Our application will give a risk analysis of the most common health problems related to women. It provides the female user as a customer with a period tracker. It will enable the female user to complain about any type of violence or sexual harassment, if they consent to report the case then the medical results after the examination of the female’s body will be directly sent to the police department for investigation and to the lawyer as well. This feature is developed because sometimes the violence starts at home and women do not feel safe to report that incident or sometimes, they are not comfortable sharing the details of that horrendous encounter with everyone all the time. They will get a list of NGOs nearby based on their pin code where they can go for help.. The reception will generate an appointment email to the user. Project aims to establish connection between different enterprises for a better flow of operation.
  
- ----------------------------------------------------- AIM -----------------------------------------------------------------------------
+ ------------------------------------------------------------------------------------------------------------------------
+ 
+ # AIM -
+ 
  Sorority -  An effort to support womanhood
  
- ------------------------------------------------------Team Contribution ----------------------------------------------------------------
+ ----------------------------------------------------------------------------------------------------------------------
+ # Team Contribution -
+ 
  Team name : Bit-by-bit
  Team member:
  Trisha Ghorpade (NUID : 002920687)
  Gloria Singh (NUID: 002960072)
  Sreyoshi Ghosh (NUID: 002924715)
- ------------------------------------------------------Technologies used ----------------------------------------------------------------
+ 
+ ----------------------------------------------------------------------------------------------------------------------
+ 
+ # Technologies used - 
+ 
  Tool : netbeans
  Database : Oracle 
  UI design : Java Swing
- ------------------------------------------------------ Requirements --------------------------------------------------------------------
+ 
+ --------------------------------------------------------------------------------------------------------------------------
+ 
+ #  Requirements -
+ 
  AED Final Project (INFO 5100)
-
 Project Deliverables: 
 1) A running swing application that addresses the challenges outlined above 
 at an eco-system scale. A typical implementation must include the 
@@ -40,3 +54,39 @@ level.
 5) A configuration module with test cases that will populate your model and 
 show the correctness of your solution. You might want to integration the 
 Faker module from faker.com for random data generation. 
+
+-----------------------------------------------------------------------------------------------
+
+# Enterprises Involved-
+
+[] Hospital
+[] Police
+[]Judiciary
+[]NGO
+
+------------------------------------------------------------------------------------------------------
+
+# Organization Involved-
+
+[]Doctor
+[]Reception
+[]Nurse
+[]Pharmacy
+[]Examination
+[]Lawyer
+[]Police
+[]NGO
+
+# Roles-
+
+[]Female Users
+[]System Admin
+[]Work area admin
+[]Reception
+[]Doctor
+[]Pharmacy
+[]Police
+[]Lawyer
+[]Examination
+[]NGO
+[]Nurse
