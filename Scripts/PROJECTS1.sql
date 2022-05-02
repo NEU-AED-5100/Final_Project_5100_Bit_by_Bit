@@ -71,8 +71,8 @@ CREATE TABLE NurseReadings (
     thyroidInTSH int,
     bmi int,
     hemoglobin int,
-    wbc long,
-    rbc long,
+    wbc int,
+    rbc int,
     pulseRateBeatsPermin int,
     respirationRate int,
     bodyTempInF int,
@@ -103,7 +103,7 @@ commit;
 
 
 ---------------------------------------
-
+--by sreyo 
 
 create table administrator(username varchar2(20),password varchar2(20));
 
@@ -171,7 +171,7 @@ BEGIN
 END workarea_trigger;
 
 ------------------------------
-
+--by me
 
 CREATE SEQUENCE workarea_id_seq  INCREMENT BY 1 START WITH 1;
 
@@ -185,7 +185,7 @@ BEGIN
   :NEW.workarea_id := workarea_id_seq.NEXTVAL ;
 END workarea_trigger;
 -------------------------------------------------------------
-
+--by trisha
 
 drop table cases;
 commit;
@@ -198,7 +198,6 @@ CREATE TABLE RegisteredCases (
     involveJudiciary varchar(5)
 );
 commit;
-
 ---------------------
 --27 Apr
 CREATE SEQUENCE patient_id_seq  INCREMENT BY 1 START WITH 1;
@@ -326,11 +325,11 @@ BEFORE INSERT
 ON Examiner 
 FOR EACH ROW
 BEGIN
-  :NEW.Examiner_Id := Examiner_Id_seq.NEXTVAL ;
+  :NEW.EXAMINER_ID := Examiner_Id_seq.NEXTVAL ;
 END Examiner_Id_trigger;
 commit;
 
-
+--polioce lawyer request send
 CREATE TABLE examinerrequest (
     femaleid              VARCHAR(255),
     police_lawyer         VARCHAR(255),
@@ -338,3 +337,52 @@ CREATE TABLE examinerrequest (
     islawyer              VARCHAR(255),
     police_lawyer_emailid VARCHAR(255)
 );commit;
+
+drop table MedicineInventory;
+commit;
+CREATE TABLE MedicineInventory (
+    inventory_id int,
+    medicineName varchar(255),
+    quantityAvailable int,
+    enterpriseId varchar2(10)
+);
+commit;
+
+CREATE SEQUENCE inventory_id_seq  INCREMENT BY 1 START WITH 1;
+commit;
+
+
+CREATE OR REPLACE TRIGGER MedicineInventory_trigger
+BEFORE INSERT
+ON MedicineInventory 
+FOR EACH ROW
+BEGIN
+  :NEW.inventory_id := inventory_id_seq.NEXTVAL ;
+END MedicineInventory_trigger;
+commit;
+
+--Appointment
+ALTER TABLE Appointment add scheduledTime varchar(10);
+commit;
+
+alter table work_area add enterprise_name VARCHAR2(20);
+commit;
+
+drop table PERIODTRACKER;
+commit;
+CREATE TABLE PeriodTracker (
+    
+    emailId varchar(255),
+    stopAlert varchar(5),
+    femaleusername varchar(255),
+    lastPeriodDate varchar(255)
+      
+);
+commit;
+
+
+ALTER TABLE patient drop column  ENTERPRISEID;
+commit;
+
+    ALTER TABLE patient add ENTERPRISEID  varchar(255);
+commit;

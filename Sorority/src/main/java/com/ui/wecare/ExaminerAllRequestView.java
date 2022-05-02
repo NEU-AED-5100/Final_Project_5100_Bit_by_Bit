@@ -235,7 +235,8 @@ JOptionPane.showMessageDialog(null,"Invalid Female User. Contact Administration"
         String emailId = (String) jTable1.getValueAt(selectedrow, 4);
         String contentForEmail = jTextArea1.getText().trim();
         //send email logic to add here
-        String toEmail="judiciarymanagementsorority@gmail.com";
+        //String toEmail="judiciarymanagementsorority@gmail.com";
+        String toEmail=emailId;
         String fromEmail="sororitywomenhealth@gmail.com";
         String emailPass="sorority@12";
         String Subject="Female patient medical Update";
