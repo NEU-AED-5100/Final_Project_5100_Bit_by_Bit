@@ -1,8 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+* Author:     Bit-by-Bit
+* Subject:    INFO5100 - Application Engineer & Development 
+* Purpose:   Sorority
+*/
 package com.ui.wecare;
 
 import java.awt.BorderLayout;
@@ -23,10 +23,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-/**
- *
- * @author Malay Ganguly
- */
+
 public class MedicineInventoryPanel extends javax.swing.JPanel {
 
 //     Connection con=null;

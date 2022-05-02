@@ -1,7 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+/**
+* Author:     Bit-by-Bit
+* Subject:    INFO5100 - Application Engineer & Development 
+* Purpose:   Sorority
+*/
 package com.ui.wecare;
 
 import java.math.BigDecimal;
@@ -13,10 +14,6 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
-/**
- *
- * @author gloriasingh
- */
 public class ManageWorkArea extends javax.swing.JPanel {
 
     String enterprise_user = "";
